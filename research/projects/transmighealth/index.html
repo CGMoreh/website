@@ -1,11 +1,14 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.5.57">
+<meta name="generator" content="quarto-1.6.42">
+
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
 <meta name="description" content="Extending our research conducted under the ‘UK in a Changing Europe’ initiative, this project focuses on the health and care practices of EU migrants. It is crucial to broaden our knowledge of such practices and assess how they are likely to change in light of the uncertainty with regards to international mobility brought by Brexit and the COVID-19 pandemic.">
-<title>Transnational healthcare practices among Polish migrants in the UK – Chris Moreh</title>
+
+<title>TransMigHealth – Chris Moreh</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -20,21 +23,25 @@ ul.task-list li input[type="checkbox"] {
 }
 </style>
 
-<script src="../../../site_libs/quarto-nav/quarto-nav.js"></script>
+
+<script src="../../../assets/libs/quarto-nav/quarto-nav.js"></script>
 <link href="../../../pics/browser-icon.png" rel="icon" type="image/png">
-<script src="../../../site_libs/clipboard/clipboard.min.js"></script>
-<script src="../../../site_libs/quarto-html/quarto.js"></script>
-<script src="../../../site_libs/quarto-html/popper.min.js"></script>
-<script src="../../../site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="../../../site_libs/quarto-html/anchor.min.js"></script>
-<link href="../../../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="../../../site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
-<link href="../../../site_libs/quarto-contrib/fontawesome6-0.1.0/all.css" rel="stylesheet">
-<link href="../../../site_libs/quarto-contrib/fontawesome6-0.1.0/latex-fontsize.css" rel="stylesheet">
-<script src="../../../site_libs/quarto-contrib/iconify-1.0.8/iconify-icon.min.js"></script><script id="quarto-search-options" type="application/json">{
+<script src="../../../assets/libs/quarto-listing/list.min.js"></script>
+<script src="../../../assets/libs/quarto-listing/quarto-listing.js"></script>
+<script src="../../../assets/libs/clipboard/clipboard.min.js"></script>
+<script src="../../../assets/libs/quarto-html/quarto.js"></script>
+<script src="../../../assets/libs/quarto-html/popper.min.js"></script>
+<script src="../../../assets/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../../assets/libs/quarto-html/anchor.min.js"></script>
+<link href="../../../assets/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../../assets/libs/quarto-html/quarto-syntax-highlighting-2f5df379a58b258e96c21c0638c20c03.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../../assets/libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../../assets/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../../assets/libs/bootstrap/bootstrap-af75ddc6410556b0e895ac43d43d4bcc.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../../../assets/libs/quarto-contrib/fontawesome6-0.1.0/all.css" rel="stylesheet">
+<link href="../../../assets/libs/quarto-contrib/fontawesome6-0.1.0/latex-fontsize.css" rel="stylesheet">
+<script src="../../../assets/libs/quarto-contrib/iconify-1.0.8/iconify-icon.min.js"></script>
+<script id="quarto-search-options" type="application/json">{
   "language": {
     "search-no-results-text": "No results",
     "search-matching-documents-text": "matching documents",
@@ -48,22 +55,199 @@ ul.task-list li input[type="checkbox"] {
     "search-submit-button-title": "Submit",
     "search-label": "Search"
   }
-}</script><style>html{ scroll-behavior: smooth; }</style>
+}</script>
+<script>
+
+  window.document.addEventListener("DOMContentLoaded", function (_event) {
+    const listingTargetEl = window.document.querySelector('#listing-books .list');
+    if (!listingTargetEl) {
+      // No listing discovered, do not attach.
+      return; 
+    }
+
+    const options = {
+      valueNames: ['listing-project','listing-website','listing-format','listing-title-block-banner','listing-lightbox','listing-execute','listing-engine','listing-_quarto-vars','listing-language','listing-pagetitle','listing-date-format','listing-toc','listing-include-back-link','listing-author','listing-include-before-body','listing-number','listing-title','listing-description','listing-categories','listing-authorstring','listing-year','listing-place','listing-publisher','listing-pages','listing-isbn','listing-cover','listing-sampletext','listing-worldcat','listing-online','listing-codedata','listing-ris','listing-path','listing-outputHref','listing-filename','listing-file-modified','listing-reading-time','listing-word-count',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-file-modified-sort'] },{ data: ['listing-reading-time-sort'] },{ data: ['listing-word-count-sort'] }],
+      
+      searchColumns: ["listing-project","listing-website","listing-format","listing-title-block-banner","listing-lightbox","listing-execute","listing-engine","listing-_quarto-vars","listing-language","listing-pagetitle","listing-date-format","listing-toc","listing-include-back-link","listing-author","listing-include-before-body","listing-number","listing-title","listing-description","listing-categories","listing-authorstring","listing-year","listing-place","listing-publisher","listing-pages","listing-isbn","listing-cover","listing-sampletext","listing-worldcat","listing-online","listing-codedata","listing-ris","listing-path","listing-outputHref","listing-filename","listing-file-modified","listing-reading-time","listing-word-count"],
+    };
+
+    window['quarto-listings'] = window['quarto-listings'] || {};
+    window['quarto-listings']['listing-books'] = new List('listing-books', options);
+
+    if (window['quarto-listing-loaded']) {
+      window['quarto-listing-loaded']();
+    }
+  });
+
+  window.addEventListener('hashchange',() => {
+    if (window['quarto-listing-loaded']) {
+      window['quarto-listing-loaded']();
+    }
+  })
+  
+
+  window.document.addEventListener("DOMContentLoaded", function (_event) {
+    const listingTargetEl = window.document.querySelector('#listing-edited .list');
+    if (!listingTargetEl) {
+      // No listing discovered, do not attach.
+      return; 
+    }
+
+    const options = {
+      valueNames: ['listing-project','listing-website','listing-format','listing-title-block-banner','listing-lightbox','listing-execute','listing-engine','listing-_quarto-vars','listing-language','listing-pagetitle','listing-date-format','listing-toc','listing-include-back-link','listing-include-before-body','listing-number','listing-title','listing-note','listing-details','listing-description','listing-categories','listing-editorstring','listing-editors','listing-author','listing-author-title','listing-year','listing-pubstatus','listing-place','listing-publisher','listing-pages','listing-isbn','listing-cover','listing-path','listing-outputHref','listing-filename','listing-file-modified','listing-reading-time','listing-word-count',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-file-modified-sort'] },{ data: ['listing-reading-time-sort'] },{ data: ['listing-word-count-sort'] }],
+      
+      searchColumns: ["listing-project","listing-website","listing-format","listing-title-block-banner","listing-lightbox","listing-execute","listing-engine","listing-_quarto-vars","listing-language","listing-pagetitle","listing-date-format","listing-toc","listing-include-back-link","listing-include-before-body","listing-number","listing-title","listing-note","listing-details","listing-description","listing-categories","listing-editorstring","listing-editors","listing-author","listing-author-title","listing-year","listing-pubstatus","listing-place","listing-publisher","listing-pages","listing-isbn","listing-cover","listing-path","listing-outputHref","listing-filename","listing-file-modified","listing-reading-time","listing-word-count"],
+    };
+
+    window['quarto-listings'] = window['quarto-listings'] || {};
+    window['quarto-listings']['listing-edited'] = new List('listing-edited', options);
+
+    if (window['quarto-listing-loaded']) {
+      window['quarto-listing-loaded']();
+    }
+  });
+
+  window.addEventListener('hashchange',() => {
+    if (window['quarto-listing-loaded']) {
+      window['quarto-listing-loaded']();
+    }
+  })
+  
+
+  window.document.addEventListener("DOMContentLoaded", function (_event) {
+    const listingTargetEl = window.document.querySelector('#listing-articles .list');
+    if (!listingTargetEl) {
+      // No listing discovered, do not attach.
+      return; 
+    }
+
+    const options = {
+      valueNames: ['listing-project','listing-website','listing-format','listing-title-block-banner','listing-lightbox','listing-execute','listing-engine','listing-_quarto-vars','listing-language','listing-pagetitle','listing-date-format','listing-toc','listing-include-back-link','listing-include-before-body','listing-number','listing-title','listing-subtitle','listing-description','listing-abstract','listing-authorstring','listing-author','listing-year','listing-publication','listing-vol','listing-issue','listing-page','listing-doi','listing-pdf','listing-online','listing-ris','listing-categories','listing-path','listing-outputHref','listing-filename','listing-file-modified','listing-reading-time','listing-word-count',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-file-modified-sort'] },{ data: ['listing-reading-time-sort'] },{ data: ['listing-word-count-sort'] }],
+      
+      searchColumns: ["listing-project","listing-website","listing-format","listing-title-block-banner","listing-lightbox","listing-execute","listing-engine","listing-_quarto-vars","listing-language","listing-pagetitle","listing-date-format","listing-toc","listing-include-back-link","listing-include-before-body","listing-number","listing-title","listing-subtitle","listing-description","listing-abstract","listing-authorstring","listing-author","listing-year","listing-publication","listing-vol","listing-issue","listing-page","listing-doi","listing-pdf","listing-online","listing-ris","listing-categories","listing-path","listing-outputHref","listing-filename","listing-file-modified","listing-reading-time","listing-word-count"],
+    };
+
+    window['quarto-listings'] = window['quarto-listings'] || {};
+    window['quarto-listings']['listing-articles'] = new List('listing-articles', options);
+
+    if (window['quarto-listing-loaded']) {
+      window['quarto-listing-loaded']();
+    }
+  });
+
+  window.addEventListener('hashchange',() => {
+    if (window['quarto-listing-loaded']) {
+      window['quarto-listing-loaded']();
+    }
+  })
+  
+
+  window.document.addEventListener("DOMContentLoaded", function (_event) {
+    const listingTargetEl = window.document.querySelector('#listing-chapters .list');
+    if (!listingTargetEl) {
+      // No listing discovered, do not attach.
+      return; 
+    }
+
+    const options = {
+      valueNames: [{ data: ['index'] },{ data: ['categories'] }],
+      
+      searchColumns: [],
+    };
+
+    window['quarto-listings'] = window['quarto-listings'] || {};
+    window['quarto-listings']['listing-chapters'] = new List('listing-chapters', options);
+
+    if (window['quarto-listing-loaded']) {
+      window['quarto-listing-loaded']();
+    }
+  });
+
+  window.addEventListener('hashchange',() => {
+    if (window['quarto-listing-loaded']) {
+      window['quarto-listing-loaded']();
+    }
+  })
+  
+
+  window.document.addEventListener("DOMContentLoaded", function (_event) {
+    const listingTargetEl = window.document.querySelector('#listing-briefs .list');
+    if (!listingTargetEl) {
+      // No listing discovered, do not attach.
+      return; 
+    }
+
+    const options = {
+      valueNames: [{ data: ['index'] },{ data: ['categories'] }],
+      
+      searchColumns: [],
+    };
+
+    window['quarto-listings'] = window['quarto-listings'] || {};
+    window['quarto-listings']['listing-briefs'] = new List('listing-briefs', options);
+
+    if (window['quarto-listing-loaded']) {
+      window['quarto-listing-loaded']();
+    }
+  });
+
+  window.addEventListener('hashchange',() => {
+    if (window['quarto-listing-loaded']) {
+      window['quarto-listing-loaded']();
+    }
+  })
+  </script>
+<style>html{ scroll-behavior: smooth; }</style>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
 </head>
+
 <body class="nav-fixed fullcontent">
 
 <div id="quarto-search-results"></div>
-  <header id="quarto-header" class="headroom fixed-top quarto-banner"><nav class="navbar navbar-expand-sm " data-bs-theme="dark"><div class="navbar-container container-fluid">
+  <header id="quarto-header" class="headroom fixed-top quarto-banner">
+    <nav class="navbar navbar-expand-md " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
     <a href="../../../index.html" class="navbar-brand navbar-brand-logo">
-    <img src="../../../pics/navbar-logo.png" alt="" class="navbar-logo"></a>
+    <img src="../../../pics/navbar-logo.png" alt="" class="navbar-logo">
+    </a>
   </div>
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
   <span class="navbar-toggler-icon"></span>
 </button>
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
-<li class="nav-item">
+  <li class="nav-item">
     <a class="nav-link" href="../../../research/index.html"> 
 <span class="menu-text">Research</span></a>
   </li>  
@@ -84,18 +268,26 @@ ul.task-list li input[type="checkbox"] {
 <span class="menu-text">Teach</span></a>
   </li>  
 </ul>
-<ul class="navbar-nav navbar-nav-scroll ms-auto">
-<li class="nav-item">
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
     <a class="nav-link" href="../../../cv/cv.html"> 
 <span class="menu-text"><iconify-icon inline="" icon="pepicons-pop:cv" style="font-size: md;"></iconify-icon></span></a>
   </li>  
   <li class="nav-item">
     <a class="nav-link" href="https://www.linkedin.com/in/cgmoreh/" target="_blank"> 
-<span class="menu-text"><iconify-icon inline="" icon="cib:linkedin" style="font-size: md;"></iconify-icon></span></a>
+<span class="menu-text"><iconify-icon inline="" icon="garden:linkedin-stroke-12" style="font-size: md;"></iconify-icon></span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="https://x.com/cgmoreh" target="_blank"> 
-<span class="menu-text"><iconify-icon inline="" icon="line-md:twitter-x-alt" style="font-size: md;"></iconify-icon></span></a>
+    <a class="nav-link" href="https://www.researchgate.net/profile/Chris-Moreh" target="_blank"> 
+<span class="menu-text"><iconify-icon inline="" icon="academicons:researchgate-square" style="font-size: md;"></iconify-icon></span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="https://scholar.google.com/citations?user=RqleBzoAAAAJ&amp;hl" target="_blank"> 
+<span class="menu-text"><iconify-icon inline="" icon="academicons:google-scholar" style="font-size: md;"></iconify-icon></span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="https://www.youtube.com/@ChrisMoreh" target="_blank"> 
+<span class="menu-text"><iconify-icon inline="" icon="si:youtube-line" style="font-size: md;"></iconify-icon></span></a>
   </li>  
   <li class="nav-item">
     <a class="nav-link" href="https://bsky.app/profile/cgmoreh.bsky.social" target="_blank"> 
@@ -106,7 +298,7 @@ ul.task-list li input[type="checkbox"] {
 <span class="menu-text"><iconify-icon inline="" icon="line-md:github-loop" style="font-size: md;"></iconify-icon></span></a>
   </li>  
 </ul>
-</div> <!-- /navcollapse -->
+          </div> <!-- /navcollapse -->
             <div class="quarto-navbar-tools">
   <a href="" class="quarto-reader-toggle quarto-navigation-tool px-1" onclick="window.quartoToggleReader(); return false;" title="Toggle reader mode">
   <div class="quarto-reader-toggle-btn">
@@ -115,17 +307,16 @@ ul.task-list li input[type="checkbox"] {
 </a>
 </div>
       </div> <!-- /container-fluid -->
-    </nav></header><!-- content --><header id="title-block-header" class="quarto-title-block publications default page-columns page-full"><div class="quarto-title-banner page-columns page-full">
+    </nav>
+</header>
+<!-- content -->
+<header id="title-block-header" class="quarto-title-block publications default page-columns page-full">
+    <div class="quarto-title-banner page-columns page-full">
                 <div class="back-nav"><p><a href="../../../research/"><i class="bi bi-arrow-90deg-up"></i> Return to projects</a></p></div>
                 <div class="quarto-title column-body">
-            <h1 class="title">Transnational healthcare practices among Polish migrants in the UK</h1>
+            <h1 class="title">TransMigHealth</h1>
 
-            
-                        <div>
-                <div class="description">
-                    Extending our research conducted under the ‘UK in a Changing Europe’ initiative, this project focuses on the health and care practices of EU migrants.<br>It is crucial to broaden our knowledge of such practices and assess how they are likely to change in light of the uncertainty with regards to international mobility brought by Brexit and the COVID-19 pandemic.
-                </div>
-            </div>
+                        <p class="subtitle lead" style="color: black !important">Transnational healthcare practices among Polish migrants in the UK</p>
                     </div>
     </div>
 
@@ -143,7 +334,8 @@ ul.task-list li input[type="checkbox"] {
 <!-- margin-sidebar -->
     
 <!-- main -->
-<main class="content quarto-banner-title-block" id="quarto-document-content"><style>
+<main class="content quarto-banner-title-block" id="quarto-document-content">
+<style>
   body {
     background-image: url(../../../pics/garden-1.jpg);
     background-size: cover;
@@ -153,14 +345,492 @@ ul.task-list li input[type="checkbox"] {
     background-blend-mode: lighten;
   }
 </style>
-<section id="description" class="level2"><h2 class="anchored" data-anchor-id="description">Description</h2>
+
+
+
+
+<section id="overview" class="level2">
+<h2 class="anchored" data-anchor-id="overview">Overview</h2>
 <p>Extending our research conducted under the ‘UK in a Changing Europe’ initiative, this project focuses on the health and care practices of EU migrants. It is crucial to broaden our knowledge of such practices and assess how they are likely to change in light of the uncertainty with regards to international mobility brought by Brexit and the COVID-19 pandemic.</p>
 <p>It is important to understand the attitudes and experiences of Polish nationals since they constitute the biggest group of EU (and non-British) population in the UK. Like other EU citizens, Poles are prone to travel back to their country of origin for medical treatment and they often resort to the private sector, in Poland or the UK. As part of this project, we have collected national level primary data on how Poles in the UK manage their health by travelling and by accessing public and private services. In particular, the project focuses on those who are likely to be in continuous contact with health service providers because they are affected by, or are caring for someone with, a long-term condition or disability.</p>
 <p>Methodologically, the project consists of two interrelated phases. Firstly, between November 2019 and January 2020, we have gathered both quantitative and qualitative data from 510 Poles living in the UK by the means of an online questionnaire. Informed by this, in-depth qualitative interviews were conducted with thirty-two survey respondents. We are currently analysing our data in order to broaden how transnational healthcare is conceptualized, develop our knowledge of health-seeking behaviours that show migrant’s engagements with both states and markets, and deepen our understanding of intergenerational caring practices.</p>
-<p>We have also received further funding to collect follow-up interviews with previous interview participants during summer 2021. This will allow us to better understand the impact of the Covid-19 pandemic year on the lives of Poles living in the UK.</p>
+<p>During summer 2021, we also collected follow-up interviews in order to better understand the impact of the Covid-19 pandemic on the lives of Poles living in the UK.</p>
+</section>
+<section id="related-publications" class="level2">
+<h2 class="anchored" data-anchor-id="related-publications">Related publications</h2>
+<div id="listing-books" class="quarto-listing quarto-listing-container-custom">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+    
+    <div class="book">
+        <div class="cover">
+          <img src="../../../publications/monographs/mobility-citizenship/mobility-citizenship-cover.webp">
+        </div>
+        <div>
+            <div style="line-height: 1.2em">
+              <span><b>Moreh</b></span>
+              
+              <span><b>(2025)</b></span>
+                
+              <span><em>Mobility citizenship: Migration, identity and nationality in a restructuring Europe</em>.</span>
+            </div>
+            <div>
+              <span>Cham: Palgrave Macmillan</span>
+              
+               <span class="rounded-corners">ISBN: 978-3-031-77032-6</span>
+              
+              
+               <span class="rounded-corners">258 pages</span>
+              
+             </div>
+             <div class="note">
+              
+              
+            </div>
+            
+            <div class="book-buttons">
+              <span><a class="btn btn-outline-description btn-sm squishy toggle-btn" data-bs-toggle="collapse" data-bs-target="#/publications\monographs\mobility-citizenship\index.qmd"><i class="fa-solid fa-scroll"></i> Description</a></span>
+              
+              
+              
+              
+                <span><a class="btn btn-outline-pdf btn-sm squishy toggle-btn" data-bs-toggle="collapse" data-bs-target="#monographs/mobility-citizenship/moreh-2025-mobcit-sample.pdf"><i class="fa-solid fa-book-open"></i> Sample</a></span>
+              
+              
+                <span><a href="https://link.springer.com/book/10.1007/978-3-031-77032-6" class="btn btn-outline-online btn-sm squishy"><i class="fa-solid fa-shop"></i> Publisher <i class="fa-solid fa-arrow-up-right-from-square fa-xs"></i></a></span>
+              
+              
+                <span><a href="https://osf.io/uav8b/" class="btn btn-outline-code btn-sm squishy"><i class="bi bi-database"></i> Code and data <i class="fa-solid fa-arrow-up-right-from-square fa-xs"></i></a></span>
+              
+              
+                <span><a href="../../../publications/monographs/mobility-citizenship/moreh-mobility-citizenship.ris" class="btn btn-outline-cite btn-sm squishy" download=""><i class="fa-solid fa-quote-left"></i> Citation <i class="fa-solid fa-download fa-xs"></i></a></span>
+              
+            
+                <div id="/publications\monographs\mobility-citizenship\index.qmd" class="collapse description-collapsed">
+                    <span>This book aims to trace the development of a new conception of 'mobility citizenship' in Europe historically, demographically and experientially. To this aim, it adopts a 'constellationist' approach applied to the intra-European mobility space and uses the case studies of Hungarian and Romanian migration to the United Kingdom to develop a multidimensional meso-level comparative empirical analysis of mobility-citizenship constellations. The main theoretical proposition of the book is that citizenship has undergone a noticeable change in meaning and valuation, with mobility rights becoming a more central component in the structure of opportunities it provides citizens. The logic of 'mobility citizenship' is thus changing long-held perceptions around the social functions of citizenship, and consequently, the nature of contemporary transnational society. The multifaceted analysis presented in the book will appeal to readers with backgrounds in various disciplines such as political sociology, migration studies, citizenship studies, nationalism studies, or European studies.</span>
+                </div> 
+
+                <div id="" class="collapse">
+                  <p style="text-align:center; margin-bottom: 0px;">
+                    <iframe class="pdf-frame" src="../../../publications/" width="75%" height="500">
+                          <p>Your browser does not support PDF viewing.
+                            <a href="../../../publications/">Download the PDF instead.</a>
+                          </p>
+                    </iframe>
+                  </p>
+                </div>  
+
+                <div id="monographs/mobility-citizenship/moreh-2025-mobcit-sample.pdf" class="collapse">
+                  <p style="text-align:center; margin-bottom: 0px;">
+                    <iframe class="pdf-frame" src="../../../publications/monographs/mobility-citizenship/moreh-2025-mobcit-sample.pdf" width="75%" height="500">
+                          <p>Your browser does not support PDF viewing.
+                            <a href="../../../publications/monographs/mobility-citizenship/moreh-2025-mobcit-sample.pdf">Download the PDF instead.</a>
+                          </p>
+                    </iframe>
+                  </p>
+                </div>  
+            
+            </div>
+        
+        </div>
+    </div>
+    
+
+<!-- The .toggle-btn class helps identify the buttons that trigger content display. -->
+<!-- The JavaScript snippet below handles the global behaviour of toggle-btn's -->
+<!-- The JavaScript logic finds all .collapse.show elements and hides them before opening the newly clicked content. -->
+
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const toggleButtons = document.querySelectorAll('.toggle-btn');
+  
+    toggleButtons.forEach(btn => {
+      btn.addEventListener('click', function () {
+        const targetId = this.getAttribute('data-bs-target');
+  
+        // Collapse all other sections
+        document.querySelectorAll('.collapse.show').forEach(openItem => {
+          if ('#' + openItem.id !== targetId) {
+            new bootstrap.Collapse(openItem, { toggle: false }).hide();
+          }
+        });
+      });
+    });
+  });
+  </script>
+
+<div class="listing-no-matching d-none">
+No matching items
+</div>
+</div>
+<div id="listing-edited" class="quarto-listing quarto-listing-container-custom">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+    
+    <div class="book">
+        <div class="cover">
+          <img src="../../../publications/../publications/edited-books/forthcoming-ee/Cover_Coming_Soon.webp">
+        </div>
+        <div>
+            <div style="line-height: 1.2em">
+              <span><b>Moreh</b>, Pietka-Nykaza and McGhee (eds.)</span>
+              
+              <span><b>(In preparation)</b></span>
+              
+              <span><em>Handbook on Brexit and Migration</em>.</span>
+            </div>
+            <div>
+              <span>Cheltenham: Edward Elgar</span>
+              
+              
+             </div>
+             <div class="note">
+              
+              
+            </div>
+            
+            <div class="book-buttons">
+              <span><a class="btn btn-outline-description btn-sm squishy toggle-btn" data-bs-toggle="collapse" data-bs-target="#/publications\edited-books\forthcoming-ee\index.qmd"><i class="fa-solid fa-scroll"></i> Description</a></span>
+              
+               
+              <span><a href="../../../publications/edited-books/forthcoming-ee/index.html" class="btn btn-outline-details btn-sm squishy"><i class="fa-solid fa-folder-open"></i> Details</a></span>
+              
+              
+              
+              
+              
+              
+            
+                <div id="/publications\edited-books\forthcoming-ee\index.qmd" class="collapse description-collapsed">
+                    <span>Migration has played a crucial role in the United Kingdom’s decision to exit the EU, and Brexit has significantly impacted the whole nation, particularly the lives of EU nationals and their families living in the UK as well as British nationals residing in the other 27 EU countries. A significant body of social scientific literature has documented these processes since 2016. However, “Brexit”, far from representing solely a unique and historically specific event, raises various and more general questions about how states, political establishments, the EU, citizens and migrants navigate the challenges posed by radical socio-political transformations and “unsettling” events. It also highlights the changing relations between citizenship, identity and the sense of belonging. Analysing migration processes - past, present and future - through this broader analytical lens can tell us about the emerging social cleavages and tensions that will likely dominate the first half of the 21st century. This handbook proposes to pull together these various aspects to provide an authoritative interdisciplinary research-driven statement on the Brexit-migration nexus both as a historically conjunctural sociological experience and as a conceptual tool for framing changes in mobility patterns, policy and legal structures, and European politics. The overall approach of the handbook - as reflected in its structure - is to take the reader on a journey, starting from the question of whether and how migration affected the UK’s decision to leave the European Union, through exploring the migration trends and policy frameworks shaped by the Brexit event, the social reactions to the yet unsettled changes engendered by the Brexit process, and finally the complex ways in which migrants of various backgrounds are affected by radical socio-political restructuring.</span>
+                </div> 
+
+                <div id="" class="collapse">
+                  <p style="text-align:center; margin-bottom: 0px;">
+                    <iframe class="pdf-frame" src="../../../publications/" width="75%" height="500">
+                          <p>Your browser does not support PDF viewing.
+                            <a href="../../../publications/">Download the PDF instead.</a>
+                          </p>
+                    </iframe>
+                  </p>
+                </div>  
+
+                <div id="" class="collapse">
+                  <p style="text-align:center; margin-bottom: 0px;">
+                    <iframe class="pdf-frame" src="../../../publications/" width="75%" height="500">
+                          <p>Your browser does not support PDF viewing.
+                            <a href="../../../publications/">Download the PDF instead.</a>
+                          </p>
+                    </iframe>
+                  </p>
+                </div>  
+            
+            </div>
+
+        </div>
+    </div>
+    
+
+    <!-- The .toggle-btn class helps identify the buttons that trigger content display. -->
+<!-- The JavaScript snippet below handles the global behaviour of toggle-btn's -->
+<!-- The JavaScript logic finds all .collapse.show elements and hides them before opening the newly clicked content. -->
+
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const toggleButtons = document.querySelectorAll('.toggle-btn');
+  
+    toggleButtons.forEach(btn => {
+      btn.addEventListener('click', function () {
+        const targetId = this.getAttribute('data-bs-target');
+  
+        // Collapse all other sections
+        document.querySelectorAll('.collapse.show').forEach(openItem => {
+          if ('#' + openItem.id !== targetId) {
+            new bootstrap.Collapse(openItem, { toggle: false }).hide();
+          }
+        });
+      });
+    });
+  });
+  </script>
+<div class="listing-no-matching d-none">
+No matching items
+</div>
+</div>
+<div id="listing-articles" class="quarto-listing quarto-listing-container-custom">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  
+  <div class="article-chapter">
+      <div>
+        <div class="details">
+          <span><b>Moreh</b>, McGhee and Vlachantoni</span>
+          
+            <span><b>(2023)</b></span>
+          
+          <span>"Transnational Healthcare Preferences Among EU Nationals in the UK: A Qualitative Assessment",</span> 
+          <span><i>Sociological Research Online</i>, vol. 28, issue 2, pp. 462-481.</span>
+        </div>
+        
+  
+        <div class="publication-buttons">
+          <span><a class="btn btn-outline-description btn-sm squishy toggle-btn" data-bs-toggle="collapse" data-bs-target="#/publications\articles\2023-sro\index.qmd"><i class="fa-solid fa-scroll"></i> Abstract</a></span>
+
+          
+          
+            <span><a class="btn btn-outline-pdf btn-sm squishy toggle-btn" data-bs-toggle="collapse" data-bs-target="#articles/2023-sro/moreh-2023-sro.pdf"><i class="fa-solid fa-file"></i> Full text</a></span>
+          
+          
+            <span><a href="https://doi.org/10.1177/13607804211058744" title="⚠ Opens in a new tab" class="btn btn-outline-online btn-sm squishy"><i class="fa-solid fa-link"></i> Read online <i class="fa-solid fa-arrow-up-right-from-square fa-xs"></i></a></span>
+          
+          
+          
+            <span><a href="../../../publications/articles/2023-sro/moreh-2023-sro.ris" title=" ⚠ Opens a download dialog" class="btn btn-outline-cite btn-sm squishy" download=""><i class="fa-solid fa-quote-left"></i> Citation <i class="fa-solid fa-download fa-xs"></i></a></span>
+          
+          
+            <div id="/publications\articles\2023-sro\index.qmd" class="collapse abstract-collapsed">
+              <span>This article explores the motivational factors behind preferences for medical care in the country of residence or the country of origin among EU nationals living in the UK. Undertaking a thematic analysis on a large-N qualitative data set, the article aims to establish a data-driven typology of motivations inductively. This provides an intermediary analysis between qualitative depth and quantitative operationalisability, contributing to the existing literature on healthcare location preferences among transnationally connected social groups. This article finds that preferences for medical care in the country of origin are driven overwhelmingly by quality considerations, while preferences for the UK have more to do with convenience and financing. These perceptions result from negative personal experiences, lack of trust, and often concealed cultural differences, and the analysis identifies various nuances and connections between attitudes that previous in-depth qualitative studies could not systematise.</span>
+            </div>  
+          
+            <div id="articles/2023-sro/moreh-2023-sro.pdf" class="collapse">
+              <p style="text-align:center; margin-bottom: 0px;">
+                <iframe class="pdf-frame" src="../../../publications/articles/2023-sro/moreh-2023-sro.pdf" width="75%" height="500">
+                        <p>Your browser does not support PDF viewing.
+                          <a href="../../../publications/articles/2023-sro/moreh-2023-sro.pdf">Download the PDF instead.</a>
+                        </p>
+                </iframe>
+              </p>
+            </div>  
+          
+        </div>
+      </div>
+  </div>
+  
+  <div class="article-chapter">
+      <div>
+        <div class="details">
+          <span>Troccoli, <b>Moreh</b>, McGhee and Vlachantoni</span>
+          
+            <span><b>(2022)</b></span>
+          
+          <span>"Diagnostic testing: therapeutic mobilities, social fields, and medical encounters in the transnational healthcare practices of Polish migrants in the UK",</span> 
+          <span><i>Journal of Migration and Health</i>, vol. 5, issue 100100, pp. 1-9.</span>
+        </div>
+        
+  
+        <div class="publication-buttons">
+          <span><a class="btn btn-outline-description btn-sm squishy toggle-btn" data-bs-toggle="collapse" data-bs-target="#/publications\articles\2022-jmh\index.qmd"><i class="fa-solid fa-scroll"></i> Abstract</a></span>
+
+          
+          
+            <span><a class="btn btn-outline-pdf btn-sm squishy toggle-btn" data-bs-toggle="collapse" data-bs-target="#articles/2022-jmh/moreh-2022-jmh.pdf"><i class="fa-solid fa-file"></i> Full text</a></span>
+          
+          
+            <span><a href="https://doi.org/10.1016/j.jmh.2022.100100" title="⚠ Opens in a new tab" class="btn btn-outline-online btn-sm squishy"><i class="fa-solid fa-link"></i> Read online <i class="fa-solid fa-arrow-up-right-from-square fa-xs"></i></a></span>
+          
+          
+          
+            <span><a href="../../../publications/articles/2022-jmh/moreh-2022-jmh.ris" title=" ⚠ Opens a download dialog" class="btn btn-outline-cite btn-sm squishy" download=""><i class="fa-solid fa-quote-left"></i> Citation <i class="fa-solid fa-download fa-xs"></i></a></span>
+          
+          
+            <div id="/publications\articles\2022-jmh\index.qmd" class="collapse abstract-collapsed">
+              <span>While diagnostic tests are a fundamental component of contemporary medical practice they are seldom considered in studies of transnational healthcare. This article investigates the little-studied role played by diagnostic testing in the healthcare-seeking practices of migrants. It is concerned with the experiences of Polish migrants living in the UK and who access a variety of health services in their host and origin countries across the public and private sectors. We analyse data from semi-structured phone interviews conducted in 2020 with 32 adult Poles living in the UK who identified as having themselves, or non-professionally caring for someone with, a long-term health condition. The article contributes to the literature on migrants’ transnational healthcare practices by showing the centrality of diagnostic technology in their health management and sense-making through the creation, modification, and maintenance of ‘transnational social fields’ (Levitt and Schiller 2004). By emphasizing the role of tests in the patient-doctor relationship the article exposes the therapeutic outcomes of the mobilities of patients and tests as they intersect with physicians in multiple medical encounters.</span>
+            </div>  
+          
+            <div id="articles/2022-jmh/moreh-2022-jmh.pdf" class="collapse">
+              <p style="text-align:center; margin-bottom: 0px;">
+                <iframe class="pdf-frame" src="../../../publications/articles/2022-jmh/moreh-2022-jmh.pdf" width="75%" height="500">
+                        <p>Your browser does not support PDF viewing.
+                          <a href="../../../publications/articles/2022-jmh/moreh-2022-jmh.pdf">Download the PDF instead.</a>
+                        </p>
+                </iframe>
+              </p>
+            </div>  
+          
+        </div>
+      </div>
+  </div>
+  
+  <div class="article-chapter">
+      <div>
+        <div class="details">
+          <span>Troccoli, <b>Moreh</b>, McGhee and Vlachantoni</span>
+          
+            <span><b>(2022)</b></span>
+          
+          <span>"Transnational healthcare as process: multiplicity and directionality in the engagements with healthcare among Polish migrants in the UK",</span> 
+          <span><i>Journal of Ethnic and Migration Studies</i>, vol. 48, issue 9, pp. 1998-2017.</span>
+        </div>
+        
+  
+        <div class="publication-buttons">
+          <span><a class="btn btn-outline-description btn-sm squishy toggle-btn" data-bs-toggle="collapse" data-bs-target="#/publications\articles\2022-jems\index.qmd"><i class="fa-solid fa-scroll"></i> Abstract</a></span>
+
+          
+          
+            <span><a class="btn btn-outline-pdf btn-sm squishy toggle-btn" data-bs-toggle="collapse" data-bs-target="#articles/2022-jems/moreh-2022-jems.pdf"><i class="fa-solid fa-file"></i> Full text</a></span>
+          
+          
+            <span><a href="https://doi.org/10.1080/1369183X.2021.1941820" title="⚠ Opens in a new tab" class="btn btn-outline-online btn-sm squishy"><i class="fa-solid fa-link"></i> Read online <i class="fa-solid fa-arrow-up-right-from-square fa-xs"></i></a></span>
+          
+          
+          
+            <span><a href="../../../publications/articles/2022-jems/moreh-2022-jems.ris" title=" ⚠ Opens a download dialog" class="btn btn-outline-cite btn-sm squishy" download=""><i class="fa-solid fa-quote-left"></i> Citation <i class="fa-solid fa-download fa-xs"></i></a></span>
+          
+          
+            <div id="/publications\articles\2022-jems\index.qmd" class="collapse abstract-collapsed">
+              <span>Drawing on a mix-methods study comprised of an online questionnaire and semi-structured interviews, this article presents findings about the complexity and development in time of health service use by Polish migrants living in the United Kingdom. The article contributes to the analysis of transnational healthcare practices by operationalising a framework that considers service access within and beyond national borders, and between private and public sectors. By categorising engagements with healthcare providers based on their occurrence in time it argues for an understanding of transnational healthcare as a process. It finds that Polish migrants manage their health by accessing a variety of different providers. This complexity is also reflected in the multiple ways in which access to services with regards to specific health issues unfolds in time. By focusing the analysis on specific health issues rather than individuals the article finds that multiple ways to access healthcare services coexist for the same participant, who does not necessarily move towards particular healthcare providers unitarily, but adopts ad hoc solutions on the basis of their experiences within specific medical areas. Understanding migrants’ patterns of accessing healthcare can contribute to more effective policy solutions supporting migrants in the UK today.</span>
+            </div>  
+          
+            <div id="articles/2022-jems/moreh-2022-jems.pdf" class="collapse">
+              <p style="text-align:center; margin-bottom: 0px;">
+                <iframe class="pdf-frame" src="../../../publications/articles/2022-jems/moreh-2022-jems.pdf" width="75%" height="500">
+                        <p>Your browser does not support PDF viewing.
+                          <a href="../../../publications/articles/2022-jems/moreh-2022-jems.pdf">Download the PDF instead.</a>
+                        </p>
+                </iframe>
+              </p>
+            </div>  
+          
+        </div>
+      </div>
+  </div>
+  
+  <div class="article-chapter">
+      <div>
+        <div class="details">
+          <span>Troccoli, <b>Moreh</b>, McGhee and Vlachantoni</span>
+          
+            <span><b>(2022)</b></span>
+          
+          <span>"At the junctures of healthcare: a qualitative study of primary and specialist service use by Polish migrants in England",</span> 
+          <span><i>BMC Health Services Research</i>, vol. 22, issue 1316, pp. 1-12.</span>
+        </div>
+        
+  
+        <div class="publication-buttons">
+          <span><a class="btn btn-outline-description btn-sm squishy toggle-btn" data-bs-toggle="collapse" data-bs-target="#/publications\articles\2022-bmchsr\index.qmd"><i class="fa-solid fa-scroll"></i> Abstract</a></span>
+
+          
+          
+            <span><a class="btn btn-outline-pdf btn-sm squishy toggle-btn" data-bs-toggle="collapse" data-bs-target="#articles/2022-bmchsr/moreh-2022-bmchsr.pdf"><i class="fa-solid fa-file"></i> Full text</a></span>
+          
+          
+            <span><a href="https://doi.org/10.1186/s12913-022-08666-z" title="⚠ Opens in a new tab" class="btn btn-outline-online btn-sm squishy"><i class="fa-solid fa-link"></i> Read online <i class="fa-solid fa-arrow-up-right-from-square fa-xs"></i></a></span>
+          
+          
+          
+            <span><a href="../../../publications/articles/2022-bmchsr/moreh-2022-bmchsr.ris" title=" ⚠ Opens a download dialog" class="btn btn-outline-cite btn-sm squishy" download=""><i class="fa-solid fa-quote-left"></i> Citation <i class="fa-solid fa-download fa-xs"></i></a></span>
+          
+          
+            <div id="/publications\articles\2022-bmchsr\index.qmd" class="collapse abstract-collapsed">
+              <span>Background:<br> Polish people are the biggest migrant group in the UK and the scholarship shows that they are attentive to their healthcare needs and seek to fulfil them by using various services both within and outside the British public healthcare system. This article explores the role of junctures within healthcare systems in the connections migrants realize between healthcare systems and sectors. The article argues that in a transnational context, migrants enact these junctures by joining different levels of care within the same sector, between sectors and across national borders. In particular, the article explores how Polish migrants’ healthcare seeking practices within and beyond national borders are enacted given the features, availability and relationship between primary and specialist care for how they are articulated between private and public sectors. <br> Methods: <br> This article is based on the second phase of a mixed-methods study on how Polish people in the UK manage their health transnationally. The participants were purposefully sampled from survey respondents (first phase) who identified as having a long-term health condition or caring in a non-professional capacity for someone who is chronically ill. Thirty-two semi-structured audio-call interviews were conducted with Polish migrants living in England between June and August 2020. Transcripts were analysed by applying thematic coding. <br> Results:<br> Key findings include a mix of dissatisfaction and satisfaction with primary care and general satisfaction with specialist care. Coping strategies consisting in reaching specialist private healthcare provided a way to access specialist care at all or additionally, or to partially complement primary care. When Polish private specialists are preferred, this is due to participants’ availability of time and financial resources, and to the specialists’ capacity to fulfil needs unmet within the public healthcare sector in the UK. <br> Conclusion:<br> Polish migrants join with their practices systems which are not integrated, and their access is limited by the constraints implied in accessing paid services in Poland. This shapes transnational healthcare practices as relating mostly to routine and ad-hoc access to healthcare. These practices impact not only the wellbeing of migrants and the development of the private market but also the public health provision of services.</span>
+            </div>  
+          
+            <div id="articles/2022-bmchsr/moreh-2022-bmchsr.pdf" class="collapse">
+              <p style="text-align:center; margin-bottom: 0px;">
+                <iframe class="pdf-frame" src="../../../publications/articles/2022-bmchsr/moreh-2022-bmchsr.pdf" width="75%" height="500">
+                        <p>Your browser does not support PDF viewing.
+                          <a href="../../../publications/articles/2022-bmchsr/moreh-2022-bmchsr.pdf">Download the PDF instead.</a>
+                        </p>
+                </iframe>
+              </p>
+            </div>  
+          
+        </div>
+      </div>
+  </div>
+  
+
+  
+<!-- The .toggle-btn class helps identify the buttons that trigger content display. -->
+<!-- The JavaScript snippet below handles the global behaviour of toggle-btn's -->
+<!-- The JavaScript logic finds all .collapse.show elements and hides them before opening the newly clicked content. -->
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  const toggleButtons = document.querySelectorAll('.toggle-btn');
+
+  toggleButtons.forEach(btn => {
+    btn.addEventListener('click', function () {
+      const targetId = this.getAttribute('data-bs-target');
+
+      // Collapse all other sections
+      document.querySelectorAll('.collapse.show').forEach(openItem => {
+        if ('#' + openItem.id !== targetId) {
+          new bootstrap.Collapse(openItem, { toggle: false }).hide();
+        }
+      });
+    });
+  });
+});
+</script>
+<div class="listing-no-matching d-none">
+No matching items
+</div>
+</div>
 
 
-</section><a onclick="window.scrollTo(0, 0); return false;" role="button" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> Back to top</a></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
+
+</section>
+
+<div class="quarto-listing quarto-listing-container-custom" id="listing-chapters">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  
+  
+<!-- The .toggle-btn class helps identify the buttons that trigger content display. -->
+<!-- The JavaScript snippet below handles the global behaviour of toggle-btn's -->
+<!-- The JavaScript logic finds all .collapse.show elements and hides them before opening the newly clicked content. -->
+
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const toggleButtons = document.querySelectorAll('.toggle-btn');
+  
+    toggleButtons.forEach(btn => {
+      btn.addEventListener('click', function () {
+        const targetId = this.getAttribute('data-bs-target');
+  
+        // Collapse all other sections
+        document.querySelectorAll('.collapse.show').forEach(openItem => {
+          if ('#' + openItem.id !== targetId) {
+            new bootstrap.Collapse(openItem, { toggle: false }).hide();
+          }
+        });
+      });
+    });
+  });
+  </script>  
+<div class="listing-no-matching d-none">
+No matching items
+</div>
+</div><div class="quarto-listing quarto-listing-container-custom" id="listing-briefs">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+
+    
+<!-- The .toggle-btn class helps identify the buttons that trigger content display. -->
+<!-- The JavaScript snippet below handles the global behaviour of toggle-btn's -->
+<!-- The JavaScript logic finds all .collapse.show elements and hides them before opening the newly clicked content. -->
+
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  const toggleButtons = document.querySelectorAll('.toggle-btn');
+
+  toggleButtons.forEach(btn => {
+    btn.addEventListener('click', function () {
+      const targetId = this.getAttribute('data-bs-target');
+
+      // Collapse all other sections
+      document.querySelectorAll('.collapse.show').forEach(openItem => {
+        if ('#' + openItem.id !== targetId) {
+          new bootstrap.Collapse(openItem, { toggle: false }).hide();
+        }
+      });
+    });
+  });
+});
+</script>
+
+<div class="listing-no-matching d-none">
+No matching items
+</div>
+</div><a onclick="window.scrollTo(0, 0); return false;" role="button" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> Back to top</a></main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
     const mode = bsSheetEl.getAttribute("data-mode");
@@ -242,8 +912,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   });
   clipboard.on('success', onCopySuccess);
   if (window.document.getElementById('quarto-embedded-source-code-modal')) {
-    // For code content inside modals, clipBoardJS needs to be initialized with a container option
-    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
     const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
       text: getTextToCopy,
       container: window.document.getElementById('quarto-embedded-source-code-modal')
@@ -252,7 +920,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   }
     var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
     var mailtoRegex = new RegExp(/^mailto:/);
-      var filterRegex = new RegExp("https:\/\/www\.chrismoreh\.com");
+      var filterRegex = new RegExp('/' + window.location.host + '/');
     var isInternal = (href) => {
         return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
     }
@@ -359,7 +1027,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       if (window.Quarto?.typesetMath) {
         window.Quarto.typesetMath(note);
       }
-      // TODO in 1.5, we should make sure this works without a callout special case
       if (note.classList.contains("callout")) {
         return note.outerHTML;
       } else {
@@ -586,19 +1253,22 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 });
 </script>
 </div> <!-- /content -->
-<footer class="footer"><div class="nav-footer">
+<footer class="footer">
+  <div class="nav-footer">
     <div class="nav-footer-left">
-<p><i class="fa-regular fa-copyright" aria-label="copyright"></i> 2024 Chris Moreh <br><a href="https://creativecommons.org/licenses/by/4.0/"><i class="fa-brands fa-creative-commons" aria-label="creative-commons"></i> <i class="fa-brands fa-creative-commons-by" aria-label="creative-commons-by"></i> Creative Commons CC BY 4.0</a></p>
+<p><i class="fa-regular fa-copyright" aria-label="copyright"></i> 2025 Chris Moreh <br> <a href="https://creativecommons.org/licenses/by/4.0/"><i class="fa-brands fa-creative-commons" aria-label="creative-commons"></i> <i class="fa-brands fa-creative-commons-by" aria-label="creative-commons-by"></i> Creative Commons CC BY 4.0</a></p>
 </div>   
     <div class="nav-footer-center">
-<p><i class="fa-brands fa-orcid" aria-label="orcid"></i> <a href="https://orcid.org/0000-0002-7739-1455">0000-0002-7739-1455</a><br><span style="color:#50D5C2; font-family:Helvetica Neue,Arial,sans-serif;"><strong><a href="../../../credits.html">Credits</a></strong></span></p>
+<p><i class="fa-brands fa-orcid" aria-label="orcid"></i> <a href="https://orcid.org/0000-0002-7739-1455">0000-0002-7739-1455</a><br> <a href="../../../credits.html"><strong>Credits</strong></a></p>
 </div>
     <div class="nav-footer-right">
-<p>Written in <a href="https://quarto.org/"><iconify-icon inline="" icon="simple-icons:quarto"></iconify-icon>&nbsp;<strong>Quarto</strong></a><br> Hosetd on <a href="https://github.com/CGMoreh"><iconify-icon inline="" icon="f7:logo-github" style="font-size: 1.25em;"></iconify-icon>&nbsp;<iconify-icon inline="" icon="octicon:logo-github-16"></iconify-icon></a></p>
+<p>Written in <a href="https://quarto.org/"><iconify-icon inline="" icon="simple-icons:quarto"></iconify-icon>&nbsp;<strong>Quarto</strong></a><br> Hosted on <a href="https://github.com/CGMoreh"><iconify-icon inline="" icon="f7:logo-github" style="font-size: 1.25em;"></iconify-icon>&nbsp;<iconify-icon inline="" icon="octicon:logo-github-16"></iconify-icon></a></p>
 </div>
   </div>
 </footer>
 
 
-<script src="../../../site_libs/quarto-html/zenscroll-min.js"></script>
+
+
+<script src="../../../assets/libs/quarto-html/zenscroll-min.js"></script>
 </body></html>

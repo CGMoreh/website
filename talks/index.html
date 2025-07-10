@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.5.57">
+<meta name="generator" content="quarto-1.6.42">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -23,21 +23,23 @@ ul.task-list li input[type="checkbox"] {
 </style>
 
 
-<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../assets/libs/quarto-nav/quarto-nav.js"></script>
 <link href="../pics/browser-icon.png" rel="icon" type="image/png">
-<script src="../site_libs/clipboard/clipboard.min.js"></script>
-<script src="../site_libs/quarto-html/quarto.js"></script>
-<script src="../site_libs/quarto-html/popper.min.js"></script>
-<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="../site_libs/quarto-html/anchor.min.js"></script>
-<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
-<link href="../site_libs/quarto-contrib/fontawesome6-0.1.0/all.css" rel="stylesheet">
-<link href="../site_libs/quarto-contrib/fontawesome6-0.1.0/latex-fontsize.css" rel="stylesheet">
-<script src="../site_libs/quarto-contrib/iconify-1.0.8/iconify-icon.min.js"></script>
+<script src="../assets/libs/quarto-listing/list.min.js"></script>
+<script src="../assets/libs/quarto-listing/quarto-listing.js"></script>
+<script src="../assets/libs/clipboard/clipboard.min.js"></script>
+<script src="../assets/libs/quarto-html/quarto.js"></script>
+<script src="../assets/libs/quarto-html/popper.min.js"></script>
+<script src="../assets/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../assets/libs/quarto-html/anchor.min.js"></script>
+<link href="../assets/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../assets/libs/quarto-html/quarto-syntax-highlighting-2f5df379a58b258e96c21c0638c20c03.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../assets/libs/bootstrap/bootstrap.min.js"></script>
+<link href="../assets/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../assets/libs/bootstrap/bootstrap-af75ddc6410556b0e895ac43d43d4bcc.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../assets/libs/quarto-contrib/fontawesome6-0.1.0/all.css" rel="stylesheet">
+<link href="../assets/libs/quarto-contrib/fontawesome6-0.1.0/latex-fontsize.css" rel="stylesheet">
+<script src="../assets/libs/quarto-contrib/iconify-1.0.8/iconify-icon.min.js"></script>
 <script id="quarto-search-options" type="application/json">{
   "language": {
     "search-no-results-text": "No results",
@@ -53,8 +55,66 @@ ul.task-list li input[type="checkbox"] {
     "search-label": "Search"
   }
 }</script>
+<script>
+
+  window.document.addEventListener("DOMContentLoaded", function (_event) {
+    const listingTargetEl = window.document.querySelector('#listing-talks .list');
+    if (!listingTargetEl) {
+      // No listing discovered, do not attach.
+      return; 
+    }
+
+    const options = {
+      valueNames: ['listing-title','listing-date','listing-event','listing-organiser','listing-details','listing-location','listing-categories','listing-pdf','listing-event-site','listing-html',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] }],
+      
+      searchColumns: ["listing-title","listing-date","listing-event","listing-organiser","listing-details","listing-location","listing-categories","listing-pdf","listing-event-site","listing-html"],
+    };
+
+    window['quarto-listings'] = window['quarto-listings'] || {};
+    window['quarto-listings']['listing-talks'] = new List('listing-talks', options);
+
+    if (window['quarto-listing-loaded']) {
+      window['quarto-listing-loaded']();
+    }
+  });
+
+  window.addEventListener('hashchange',() => {
+    if (window['quarto-listing-loaded']) {
+      window['quarto-listing-loaded']();
+    }
+  })
+  </script>
 <style>html{ scroll-behavior: smooth; }</style>
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 </head>
 
@@ -62,7 +122,7 @@ ul.task-list li input[type="checkbox"] {
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top quarto-banner">
-    <nav class="navbar navbar-expand-sm " data-bs-theme="dark">
+    <nav class="navbar navbar-expand-md " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
     <a href="../index.html" class="navbar-brand navbar-brand-logo">
@@ -102,11 +162,19 @@ ul.task-list li input[type="checkbox"] {
   </li>  
   <li class="nav-item">
     <a class="nav-link" href="https://www.linkedin.com/in/cgmoreh/" target="_blank"> 
-<span class="menu-text"><iconify-icon inline="" icon="cib:linkedin" style="font-size: md;"></iconify-icon></span></a>
+<span class="menu-text"><iconify-icon inline="" icon="garden:linkedin-stroke-12" style="font-size: md;"></iconify-icon></span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="https://x.com/cgmoreh" target="_blank"> 
-<span class="menu-text"><iconify-icon inline="" icon="line-md:twitter-x-alt" style="font-size: md;"></iconify-icon></span></a>
+    <a class="nav-link" href="https://www.researchgate.net/profile/Chris-Moreh" target="_blank"> 
+<span class="menu-text"><iconify-icon inline="" icon="academicons:researchgate-square" style="font-size: md;"></iconify-icon></span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="https://scholar.google.com/citations?user=RqleBzoAAAAJ&amp;hl" target="_blank"> 
+<span class="menu-text"><iconify-icon inline="" icon="academicons:google-scholar" style="font-size: md;"></iconify-icon></span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="https://www.youtube.com/@ChrisMoreh" target="_blank"> 
+<span class="menu-text"><iconify-icon inline="" icon="si:youtube-line" style="font-size: md;"></iconify-icon></span></a>
   </li>  
   <li class="nav-item">
     <a class="nav-link" href="https://bsky.app/profile/cgmoreh.bsky.social" target="_blank"> 
@@ -130,19 +198,20 @@ ul.task-list li input[type="checkbox"] {
 </header>
 <!-- content -->
 <header id="title-block-header" class="quarto-title-block publications default page-columns page-full">
+    <link href="https://fonts.cdnfonts.com/css/georgia-pro-cond" rel="stylesheet">
     <div class="quarto-title-banner page-columns page-full">
-        <div class="quarto-title column-page">
+        <div class="quarto-title column-page-left">
             <h1 class="title anton-large"><iconify-icon inline="" icon="streamline:interface-presentation-podium-work-desk-notes-company-presentation-office-podium-microphone"></iconify-icon> Presentations</h1>
         </div>
     </div>
 </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
         
-    </div>
+    <h5 class="quarto-listing-category-title">Type</h5><div class="quarto-listing-category category-default"><div class="category" data-category="">All <span class="quarto-category-count">(2)</span></div><div class="category" data-category="Q29uZmVyZW5jZQ==">Conference <span class="quarto-category-count">(1)</span></div><div class="category" data-category="SW52aXRlZA==">Invited <span class="quarto-category-count">(1)</span></div><div class="category" data-category="V29ya3Nob3A=">Workshop <span class="quarto-category-count">(1)</span></div></div></div>
 <!-- main -->
-<main class="content quarto-banner-title-block column-page" id="quarto-document-content">
+<main class="content quarto-banner-title-block column-page-left" id="quarto-document-content">
 <style>
   body {
     background-image: url(../pics/garden-4.jpg);
@@ -152,7 +221,6 @@ ul.task-list li input[type="checkbox"] {
     background-color: rgba(255,255,255,0.5);
     background-blend-mode: lighten;
   }
-
 
   body #quarto-content {
       padding: 0;
@@ -165,19 +233,193 @@ ul.task-list li input[type="checkbox"] {
 
 
 
-<!-- ## 2022 -->
-<!-- :::{#talks_2022} -->
-<!-- ::: -->
-<!-- ## 2021 -->
-<!-- :::{#talks_2021} -->
-<!-- ::: -->
-<!-- ## 2020 -->
-<!-- :::{#talks_2020} -->
-<!-- ::: -->
+<p><br></p>
 
 
 
-<a onclick="window.scrollTo(0, 0); return false;" role="button" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> Back to top</a></main> <!-- /main -->
+
+<div class="quarto-listing quarto-listing-container-custom" id="listing-talks">
+<div class="listing-actions-group">
+    <div class="input-group input-group-sm quarto-listing-filter">
+      <span class="input-group-text"><i class="bi bi-search"></i></span>
+      <input type="text" class="search form-control" placeholder="Search and filter presentations by keyword or date">
+    </div>
+</div>
+<div class="list talks">
+     
+    <div class="talk-entry" data-index="0" data-categories="SW52aXRlZCUyQ1dvcmtzaG9w" data-listing-date-sort="1570748400000">
+      <div>
+          <span class="title listing-title"><a>From post-socialist to post-accession pioneering and beyond: thirty years of change in the Romanian international migration system&nbsp;</a></span>
+           
+            <span class="event listing-event"><i class="fa-solid fa-at fa-fade" style="color: #700001; font-weight: bold;"></i> Workshop on <i>Migration in the Balkan region, before and after the EU</i>&nbsp;</span>
+          
+           
+            <span class="event listing-event"><i class="fa-solid fa-building-columns" style="color: #700001; font-weight: bold;"></i> The Kosovo Institute for Economic Development</span>
+          
+      </div>
+      <div>
+          <span class="location-date listing-location"><i class="fa-solid fa-map-location" style="color: #700001;"></i> Europe House, Tirana, Albania  </span>
+          <span class="location-date listing-date"><i class="fa-solid fa-calendar-days" style="color: #700001;"></i> 11 October 2019</span>
+      </div>
+        <div class="talk-buttons">
+             
+            <span>
+              <a class="btn btn-outline-description btn-sm squishy toggle-btn" data-bs-toggle="collapse" data-bs-target="#details-0">
+                <i class="fa-solid fa-scroll"></i> Details
+              </a>
+            </span>
+            
+
+            
+             
+            <span><a class="btn btn-slides disabled">Slides: </a></span>
+            
+
+            
+
+            
+              <span>
+                <a class="btn btn-outline-online btn-sm squishy toggle-btn" data-bs-toggle="collapse" data-bs-target="#pdf-0">
+                  <i class="fa-solid fa-chevron-down fa-bounce"></i> Preview
+                </a>
+              </span>
+              <span>
+                <a class="btn btn-outline-online btn-sm squishy" href="old-slides/19-10-11-Tirana.pdf" download="">
+                  <i class="fa-solid fa-download"></i> Download
+                </a>
+              </span>
+            
+
+            
+
+            
+          
+          <!-- Collapsed content -->
+             
+              <div id="details-0" class="collapse details-collapsed listing-details">
+                  This ddrtd test
+              </div> 
+            
+          
+            <div id="pdf-0" class="collapse">
+              <p style="text-align:center; margin-bottom: 0px;">
+                <iframe class="pdf-frame" src="old-slides/19-10-11-Tirana.pdf#toolbar=0&amp;view=FitH" width="500px" height="275px">
+                        <p>Your browser does not support PDF viewing.
+                          <a href="old-slides/19-10-11-Tirana.pdf">Download the PDF instead.</a>
+                        </p>
+                </iframe>
+              </p>
+            </div>  
+            
+          
+            <div id="html-0" class="collapse">
+              <p style="text-align:center; margin-bottom: 0px;">
+                <iframe class="pdf-frame" src="" width="500px" height="275px"></iframe>
+              </p>
+            </div>  
+            
+          </div>
+        </div>
+     
+    <div class="talk-entry" data-index="1" data-categories="Q29uZmVyZW5jZQ==" data-listing-date-sort="1561071600000">
+      <div>
+          <span class="title listing-title"><a>The 'Brexit' effect on the life satisfaction of Poles in the UK&nbsp;</a></span>
+           
+            <span class="event listing-event"><i class="fa-solid fa-at fa-fade" style="color: #700001; font-weight: bold;"></i><a href="https://councilforeuropeanstudies.org/conferences/past-conferences/26th-international-conference/"> 26th International Conference of Europeanists&nbsp;</a></span>
+          
+           
+            <span class="event listing-event"><i class="fa-solid fa-building-columns" style="color: #700001; font-weight: bold;"></i> Council for European Studies</span>
+          
+      </div>
+      <div>
+          <span class="location-date listing-location"><i class="fa-solid fa-map-location" style="color: #700001;"></i> Universidad Carlos III, Madrid, Spain  </span>
+          <span class="location-date listing-date"><i class="fa-solid fa-calendar-days" style="color: #700001;"></i> 21 June 2019</span>
+      </div>
+        <div class="talk-buttons">
+             
+            <span>
+              <a class="btn btn-outline-description btn-sm squishy toggle-btn" data-bs-toggle="collapse" data-bs-target="#details-1">
+                <i class="fa-solid fa-scroll"></i> Details
+              </a>
+            </span>
+            
+
+            
+             
+            <span><a class="btn btn-slides disabled">Slides: </a></span>
+            
+
+            
+              <span>
+                <a class="btn btn-outline-online btn-sm squishy toggle-btn" data-bs-toggle="collapse" data-bs-target="#html-1">
+                  <i class="fa-solid fa-chevron-down fa-bounce"></i> Preview
+                </a>
+              </span>
+              <span>
+                <a class="btn btn-outline-online btn-sm squishy" href="https://slides.chrismoreh.com/250311-TeachOut">
+                  <i class="fa-solid fa-link"></i> Open
+                </a>
+              </span>
+            
+
+            
+
+            
+
+            
+          
+          <!-- Collapsed content -->
+             
+              <div id="details-1" class="collapse details-collapsed listing-details">
+                  Paper presentation
+              </div> 
+            
+          
+            <div id="pdf-1" class="collapse">
+              <p style="text-align:center; margin-bottom: 0px;">
+                <iframe class="pdf-frame" src="#toolbar=0&amp;view=FitH" width="500px" height="275px">
+                        <p>Your browser does not support PDF viewing.
+                          <a href="">Download the PDF instead.</a>
+                        </p>
+                </iframe>
+              </p>
+            </div>  
+            
+          
+            <div id="html-1" class="collapse">
+              <p style="text-align:center; margin-bottom: 0px;">
+                <iframe class="pdf-frame" src="https://slides.chrismoreh.com/250311-TeachOut" width="500px" height="275px"></iframe>
+              </p>
+            </div>  
+            
+          </div>
+        </div>
+    
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  const toggleButtons = document.querySelectorAll('.toggle-btn');
+
+  toggleButtons.forEach(btn => {
+    btn.addEventListener('click', function () {
+      const targetId = this.getAttribute('data-bs-target');
+
+      // Collapse all other sections
+      document.querySelectorAll('.collapse.show').forEach(openItem => {
+        if ('#' + openItem.id !== targetId) {
+          new bootstrap.Collapse(openItem, { toggle: false }).hide();
+        }
+      });
+    });
+  });
+});
+</script>
+
+<div class="listing-no-matching d-none">
+No matching items
+</div>
+</div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
@@ -260,8 +502,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   });
   clipboard.on('success', onCopySuccess);
   if (window.document.getElementById('quarto-embedded-source-code-modal')) {
-    // For code content inside modals, clipBoardJS needs to be initialized with a container option
-    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
     const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
       text: getTextToCopy,
       container: window.document.getElementById('quarto-embedded-source-code-modal')
@@ -377,7 +617,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       if (window.Quarto?.typesetMath) {
         window.Quarto.typesetMath(note);
       }
-      // TODO in 1.5, we should make sure this works without a callout special case
       if (note.classList.contains("callout")) {
         return note.outerHTML;
       } else {
@@ -607,13 +846,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <footer class="footer">
   <div class="nav-footer">
     <div class="nav-footer-left">
-<p><i class="fa-regular fa-copyright" aria-label="copyright"></i> 2024 Chris Moreh <br> <a href="https://creativecommons.org/licenses/by/4.0/"><i class="fa-brands fa-creative-commons" aria-label="creative-commons"></i> <i class="fa-brands fa-creative-commons-by" aria-label="creative-commons-by"></i> Creative Commons CC BY 4.0</a></p>
+<p><i class="fa-regular fa-copyright" aria-label="copyright"></i> 2025 Chris Moreh <br> <a href="https://creativecommons.org/licenses/by/4.0/"><i class="fa-brands fa-creative-commons" aria-label="creative-commons"></i> <i class="fa-brands fa-creative-commons-by" aria-label="creative-commons-by"></i> Creative Commons CC BY 4.0</a></p>
 </div>   
     <div class="nav-footer-center">
-<p><i class="fa-brands fa-orcid" aria-label="orcid"></i> <a href="https://orcid.org/0000-0002-7739-1455">0000-0002-7739-1455</a><br> <span style="color:#50D5C2; font-family:Helvetica Neue,Arial,sans-serif;"><strong><a href="../credits.html">Credits</a></strong></span></p>
+<p><i class="fa-brands fa-orcid" aria-label="orcid"></i> <a href="https://orcid.org/0000-0002-7739-1455">0000-0002-7739-1455</a><br> <a href="../credits.html"><strong>Credits</strong></a></p>
 </div>
     <div class="nav-footer-right">
-<p>Written in <a href="https://quarto.org/"><iconify-icon inline="" icon="simple-icons:quarto"></iconify-icon>&nbsp;<strong>Quarto</strong></a><br> Hosetd on <a href="https://github.com/CGMoreh"><iconify-icon inline="" icon="f7:logo-github" style="font-size: 1.25em;"></iconify-icon>&nbsp;<iconify-icon inline="" icon="octicon:logo-github-16"></iconify-icon></a></p>
+<p>Written in <a href="https://quarto.org/"><iconify-icon inline="" icon="simple-icons:quarto"></iconify-icon>&nbsp;<strong>Quarto</strong></a><br> Hosted on <a href="https://github.com/CGMoreh"><iconify-icon inline="" icon="f7:logo-github" style="font-size: 1.25em;"></iconify-icon>&nbsp;<iconify-icon inline="" icon="octicon:logo-github-16"></iconify-icon></a></p>
 </div>
   </div>
 </footer>
@@ -621,5 +860,5 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 
 
 
-<script src="../site_libs/quarto-html/zenscroll-min.js"></script>
+<script src="../assets/libs/quarto-html/zenscroll-min.js"></script>
 </body></html>

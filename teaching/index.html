@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.5.57">
+<meta name="generator" content="quarto-1.6.42">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -23,21 +23,23 @@ ul.task-list li input[type="checkbox"] {
 </style>
 
 
-<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../assets/libs/quarto-nav/quarto-nav.js"></script>
 <link href="../pics/browser-icon.png" rel="icon" type="image/png">
-<script src="../site_libs/clipboard/clipboard.min.js"></script>
-<script src="../site_libs/quarto-html/quarto.js"></script>
-<script src="../site_libs/quarto-html/popper.min.js"></script>
-<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="../site_libs/quarto-html/anchor.min.js"></script>
-<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
-<link href="../site_libs/quarto-contrib/fontawesome6-0.1.0/all.css" rel="stylesheet">
-<link href="../site_libs/quarto-contrib/fontawesome6-0.1.0/latex-fontsize.css" rel="stylesheet">
-<script src="../site_libs/quarto-contrib/iconify-1.0.8/iconify-icon.min.js"></script>
+<script src="../assets/libs/quarto-listing/list.min.js"></script>
+<script src="../assets/libs/quarto-listing/quarto-listing.js"></script>
+<script src="../assets/libs/clipboard/clipboard.min.js"></script>
+<script src="../assets/libs/quarto-html/quarto.js"></script>
+<script src="../assets/libs/quarto-html/popper.min.js"></script>
+<script src="../assets/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../assets/libs/quarto-html/anchor.min.js"></script>
+<link href="../assets/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../assets/libs/quarto-html/quarto-syntax-highlighting-2f5df379a58b258e96c21c0638c20c03.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../assets/libs/bootstrap/bootstrap.min.js"></script>
+<link href="../assets/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../assets/libs/bootstrap/bootstrap-af75ddc6410556b0e895ac43d43d4bcc.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../assets/libs/quarto-contrib/fontawesome6-0.1.0/all.css" rel="stylesheet">
+<link href="../assets/libs/quarto-contrib/fontawesome6-0.1.0/latex-fontsize.css" rel="stylesheet">
+<script src="../assets/libs/quarto-contrib/iconify-1.0.8/iconify-icon.min.js"></script>
 <script id="quarto-search-options" type="application/json">{
   "language": {
     "search-no-results-text": "No results",
@@ -53,8 +55,66 @@ ul.task-list li input[type="checkbox"] {
     "search-label": "Search"
   }
 }</script>
+<script>
+
+  window.document.addEventListener("DOMContentLoaded", function (_event) {
+    const listingTargetEl = window.document.querySelector('#listing-courses .list');
+    if (!listingTargetEl) {
+      // No listing discovered, do not attach.
+      return; 
+    }
+
+    const options = {
+      valueNames: ['listing-title','listing-subtitle','listing-institution','listing-code','listing-level','listing-type','listing-hecos','listing-ay','listing-description','listing-website','listing-logo','listing-subtitile',{ data: ['index'] },{ data: ['categories'] }],
+      
+      searchColumns: ["listing-title","listing-subtitle","listing-institution","listing-code","listing-level","listing-type","listing-hecos","listing-ay","listing-description","listing-website","listing-logo","listing-subtitile"],
+    };
+
+    window['quarto-listings'] = window['quarto-listings'] || {};
+    window['quarto-listings']['listing-courses'] = new List('listing-courses', options);
+
+    if (window['quarto-listing-loaded']) {
+      window['quarto-listing-loaded']();
+    }
+  });
+
+  window.addEventListener('hashchange',() => {
+    if (window['quarto-listing-loaded']) {
+      window['quarto-listing-loaded']();
+    }
+  })
+  </script>
 <style>html{ scroll-behavior: smooth; }</style>
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 </head>
 
@@ -62,7 +122,7 @@ ul.task-list li input[type="checkbox"] {
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top quarto-banner">
-    <nav class="navbar navbar-expand-sm " data-bs-theme="dark">
+    <nav class="navbar navbar-expand-md " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
     <a href="../index.html" class="navbar-brand navbar-brand-logo">
@@ -102,11 +162,19 @@ ul.task-list li input[type="checkbox"] {
   </li>  
   <li class="nav-item">
     <a class="nav-link" href="https://www.linkedin.com/in/cgmoreh/" target="_blank"> 
-<span class="menu-text"><iconify-icon inline="" icon="cib:linkedin" style="font-size: md;"></iconify-icon></span></a>
+<span class="menu-text"><iconify-icon inline="" icon="garden:linkedin-stroke-12" style="font-size: md;"></iconify-icon></span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="https://x.com/cgmoreh" target="_blank"> 
-<span class="menu-text"><iconify-icon inline="" icon="line-md:twitter-x-alt" style="font-size: md;"></iconify-icon></span></a>
+    <a class="nav-link" href="https://www.researchgate.net/profile/Chris-Moreh" target="_blank"> 
+<span class="menu-text"><iconify-icon inline="" icon="academicons:researchgate-square" style="font-size: md;"></iconify-icon></span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="https://scholar.google.com/citations?user=RqleBzoAAAAJ&amp;hl" target="_blank"> 
+<span class="menu-text"><iconify-icon inline="" icon="academicons:google-scholar" style="font-size: md;"></iconify-icon></span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="https://www.youtube.com/@ChrisMoreh" target="_blank"> 
+<span class="menu-text"><iconify-icon inline="" icon="si:youtube-line" style="font-size: md;"></iconify-icon></span></a>
   </li>  
   <li class="nav-item">
     <a class="nav-link" href="https://bsky.app/profile/cgmoreh.bsky.social" target="_blank"> 
@@ -130,6 +198,7 @@ ul.task-list li input[type="checkbox"] {
 </header>
 <!-- content -->
 <header id="title-block-header" class="quarto-title-block publications default page-columns page-full">
+    <link href="https://fonts.cdnfonts.com/css/georgia-pro-cond" rel="stylesheet">
     <div class="quarto-title-banner page-columns page-full">
         <div class="quarto-title column-page">
             <h1 class="title anton-large"><iconify-icon inline="" icon="game-icons:teacher"></iconify-icon> Courses</h1>
@@ -138,9 +207,7 @@ ul.task-list li input[type="checkbox"] {
 </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
-    </div>
+    
 <!-- main -->
 <main class="content quarto-banner-title-block column-page" id="quarto-document-content">
 <style>
@@ -165,16 +232,102 @@ ul.task-list li input[type="checkbox"] {
 
 
 
-<!-- ## 2023–24 -->
-<!-- :::{#ay_23-24} -->
-<!-- ::: -->
-<!-- ## 2022–23 -->
-<!-- :::{#ay_22-23} -->
-<!-- ::: -->
 
 
 
-<a onclick="window.scrollTo(0, 0); return false;" role="button" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> Back to top</a></main> <!-- /main -->
+
+<div class="quarto-listing quarto-listing-container-custom" id="listing-courses">
+<div class="course-cards">
+    
+        <div class="course-card">
+            <div class="face1">
+                <div class="face1-content">
+                    <img src="pics/SOC2069.jpg">
+                    
+                      <h1 class="lower">Researching Social Life</h1>
+                    
+                    <p><i class="fa-solid fa-building-columns"></i> Newcastle University (UK)   <i class="fa-solid fa-hashtag fa-shake"></i> SOC2069</p>
+                    
+<table class="caption-top table" data-quarto-postprocess="true">
+<tbody>
+<tr class="odd">
+<td>Level:</td>
+<td>Undergraduate</td>
+</tr>
+<tr class="even">
+<td>Type:</td>
+<td>Compulsory</td>
+</tr>
+<tr class="odd">
+<td>HECoS Description:</td>
+<td>Applied Sociology</td>
+</tr>
+<tr class="even">
+<td>Last taught:</td>
+<td>2024/2025</td>
+</tr>
+</tbody>
+</table>
+
+                </div>
+            </div>
+            <div class="face2">
+                <div class="face2-content">
+                  <p>A 2nd-year undergraduate module for <i>Sociology</i> and <i>Politics and Sociology</i> students. The module consists of two parts: one one quantitative methods and one on qualitative methods. Having taught both parts in previous years, I now lead on the quantitative component delivered over six weeks. The module website hosts materials pertaining to the quantitative methods component.</p>
+                  
+                  <a href="https://chrismoreh.com/SOC2069-QUANT" class="btn btn-outline-online btn-sm"><i class="fa-solid fa-globe"></i> Course website</a>
+                  
+                </div>
+            </div>
+        </div>
+    
+        <div class="course-card">
+            <div class="face1">
+                <div class="face1-content">
+                    <img src="pics/HSS8005.png">
+                    
+                      <h1 class="lower">Quantitative Analysis +</h1>
+                    
+                    <p><i class="fa-solid fa-building-columns"></i> Newcastle University (UK)   <i class="fa-solid fa-hashtag fa-shake"></i> HSS8005</p>
+                    
+<table class="caption-top table" data-quarto-postprocess="true">
+<tbody>
+<tr class="odd">
+<td>Level:</td>
+<td>Postgraduate</td>
+</tr>
+<tr class="even">
+<td>Type:</td>
+<td>Partially elective</td>
+</tr>
+<tr class="odd">
+<td>HECoS Description:</td>
+<td>Research Skills</td>
+</tr>
+<tr class="even">
+<td>Last taught:</td>
+<td>2024/2025</td>
+</tr>
+</tbody>
+</table>
+
+                </div>
+            </div>
+            <div class="face2">
+                <div class="face2-content">
+                  <p>This postgraduate-level module open to students across the <i>Faculty of Humanities and Social Sciences</i> (FHaSS) consists of two streams: introductory and intermediate. As part of a three-year part-time secondment to FHaSS, I designed and delivered the intermediate stream of the module (HSS8005+). The intermediate stream is a continuation course in applied statistics and probability for the understanding of society and culture. It is aimed at an interdisciplinary postgraduate audience in the social sciences and humanities. Focusing on real-life examples from published research, the course emphasizes the scientific application of regression models, the practice of reproducible research workflows, and the communication of statistical results to diverse audiences. It prioritises understanding through modern computational techniques over mathematical abstraction.</p>
+                  
+                  <a href="https://chrismoreh.com/HSS8005" class="btn btn-outline-online btn-sm"><i class="fa-solid fa-globe"></i> Course website</a>
+                  
+                </div>
+            </div>
+        </div>
+    
+</div>
+<div class="listing-no-matching d-none">
+No matching items
+</div>
+</div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
@@ -257,8 +410,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   });
   clipboard.on('success', onCopySuccess);
   if (window.document.getElementById('quarto-embedded-source-code-modal')) {
-    // For code content inside modals, clipBoardJS needs to be initialized with a container option
-    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
     const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
       text: getTextToCopy,
       container: window.document.getElementById('quarto-embedded-source-code-modal')
@@ -374,7 +525,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       if (window.Quarto?.typesetMath) {
         window.Quarto.typesetMath(note);
       }
-      // TODO in 1.5, we should make sure this works without a callout special case
       if (note.classList.contains("callout")) {
         return note.outerHTML;
       } else {
@@ -604,13 +754,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <footer class="footer">
   <div class="nav-footer">
     <div class="nav-footer-left">
-<p><i class="fa-regular fa-copyright" aria-label="copyright"></i> 2024 Chris Moreh <br> <a href="https://creativecommons.org/licenses/by/4.0/"><i class="fa-brands fa-creative-commons" aria-label="creative-commons"></i> <i class="fa-brands fa-creative-commons-by" aria-label="creative-commons-by"></i> Creative Commons CC BY 4.0</a></p>
+<p><i class="fa-regular fa-copyright" aria-label="copyright"></i> 2025 Chris Moreh <br> <a href="https://creativecommons.org/licenses/by/4.0/"><i class="fa-brands fa-creative-commons" aria-label="creative-commons"></i> <i class="fa-brands fa-creative-commons-by" aria-label="creative-commons-by"></i> Creative Commons CC BY 4.0</a></p>
 </div>   
     <div class="nav-footer-center">
-<p><i class="fa-brands fa-orcid" aria-label="orcid"></i> <a href="https://orcid.org/0000-0002-7739-1455">0000-0002-7739-1455</a><br> <span style="color:#50D5C2; font-family:Helvetica Neue,Arial,sans-serif;"><strong><a href="../credits.html">Credits</a></strong></span></p>
+<p><i class="fa-brands fa-orcid" aria-label="orcid"></i> <a href="https://orcid.org/0000-0002-7739-1455">0000-0002-7739-1455</a><br> <a href="../credits.html"><strong>Credits</strong></a></p>
 </div>
     <div class="nav-footer-right">
-<p>Written in <a href="https://quarto.org/"><iconify-icon inline="" icon="simple-icons:quarto"></iconify-icon>&nbsp;<strong>Quarto</strong></a><br> Hosetd on <a href="https://github.com/CGMoreh"><iconify-icon inline="" icon="f7:logo-github" style="font-size: 1.25em;"></iconify-icon>&nbsp;<iconify-icon inline="" icon="octicon:logo-github-16"></iconify-icon></a></p>
+<p>Written in <a href="https://quarto.org/"><iconify-icon inline="" icon="simple-icons:quarto"></iconify-icon>&nbsp;<strong>Quarto</strong></a><br> Hosted on <a href="https://github.com/CGMoreh"><iconify-icon inline="" icon="f7:logo-github" style="font-size: 1.25em;"></iconify-icon>&nbsp;<iconify-icon inline="" icon="octicon:logo-github-16"></iconify-icon></a></p>
 </div>
   </div>
 </footer>
@@ -618,5 +768,5 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 
 
 
-<script src="../site_libs/quarto-html/zenscroll-min.js"></script>
+<script src="../assets/libs/quarto-html/zenscroll-min.js"></script>
 </body></html>

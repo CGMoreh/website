@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.5.57">
+<meta name="generator" content="quarto-1.6.42">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 <title>404 (Page Not Found) – Chris Moreh</title>
 <style>
@@ -19,24 +19,24 @@ ul.task-list li input[type="checkbox"] {
 }
 </style>
 
-<script src="/site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="/assets/libs/quarto-nav/quarto-nav.js"></script>
 <link href="/./pics/browser-icon.png" rel="icon" type="image/png">
-<script src="/site_libs/clipboard/clipboard.min.js"></script>
-<script src="/site_libs/quarto-html/quarto.js"></script>
-<script src="/site_libs/quarto-html/popper.min.js"></script>
-<script src="/site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="/site_libs/quarto-html/anchor.min.js"></script>
-<link href="/site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="/site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="/site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="/site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="/site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
-<link href="/site_libs/quarto-contrib/fontawesome6-0.1.0/all.css" rel="stylesheet">
-<link href="/site_libs/quarto-contrib/fontawesome6-0.1.0/latex-fontsize.css" rel="stylesheet">
-<script src="/site_libs/quarto-contrib/iconify-1.0.8/iconify-icon.min.js"></script>
-<script src="/site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
-<link href="/site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
-<link href="/site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet"><script id="quarto-search-options" type="application/json">{
+<script src="/assets/libs/clipboard/clipboard.min.js"></script>
+<script src="/assets/libs/quarto-html/quarto.js"></script>
+<script src="/assets/libs/quarto-html/popper.min.js"></script>
+<script src="/assets/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="/assets/libs/quarto-html/anchor.min.js"></script>
+<link href="/assets/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="/assets/libs/quarto-html/quarto-syntax-highlighting-2f5df379a58b258e96c21c0638c20c03.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="/assets/libs/bootstrap/bootstrap.min.js"></script>
+<link href="/assets/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="/assets/libs/bootstrap/bootstrap-5d5190a3a93c3a134a587e88f63dc34c.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="/assets/libs/quarto-contrib/fontawesome6-0.1.0/all.css" rel="stylesheet">
+<link href="/assets/libs/quarto-contrib/fontawesome6-0.1.0/latex-fontsize.css" rel="stylesheet">
+<script src="/assets/libs/quarto-contrib/iconify-1.0.8/iconify-icon.min.js"></script>
+<script src="/assets/libs/quarto-contrib/glightbox/glightbox.min.js"></script>
+<link href="/assets/libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
+<link href="/assets/libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet"><script id="quarto-search-options" type="application/json">{
   "language": {
     "search-no-results-text": "No results",
     "search-matching-documents-text": "matching documents",
@@ -56,7 +56,7 @@ ul.task-list li input[type="checkbox"] {
 
 <div id="quarto-search-results"></div>
 <!-- content -->
-<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<header id="title-block-header" class="quarto-title-block"></header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
 <!-- sidebar -->
 <!-- margin-sidebar -->
     
@@ -64,7 +64,7 @@ ul.task-list li input[type="checkbox"] {
 <main class="content quarto-banner-title-block" id="quarto-document-content"><div>
 
 </div>
-<div class="quarto-layout-panel" style="margin-bottom:0em !important" data-layout="[ 30, 40, 30 ]">
+<div class="quarto-layout-panel" data-layout="[ 30, 40, 30 ]" style="margin-bottom:0em !important">
 <div class="quarto-layout-row">
 <div id="first-column" class="quarto-layout-cell" style="flex-basis: 30.0%;justify-content: flex-start;">
 
@@ -233,8 +233,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   });
   clipboard.on('success', onCopySuccess);
   if (window.document.getElementById('quarto-embedded-source-code-modal')) {
-    // For code content inside modals, clipBoardJS needs to be initialized with a container option
-    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
     const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
       text: getTextToCopy,
       container: window.document.getElementById('quarto-embedded-source-code-modal')
@@ -350,7 +348,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       if (window.Quarto?.typesetMath) {
         window.Quarto.typesetMath(note);
       }
-      // TODO in 1.5, we should make sure this works without a callout special case
       if (note.classList.contains("callout")) {
         return note.outerHTML;
       } else {
@@ -579,16 +576,16 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </div> <!-- /content -->
 <footer class="footer"><div class="nav-footer">
     <div class="nav-footer-left">
-<p><i class="fa-regular fa-copyright" aria-label="copyright"></i> 2024 Chris Moreh <br><a href="https://creativecommons.org/licenses/by/4.0/"><i class="fa-brands fa-creative-commons" aria-label="creative-commons"></i> <i class="fa-brands fa-creative-commons-by" aria-label="creative-commons-by"></i> Creative Commons CC BY 4.0</a></p>
+<p><i class="fa-regular fa-copyright" aria-label="copyright"></i> 2025 Chris Moreh <br><a href="https://creativecommons.org/licenses/by/4.0/"><i class="fa-brands fa-creative-commons" aria-label="creative-commons"></i> <i class="fa-brands fa-creative-commons-by" aria-label="creative-commons-by"></i> Creative Commons CC BY 4.0</a></p>
 </div>   
     <div class="nav-footer-center">
-<p><i class="fa-brands fa-orcid" aria-label="orcid"></i> <a href="https://orcid.org/0000-0002-7739-1455">0000-0002-7739-1455</a><br><span style="color:#50D5C2; font-family:Helvetica Neue,Arial,sans-serif;"><strong><a href="/./credits.html">Credits</a></strong></span></p>
+<p><i class="fa-brands fa-orcid" aria-label="orcid"></i> <a href="https://orcid.org/0000-0002-7739-1455">0000-0002-7739-1455</a><br><a href="/./credits.html"><strong>Credits</strong></a></p>
 </div>
     <div class="nav-footer-right">
-<p>Written in <a href="https://quarto.org/"><iconify-icon inline="" icon="simple-icons:quarto"></iconify-icon>&nbsp;<strong>Quarto</strong></a><br> Hosetd on <a href="https://github.com/CGMoreh"><iconify-icon inline="" icon="f7:logo-github" style="font-size: 1.25em;"></iconify-icon>&nbsp;<iconify-icon inline="" icon="octicon:logo-github-16"></iconify-icon></a></p>
+<p>Written in <a href="https://quarto.org/"><iconify-icon inline="" icon="simple-icons:quarto"></iconify-icon>&nbsp;<strong>Quarto</strong></a><br> Hosted on <a href="https://github.com/CGMoreh"><iconify-icon inline="" icon="f7:logo-github" style="font-size: 1.25em;"></iconify-icon>&nbsp;<iconify-icon inline="" icon="octicon:logo-github-16"></iconify-icon></a></p>
 </div>
   </div>
-</footer><script>var lightboxQuarto = GLightbox({"selector":".lightbox","loop":false,"descPosition":"bottom","openEffect":"zoom","closeEffect":"zoom"});
+</footer><script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","descPosition":"bottom","loop":false,"openEffect":"zoom","selector":".lightbox"});
 (function() {
   let previousOnload = window.onload;
   window.onload = () => {
@@ -622,5 +619,5 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
           </script>
 
 
-<script src="/site_libs/quarto-html/zenscroll-min.js"></script>
+<script src="/assets/libs/quarto-html/zenscroll-min.js"></script>
 </body></html>
