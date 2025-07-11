@@ -1,16 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://www.chrismoreh.com/teaching/index.html</loc>
-    <lastmod>2025-07-10T21:06:11.494Z</lastmod>
-  </url>
-  <url>
     <loc>https://www.chrismoreh.com/research/projects/transmighealth/index.html</loc>
     <lastmod>2025-04-07T11:07:02.063Z</lastmod>
-  </url>
-  <url>
-    <loc>https://www.chrismoreh.com/research/index.html</loc>
-    <lastmod>2025-07-11T20:13:51.421Z</lastmod>
   </url>
   <url>
     <loc>https://www.chrismoreh.com/publications/reviews/index.html</loc>
@@ -81,14 +73,6 @@
     <lastmod>2025-03-24T22:58:59.803Z</lastmod>
   </url>
   <url>
-    <loc>https://www.chrismoreh.com/posts/index.html</loc>
-    <lastmod>2025-07-10T13:32:21.652Z</lastmod>
-  </url>
-  <url>
-    <loc>https://www.chrismoreh.com/index.html</loc>
-    <lastmod>2025-07-11T15:28:52.266Z</lastmod>
-  </url>
-  <url>
     <loc>https://www.chrismoreh.com/footer/about.html</loc>
     <lastmod>2025-07-08T16:24:48.598Z</lastmod>
   </url>
@@ -115,10 +99,6 @@
   <url>
     <loc>https://www.chrismoreh.com/blog/miscellanea/190610-LSE/index.html</loc>
     <lastmod>2025-07-06T12:36:03.499Z</lastmod>
-  </url>
-  <url>
-    <loc>https://www.chrismoreh.com/cv/cv.html</loc>
-    <lastmod>2025-02-27T01:27:40.177Z</lastmod>
   </url>
   <url>
     <loc>https://www.chrismoreh.com/footer/credits.html</loc>
@@ -185,10 +165,6 @@
     <lastmod>2025-03-24T10:59:22.340Z</lastmod>
   </url>
   <url>
-    <loc>https://www.chrismoreh.com/publications/index.html</loc>
-    <lastmod>2025-07-11T15:41:56.416Z</lastmod>
-  </url>
-  <url>
     <loc>https://www.chrismoreh.com/publications/mags/2019-Perspektif/index.html</loc>
     <lastmod>2025-07-11T20:49:18.291Z</lastmod>
   </url>
@@ -203,9 +179,5 @@
   <url>
     <loc>https://www.chrismoreh.com/research/projects/maxoutSA/index.html</loc>
     <lastmod>2025-04-07T06:35:00.037Z</lastmod>
-  </url>
-  <url>
-    <loc>https://www.chrismoreh.com/talks/index.html</loc>
-    <lastmod>2025-04-02T13:18:29.017Z</lastmod>
   </url>
 </urlset>
