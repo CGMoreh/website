@@ -2,7 +2,7 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://www.chrismoreh.com/teaching/index.html</loc>
-    <lastmod>2025-04-03T20:41:29.470Z</lastmod>
+    <lastmod>2025-07-10T21:06:11.494Z</lastmod>
   </url>
   <url>
     <loc>https://www.chrismoreh.com/research/projects/transmighealth/index.html</loc>
@@ -10,7 +10,11 @@
   </url>
   <url>
     <loc>https://www.chrismoreh.com/research/index.html</loc>
-    <lastmod>2025-04-05T21:35:31.193Z</lastmod>
+    <lastmod>2025-07-11T20:13:51.421Z</lastmod>
+  </url>
+  <url>
+    <loc>https://www.chrismoreh.com/publications/reviews/index.html</loc>
+    <lastmod>2025-07-11T05:17:05.316Z</lastmod>
   </url>
   <url>
     <loc>https://www.chrismoreh.com/publications/monographs/2014-lharmattan/index.html</loc>
@@ -18,11 +22,11 @@
   </url>
   <url>
     <loc>https://www.chrismoreh.com/publications/mags/2008-beszelo/index.html</loc>
-    <lastmod>2025-03-24T11:46:09.825Z</lastmod>
+    <lastmod>2025-07-10T14:01:56.445Z</lastmod>
   </url>
   <url>
     <loc>https://www.chrismoreh.com/publications/edited-books/forthcoming-ee/index.html</loc>
-    <lastmod>2025-04-07T11:00:09.047Z</lastmod>
+    <lastmod>2025-07-11T16:32:18.007Z</lastmod>
   </url>
   <url>
     <loc>https://www.chrismoreh.com/publications/chapters/2019-ceup/index.html</loc>
@@ -78,55 +82,55 @@
   </url>
   <url>
     <loc>https://www.chrismoreh.com/posts/index.html</loc>
-    <lastmod>2025-07-10T11:28:54.319Z</lastmod>
+    <lastmod>2025-07-10T13:32:21.652Z</lastmod>
   </url>
   <url>
     <loc>https://www.chrismoreh.com/index.html</loc>
-    <lastmod>2025-07-09T12:45:48.786Z</lastmod>
+    <lastmod>2025-07-11T15:28:52.266Z</lastmod>
   </url>
   <url>
-    <loc>https://www.chrismoreh.com/credits.html</loc>
-    <lastmod>2024-01-24T18:37:44.776Z</lastmod>
-  </url>
-  <url>
-    <loc>https://www.chrismoreh.com/blog/miscellanea/190610-LSE/index.html</loc>
-    <lastmod>2025-07-06T12:36:03.499Z</lastmod>
-  </url>
-  <url>
-    <loc>https://www.chrismoreh.com/blog/data-science/241202-FAKEPerspektif/index.html</loc>
-    <lastmod>2025-07-07T11:56:59.695Z</lastmod>
-  </url>
-  <url>
-    <loc>https://www.chrismoreh.com/blog/data-science/190321-FAKEConversation/index.html</loc>
-    <lastmod>2025-07-07T23:49:30.216Z</lastmod>
-  </url>
-  <url>
-    <loc>https://www.chrismoreh.com/about.html</loc>
+    <loc>https://www.chrismoreh.com/footer/about.html</loc>
     <lastmod>2025-07-08T16:24:48.598Z</lastmod>
-  </url>
-  <url>
-    <loc>https://www.chrismoreh.com/blog/data-science/190610-FAKELSE/index.html</loc>
-    <lastmod>2025-07-07T23:49:57.339Z</lastmod>
-  </url>
-  <url>
-    <loc>https://www.chrismoreh.com/blog/miscellanea/190321-Conversation/index.html</loc>
-    <lastmod>2025-07-06T12:38:54.500Z</lastmod>
   </url>
   <url>
     <loc>https://www.chrismoreh.com/blog/miscellanea/191202-Perspektif/index.html</loc>
     <lastmod>2025-07-06T12:38:00.006Z</lastmod>
   </url>
   <url>
+    <loc>https://www.chrismoreh.com/blog/miscellanea/190321-Conversation/index.html</loc>
+    <lastmod>2025-07-11T20:23:09.855Z</lastmod>
+  </url>
+  <url>
+    <loc>https://www.chrismoreh.com/blog/data-science/190610-FAKELSE/index.html</loc>
+    <lastmod>2025-07-07T23:49:57.339Z</lastmod>
+  </url>
+  <url>
+    <loc>https://www.chrismoreh.com/blog/data-science/190321-FAKEConversation/index.html</loc>
+    <lastmod>2025-07-07T23:49:30.216Z</lastmod>
+  </url>
+  <url>
+    <loc>https://www.chrismoreh.com/blog/data-science/241202-FAKEPerspektif/index.html</loc>
+    <lastmod>2025-07-07T11:56:59.695Z</lastmod>
+  </url>
+  <url>
+    <loc>https://www.chrismoreh.com/blog/miscellanea/190610-LSE/index.html</loc>
+    <lastmod>2025-07-06T12:36:03.499Z</lastmod>
+  </url>
+  <url>
     <loc>https://www.chrismoreh.com/cv/cv.html</loc>
     <lastmod>2025-02-27T01:27:40.177Z</lastmod>
   </url>
   <url>
+    <loc>https://www.chrismoreh.com/footer/credits.html</loc>
+    <lastmod>2024-01-24T18:37:44.776Z</lastmod>
+  </url>
+  <url>
     <loc>https://www.chrismoreh.com/posts/data-science/index.html</loc>
-    <lastmod>2025-07-09T15:15:17.684Z</lastmod>
+    <lastmod>2025-07-10T12:58:49.812Z</lastmod>
   </url>
   <url>
     <loc>https://www.chrismoreh.com/posts/miscellanea/index.html</loc>
-    <lastmod>2025-07-09T15:13:54.532Z</lastmod>
+    <lastmod>2025-07-10T13:07:08.153Z</lastmod>
   </url>
   <url>
     <loc>https://www.chrismoreh.com/publications/articles/2014-dem/index.html</loc>
@@ -182,15 +186,19 @@
   </url>
   <url>
     <loc>https://www.chrismoreh.com/publications/index.html</loc>
-    <lastmod>2025-04-02T13:15:26.451Z</lastmod>
+    <lastmod>2025-07-11T15:41:56.416Z</lastmod>
   </url>
   <url>
     <loc>https://www.chrismoreh.com/publications/mags/2019-Perspektif/index.html</loc>
-    <lastmod>2025-03-24T23:46:26.867Z</lastmod>
+    <lastmod>2025-07-11T20:49:18.291Z</lastmod>
   </url>
   <url>
     <loc>https://www.chrismoreh.com/publications/monographs/mobility-citizenship/index.html</loc>
     <lastmod>2025-04-07T10:52:09.763Z</lastmod>
+  </url>
+  <url>
+    <loc>https://www.chrismoreh.com/publications/working-papers/index.html</loc>
+    <lastmod>2025-07-11T05:17:20.236Z</lastmod>
   </url>
   <url>
     <loc>https://www.chrismoreh.com/research/projects/maxoutSA/index.html</loc>
