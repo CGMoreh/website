@@ -1,0 +1,283 @@
+---
+pagetitle: Blog-roll
+title: '{{< iconify gridicons reblog >}} Follow and learn'
+theme: blog-roll.scss
+
+execute: 
+  echo: false
+---
+
+```{r "render_blog_feed() function"}
+
+# A function to read in a list of blog posts from an RSS feed and output html
+render_blog_feed <- function(
+  feed_url,
+  show_description = FALSE,
+  max_chars = 200,
+  n_items = 3
+) {
+  feed <- tryCatch(tidyRSS::tidyfeed(feed_url), error = function(e) NULL)
+
+  if (is.null(feed)) {
+    return(htmltools::tags$p("Feed unavailable."))
+  }
+
+  feed_items <- utils::head(feed, n_items)
+
+  entries <- lapply(seq_len(nrow(feed_items)), function(i) {
+    item <- feed_items[i, ]
+
+    date_str <- format(as.Date(item$item_pub_date), "%e %B %Y")
+
+    # Get description/first few lines of each post, truncate to maximum characters
+    description <- if (show_description) {
+      desc <- xml2::xml_text(xml2::read_html(paste0(
+        "<x>",
+        item$item_description,
+        "</x>"
+      )))
+      desc <- gsub("<[^>]+>", "", desc)
+      if (nchar(desc) > max_chars) {
+        paste0(substr(desc, 1, max_chars), "...")
+      } else {
+        desc
+      }
+    } else {
+      NULL
+    }
+
+    # Build list item
+    htmltools::tagList(
+      htmltools::tags$li(
+        htmltools::HTML(paste0(
+          "<strong>",
+          date_str,
+          "</strong>: ",
+          "<a href='",
+          item$item_link,
+          "'>",
+          item$item_title,
+          "</a>"
+        )),
+        if (!is.null(description)) htmltools::tags$div(description)
+      )
+    )
+  })
+
+  htmltools::tags$ul(
+    class = "blog-feed-list",
+    entries
+  )
+}
+```
+
+```{r "render_blog_feed_dd() function"}
+
+# A function to read in a list of blog posts from an RSS feed and output html with a hidden drop-down tag
+render_blog_feed_dd <- function(
+  feed_url,
+  show_description = FALSE,
+  max_chars = 200,
+  n_items = 3,
+  label = "Recent posts"
+) {
+  feed <- tryCatch(tidyRSS::tidyfeed(feed_url), error = function(e) NULL)
+  if (is.null(feed)) {
+    return(htmltools::tags$p("Feed unavailable."))
+  }
+
+  feed_items <- utils::head(feed, n_items)
+
+  entries <- lapply(seq_len(nrow(feed_items)), function(i) {
+    item <- feed_items[i, ]
+
+    date_str <- format(as.Date(item$item_pub_date), "%e %B %Y")
+
+    description <- if (show_description) {
+      desc <- xml2::xml_text(xml2::read_html(paste0(
+        "<x>",
+        item$item_description,
+        "</x>"
+      )))
+      desc <- gsub("<[^>]+>", "", desc)
+      if (nchar(desc) > max_chars) {
+        paste0(substr(desc, 1, max_chars), "...")
+      } else {
+        desc
+      }
+    } else {
+      NULL
+    }
+
+    htmltools::tags$li(
+      htmltools::HTML(paste0(
+        "<strong>",
+        date_str,
+        "</strong>: ",
+        "<a href='",
+        item$item_link,
+        "'>",
+        item$item_title,
+        "</a>"
+      )),
+      if (!is.null(description)) htmltools::tags$div(description)
+    )
+  })
+
+  htmltools::tags$details(
+    htmltools::tags$summary(label),
+    htmltools::tags$ul(
+      class = "blog-feed-list",
+      c(
+        entries,
+        list(
+          htmltools::tags$li(
+            style = "list-style: none; font-style: italic; margin-top: 0.5em;",
+            paste0(
+              "(Last rendered on ",
+              format(Sys.time(), "%e %B %Y at %R"),
+              ")"
+            )
+          )
+        )
+      )
+    )
+  )
+}
+```
+
+
+::::::::::::::::::::: grid
+:::: {.g-col-12 .g-col-sm-6 .g-col-md-4}
+::: heading-row
+### Quantitude
+
+{{< var podcast >}}
+:::
+
+This is a must listen! The [Quantitude podcast](https://quantitudepod.org/) co-hosted and masterfully produced by Patrick Curran (UNC\@CH) and Greg Hancock (UMD) is proof that great comedy can also be done sitting down and despite mastering only a bad pirate accent and being of Transylvanian lineage (😎). And it's about quantitative methods and academia. The dudes are seriously flawed, though; they're likelihoodists who get a kick out of calling up Bayesians at 5:40 in the morning asking them to explain themselves.
+
+```{r}
+render_blog_feed_dd("https://feeds.buzzsprout.com/639103.rss", label = "Recent pods")
+```
+::::
+
+:::: {.g-col-12 .g-col-sm-6 .g-col-md-4}
+::: heading-row
+### Andrew Gelman et al.
+
+{{< var blog >}}
+:::
+
+You know this one. Running since 2004, the [Statistical Modeling, Causal Inference, and Social Science](https://statmodeling.stat.columbia.edu/) blog coordinated by statistician and political scientist Andrew Gelman (Columbia) - but also contributed to by an increasing number of his collaborators - functions like a statistics consultancy desk for the world. Andrew is probably the most influential voice for pragmatic Bayesianism in the social sciences, and a prolific textbook author who has gifted treasures to quantitative educators worldwide.
+
+```{r}
+render_blog_feed_dd("https://statmodeling.stat.columbia.edu/feed/")
+```
+::::
+
+:::: {.g-col-12 .g-col-sm-6 .g-col-md-4}
+::: heading-row
+### Richard McElreath
+
+{{< var blog >}}
+:::
+
+Richard is best known outside the field of evolutionary anthropology for his foundational Bayesian textbook [Statistical Rethinking](https://xcelab.net/rm/) and related [YouTube course lectures](https://youtube.com/playlist?list=PLDcUM9US4XdPz-KxHM4XHt7uUVGWWVSus&si=ZTiq6snAUOutn8Em). Currently directing a Max Planck Institute in Leipzig, his blog [Elements of Evolutionary Anthropology](https://elevanth.org/blog/) is not extremely active, but it makes up for that with the quality of the thoughts conveyed in each post.
+
+```{r}
+render_blog_feed_dd("https://elevanth.org/blog/feed/")
+```
+::::
+
+:::: {.g-col-12 .g-col-sm-6 .g-col-md-4}
+::: heading-row
+### Andrew Heiss
+
+{{< var blog >}}
+:::
+
+Andrew Heiss is a political scientist and public policy researcher at GSU. He has the strongest [explicit commitment to making all aspects of his work open and transparent](https://talks.andrewheiss.com/2022-03-22_uga-putting-everything-out-there/slides.html#1) that you'll find anywhere on the internet today. [His blog](https://www.andrewheiss.com/blog/) dives deeply into various technical aspects of social science programming and it's a wonderful resource for learning about coding in R.
+
+```{r}
+render_blog_feed_dd("https://www.andrewheiss.com/atom.xml")
+```
+::::
+
+:::: {.g-col-12 .g-col-sm-6 .g-col-md-4}
+::: heading-row
+### Learning Bayesian Statistics
+
+{{< var podcast >}} {{< var videocast >}}
+:::
+
+Hosted by Alexandre Andorra, a Bayesian modeller at PyMC Labs, the [Learning Bayesian Statistics](https://learnbayesstats.com/episodes) podcast focuses on long-form conversations with various people who have contributed to Bayesian modelling in various academic fields and industries. Some recent episodes have a hybrid workshop format with a videocast available on the series' [YouTube channel](https://www.youtube.com/@learningbayesianstatistics/videos).
+
+```{r}
+render_blog_feed_dd("https://feeds.captivate.fm/learnbayesstats", label = "Recent pods")
+```
+::::
+
+:::: {.g-col-12 .g-col-sm-6 .g-col-md-4}
+::: heading-row
+### Data Is Plural
+
+{{< var newsletter >}} {{< var podcast >}}
+:::
+
+[Data Is Plural](https://www.data-is-plural.com/) is a long-running newsletter curated by Jeremy Singer-Vine, currently a data editor for the New York Times (previously at *BuzzFeed*, *The Wall Street Journal* and *Slate*). It's a good idea to subscribe to the newsletter to receive a list of interesting and useful publicly available datasets every once in a while, which are also added to a [Google Docs spreadsheet](https://docs.google.com/spreadsheets/d/1wZhPLMCHKJvwOkP4juclhjFgqIY8fQFMemwKL2c64vk/edit?gid=0#gid=0) containing all the datasets listed in past editions of the newsletter. It also has an [associated podcast](https://podcast.data-is-plural.com/2159594/episodes), although that has been quiet recently.
+
+```{r}
+render_blog_feed_dd("https://data-is-plural.github.io/newsletter-archive/feeds/dip.rss", label = "Recent newsletters", show_description = TRUE)
+# render_blog_feed_dd("https://feeds.buzzsprout.com/2159594.rss", label = "Recent pods")
+```
+::::
+
+:::: {.g-col-12 .g-col-sm-6 .g-col-md-4}
+::: heading-row
+### Frank Harrell
+
+{{< var blog >}}
+:::
+
+Frank Harrell is Professor of Biostatistics at Vanderbilt University and is known in the R community for his popular R packages. His blog [Statistical Thinking](https://www.fharrell.com/post/) has been going since 2017 and contains very useful posts on various statistical tests and models implemented in R.
+
+```{r}
+render_blog_feed_dd(
+  "https://www.fharrell.com/index.xml"
+)
+```
+::::
+
+:::: {.g-col-12 .g-col-sm-6 .g-col-md-4}
+::: heading-row
+### Danielle Navarro
+
+{{< var blog >}}
+:::
+
+I first encountered Danielle's work as the author of a very lucid online textbook on [Learning Statistics with R](https://learningstatisticswithr.com/) from back when she was a lecturer in quantitative psychology at the University of Adelaide. She has since moved into industry and has developed many cool interests in computational methods (including [generative art](https://art.djnavarro.net/)). Her data science blog [Notes from a data witch](https://blog.djnavarro.net/) is a treasure trove.
+
+```{r}
+render_blog_feed_dd(
+  "https://blog.djnavarro.net/index.xml"
+)
+```
+::::
+
+:::: {.g-col-12 .g-col-sm-6 .g-col-md-4}
+::: heading-row
+### Kieran Healy
+
+{{< var blog >}}
+:::
+
+Fellow sociologist Kieran Healy (Duke) is a prolific author on both substantive and technical topics. He has written on almost everything from [organ procurement](https://kieranhealy.org/publications/lbg/), through [the institutionalization of mass shootings](https://kieranhealy.org/publications/rituals-of-childhood/) as a ritual of American childhood, to the problems of [digital capitalism](https://kieranhealy.org/publications/tos/). His [Plain Person's Guide to Plain Text Social Science](https://kieranhealy.org/files/papers/plain-person-text.pdf) has been a terrific resource for those transitioning to computationally reproducible research workflows, and he is best known in the R social science community for his book on [Data Visualization](https://socviz.co/). His [blog](https://kieranhealy.org/blog/) is just as diverse and interesting.
+
+```{r}
+render_blog_feed_dd(
+  "https://kieranhealy.org/blog/index.xml"
+)
+```
+::::
+:::::::::::::::::::::
