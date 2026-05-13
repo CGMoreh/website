@@ -7,73 +7,83 @@ execute:
   echo: false
 ---
 
-```{r "render_blog_feed() function"}
+```{r "feed_cache_setup"}
+# The feed data this page renders is no longer pulled at render time with
+# tidyRSS::tidyfeed(); a separate scripts/fetch_feeds.R writes a cached
+# JSON snapshot to perish/blog-roll/_feeds.json on a schedule (locally via
+# `Rscript scripts/fetch_feeds.R`, in CI via
+# .github/workflows/refresh-feeds.yml).
+#
+# The original tidyfeed-based implementations of render_blog_feed() and
+# render_blog_feed_dd() are preserved in this file's git history. To
+# revisit them: `git log --follow -- perish/blog-roll/index.qmd` and pick
+# any commit prior to the migration.
 
-# A function to read in a list of blog posts from an RSS feed and output html
+.blog_feed_cache <- jsonlite::fromJSON(
+  "perish/blog-roll/_feeds.json",
+  simplifyVector = FALSE
+)
+
+# Look up a single cached feed by its source URL. Returns NULL if the
+# URL isn't in the cache (typically because it was added to the qmd but
+# the fetcher hasn't been re-run yet).
+.lookup_feed <- function(feed_url) {
+  for (f in .blog_feed_cache$feeds) {
+    if (identical(f$url, feed_url)) return(f)
+  }
+  NULL
+}
+```
+
+```{r "render_blog_feed() function"}
+# Plain list of recent items from one feed. Reads from the JSON cache.
 render_blog_feed <- function(
   feed_url,
   show_description = FALSE,
   max_chars = 200,
   n_items = 3
 ) {
-  feed <- tryCatch(tidyRSS::tidyfeed(feed_url), error = function(e) NULL)
-
-  if (is.null(feed)) {
+  feed_data <- .lookup_feed(feed_url)
+  if (is.null(feed_data) || isTRUE(feed_data$error) || length(feed_data$items) == 0) {
     return(htmltools::tags$p("Feed unavailable."))
   }
 
-  feed_items <- utils::head(feed, n_items)
+  feed_items <- feed_data$items[seq_len(min(length(feed_data$items), n_items))]
 
-  entries <- lapply(seq_len(nrow(feed_items)), function(i) {
-    item <- feed_items[i, ]
+  entries <- lapply(feed_items, function(item) {
+    date_str <- if (!is.null(item$pub_date) && !is.na(item$pub_date)) {
+      format(as.Date(item$pub_date), "%e %B %Y")
+    } else {
+      ""
+    }
 
-    date_str <- format(as.Date(item$item_pub_date), "%e %B %Y")
-
-    # Get description/first few lines of each post, truncate to maximum characters
-    description <- if (show_description) {
-      desc <- xml2::xml_text(xml2::read_html(paste0(
-        "<x>",
-        item$item_description,
-        "</x>"
-      )))
+    description <- if (show_description && !is.null(item$description) && !is.na(item$description)) {
+      desc <- xml2::xml_text(xml2::read_html(paste0("<x>", item$description, "</x>")))
       desc <- gsub("<[^>]+>", "", desc)
-      if (nchar(desc) > max_chars) {
-        paste0(substr(desc, 1, max_chars), "...")
-      } else {
-        desc
-      }
+      if (nchar(desc) > max_chars) paste0(substr(desc, 1, max_chars), "...") else desc
     } else {
       NULL
     }
 
-    # Build list item
     htmltools::tagList(
       htmltools::tags$li(
         htmltools::HTML(paste0(
-          "<strong>",
-          date_str,
-          "</strong>: ",
-          "<a href='",
-          item$item_link,
-          "'>",
-          item$item_title,
-          "</a>"
+          "<strong>", date_str, "</strong>: ",
+          "<a href='", item$link, "'>", item$title, "</a>"
         )),
         if (!is.null(description)) htmltools::tags$div(description)
       )
     )
   })
 
-  htmltools::tags$ul(
-    class = "blog-feed-list",
-    entries
-  )
+  htmltools::tags$ul(class = "blog-feed-list", entries)
 }
 ```
 
 ```{r "render_blog_feed_dd() function"}
-
-# A function to read in a list of blog posts from an RSS feed and output html with a hidden drop-down tag
+# Same as render_blog_feed() but wrapped in a <details>/<summary> drop-down.
+# Footer line shows when the JSON cache was last refreshed by the fetcher,
+# not when this qmd was rendered, since the cache is what drives freshness.
 render_blog_feed_dd <- function(
   feed_url,
   show_description = FALSE,
@@ -81,48 +91,48 @@ render_blog_feed_dd <- function(
   n_items = 3,
   label = "Recent posts"
 ) {
-  feed <- tryCatch(tidyRSS::tidyfeed(feed_url), error = function(e) NULL)
-  if (is.null(feed)) {
+  feed_data <- .lookup_feed(feed_url)
+  if (is.null(feed_data) || isTRUE(feed_data$error) || length(feed_data$items) == 0) {
     return(htmltools::tags$p("Feed unavailable."))
   }
 
-  feed_items <- utils::head(feed, n_items)
+  feed_items <- feed_data$items[seq_len(min(length(feed_data$items), n_items))]
 
-  entries <- lapply(seq_len(nrow(feed_items)), function(i) {
-    item <- feed_items[i, ]
+  entries <- lapply(feed_items, function(item) {
+    date_str <- if (!is.null(item$pub_date) && !is.na(item$pub_date)) {
+      format(as.Date(item$pub_date), "%e %B %Y")
+    } else {
+      ""
+    }
 
-    date_str <- format(as.Date(item$item_pub_date), "%e %B %Y")
-
-    description <- if (show_description) {
-      desc <- xml2::xml_text(xml2::read_html(paste0(
-        "<x>",
-        item$item_description,
-        "</x>"
-      )))
+    description <- if (show_description && !is.null(item$description) && !is.na(item$description)) {
+      desc <- xml2::xml_text(xml2::read_html(paste0("<x>", item$description, "</x>")))
       desc <- gsub("<[^>]+>", "", desc)
-      if (nchar(desc) > max_chars) {
-        paste0(substr(desc, 1, max_chars), "...")
-      } else {
-        desc
-      }
+      if (nchar(desc) > max_chars) paste0(substr(desc, 1, max_chars), "...") else desc
     } else {
       NULL
     }
 
     htmltools::tags$li(
       htmltools::HTML(paste0(
-        "<strong>",
-        date_str,
-        "</strong>: ",
-        "<a href='",
-        item$item_link,
-        "'>",
-        item$item_title,
-        "</a>"
+        "<strong>", date_str, "</strong>: ",
+        "<a href='", item$link, "'>", item$title, "</a>"
       )),
       if (!is.null(description)) htmltools::tags$div(description)
     )
   })
+
+  fetched_at <- if (!is.null(.blog_feed_cache$generated_at)) {
+    tryCatch(
+      format(
+        as.POSIXct(.blog_feed_cache$generated_at, format = "%Y-%m-%dT%H:%M:%SZ", tz = "UTC"),
+        "%e %B %Y at %R UTC"
+      ),
+      error = function(e) .blog_feed_cache$generated_at
+    )
+  } else {
+    "unknown"
+  }
 
   htmltools::tags$details(
     htmltools::tags$summary(label),
@@ -133,11 +143,7 @@ render_blog_feed_dd <- function(
         list(
           htmltools::tags$li(
             style = "list-style: none; font-style: italic; margin-top: 0.5em;",
-            paste0(
-              "(Last rendered on ",
-              format(Sys.time(), "%e %B %Y at %R"),
-              ")"
-            )
+            paste0("(Feed last fetched on ", fetched_at, ")")
           )
         )
       )
@@ -158,7 +164,10 @@ render_blog_feed_dd <- function(
 This is a must listen! The [Quantitude podcast](https://quantitudepod.org/) co-hosted and masterfully produced by Patrick Curran (UNC\@CH) and Greg Hancock (UMD) is proof that great comedy can also be done sitting down and despite mastering only a bad pirate accent and being of Transylvanian lineage (😎). And it's about quantitative methods and academia. The dudes are seriously flawed, though; they're likelihoodists who get a kick out of calling up Bayesians at 5:40 in the morning asking them to explain themselves.
 
 ```{r}
-render_blog_feed_dd("https://feeds.buzzsprout.com/639103.rss", label = "Recent pods")
+render_blog_feed_dd(
+  "https://feeds.buzzsprout.com/639103.rss",
+  label = "Recent pods"
+)
 ```
 ::::
 
@@ -214,7 +223,10 @@ render_blog_feed_dd("https://www.andrewheiss.com/atom.xml")
 Hosted by Alexandre Andorra, a Bayesian modeller at PyMC Labs, the [Learning Bayesian Statistics](https://learnbayesstats.com/episodes) podcast focuses on long-form conversations with various people who have contributed to Bayesian modelling in various academic fields and industries. Some recent episodes have a hybrid workshop format with a videocast available on the series' [YouTube channel](https://www.youtube.com/@learningbayesianstatistics/videos).
 
 ```{r}
-render_blog_feed_dd("https://feeds.captivate.fm/learnbayesstats", label = "Recent pods")
+render_blog_feed_dd(
+  "https://feeds.captivate.fm/learnbayesstats",
+  label = "Recent pods"
+)
 ```
 ::::
 
@@ -228,7 +240,11 @@ render_blog_feed_dd("https://feeds.captivate.fm/learnbayesstats", label = "Recen
 [Data Is Plural](https://www.data-is-plural.com/) is a long-running newsletter curated by Jeremy Singer-Vine, currently a data editor for the New York Times (previously at *BuzzFeed*, *The Wall Street Journal* and *Slate*). It's a good idea to subscribe to the newsletter to receive a list of interesting and useful publicly available datasets every once in a while, which are also added to a [Google Docs spreadsheet](https://docs.google.com/spreadsheets/d/1wZhPLMCHKJvwOkP4juclhjFgqIY8fQFMemwKL2c64vk/edit?gid=0#gid=0) containing all the datasets listed in past editions of the newsletter. It also has an [associated podcast](https://podcast.data-is-plural.com/2159594/episodes), although that has been quiet recently.
 
 ```{r}
-render_blog_feed_dd("https://data-is-plural.github.io/newsletter-archive/feeds/dip.rss", label = "Recent newsletters", show_description = TRUE)
+render_blog_feed_dd(
+  "https://data-is-plural.github.io/newsletter-archive/feeds/dip.rss",
+  label = "Recent newsletters",
+  show_description = TRUE
+)
 # render_blog_feed_dd("https://feeds.buzzsprout.com/2159594.rss", label = "Recent pods")
 ```
 ::::
