@@ -95,9 +95,9 @@ ul.task-list li input[type="checkbox"] {
     }
 
     const options = {
-      valueNames: ['listing-project','listing-website','listing-format','listing-title-block-banner','listing-title-block-categories','listing-lightbox','listing-hooks','listing-include-after-body','listing-engine','listing-knitr','listing-engines','listing-_quarto-vars','listing-language','listing-pagetitle','listing-metadata-files','listing-number','listing-title','listing-subtitle','listing-description','listing-abstract','listing-categories','listing-authorstring','listing-author','listing-year','listing-publication','listing-vol','listing-issue','listing-page','listing-pdf','listing-online','listing-ris','listing-path','listing-outputHref','listing-filename','listing-file-modified','listing-reading-time','listing-word-count','listing-note','listing-doi','listing-details','listing-toc','listing-back-to-top-navigation',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-file-modified-sort'] },{ data: ['listing-reading-time-sort'] },{ data: ['listing-word-count-sort'] }],
+      valueNames: ['listing-project','listing-website','listing-format','listing-title-block-banner','listing-title-block-categories','listing-lightbox','listing-hooks','listing-include-after-body','listing-engine','listing-knitr','listing-engines','listing-_quarto-vars','listing-language','listing-pagetitle','listing-metadata-files','listing-number','listing-title','listing-subtitle','listing-description','listing-abstract','listing-categories','listing-authorstring','listing-author','listing-year','listing-publication','listing-vol','listing-issue','listing-page','listing-pdf','listing-online','listing-ris','listing-path','listing-outputHref','listing-filename','listing-file-modified','listing-reading-time','listing-word-count','listing-note','listing-doi','listing-details','listing-toc','listing-back-to-top-navigation','listing-codedata',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-file-modified-sort'] },{ data: ['listing-reading-time-sort'] },{ data: ['listing-word-count-sort'] }],
       
-      searchColumns: ["listing-project","listing-website","listing-format","listing-title-block-banner","listing-title-block-categories","listing-lightbox","listing-hooks","listing-include-after-body","listing-engine","listing-knitr","listing-engines","listing-_quarto-vars","listing-language","listing-pagetitle","listing-metadata-files","listing-number","listing-title","listing-subtitle","listing-description","listing-abstract","listing-categories","listing-authorstring","listing-author","listing-year","listing-publication","listing-vol","listing-issue","listing-page","listing-pdf","listing-online","listing-ris","listing-path","listing-outputHref","listing-filename","listing-file-modified","listing-reading-time","listing-word-count","listing-note","listing-doi","listing-details","listing-toc","listing-back-to-top-navigation"],
+      searchColumns: ["listing-project","listing-website","listing-format","listing-title-block-banner","listing-title-block-categories","listing-lightbox","listing-hooks","listing-include-after-body","listing-engine","listing-knitr","listing-engines","listing-_quarto-vars","listing-language","listing-pagetitle","listing-metadata-files","listing-number","listing-title","listing-subtitle","listing-description","listing-abstract","listing-categories","listing-authorstring","listing-author","listing-year","listing-publication","listing-vol","listing-issue","listing-page","listing-pdf","listing-online","listing-ris","listing-path","listing-outputHref","listing-filename","listing-file-modified","listing-reading-time","listing-word-count","listing-note","listing-doi","listing-details","listing-toc","listing-back-to-top-navigation","listing-codedata"],
     };
 
     window['quarto-listings'] = window['quarto-listings'] || {};
@@ -369,16 +369,16 @@ window.Quarto = {
 
         
           <h2>
-            <b>Transnational Healthcare Preferences Among EU Nationals in the UK</b>
+            <b>Investigating the analytical robustness of the social and behavioural sciences</b>
           </h2>
         
         <h3>
-          <span><b><i>Sociological Research Online</i>, vol. 28, issue 2, pp. 462-481</b></span>
+          <span><b><i>Nature</i>, vol. 652, issue 8108, pp. 135-142</b></span>
           
-            <span><b>(2023)</b></span>
+            <span><b>(2026)</b></span>
           
          </h3>
-        <p>This article explores the motivational factors behind preferences for medical care in the country of residence or the country of origin among EU nationals living in the UK. Undertaking a thematic analysis on a large-N qualitative data set, the article aims to establish a data-driven typology of motivations inductively. This provides an intermediary analysis between qualitative depth and quantitative operationalisability, contributing to the existing literature on healthcare location preferences among transnationally connected social groups. This article finds that preferences for medical care in the country of origin are driven overwhelmingly by quality considerations, while preferences for the UK have more to do with convenience and financing. These perceptions result from negative personal experiences, lack of trust, and often concealed cultural differences, and the analysis identifies various nuances and connections between attitudes that previous in-depth qualitative studies could not systematise.</p>
+        <p>The same dataset can be analysed in different justifiable ways to answer the same research question, potentially challenging the robustness of empirical science. In this crowd initiative, we investigated the degree to which research findings in the social and behavioural sciences are contingent on analysts' choices. We examined a stratified random sample of 100 studies published between 2009 and 2018, where for one claim per study, at least five re-analysts independently re-analysed the original data. The statistical appropriateness of the re-analyses was assessed in peer evaluations, and the robustness indicators were inspected along a range of research characteristics and study designs. We found that 34% of the independent re-analyses yielded the same result (within a tolerance region of +/- 0.05 Cohen's d) as the original report; with a four times broader tolerance region, this indicator rose to 57%. Regarding the conclusions drawn, 74% of analyses were reported to arrive at the same conclusion as in the original investigation; 24% to no effects/inconclusive result, and 2% to the opposite effect as in the original investigation. This exploratory study suggests that the common single-path analyses in social and behavioural research should not simply be assumed to be robust to alternative analyses. Therefore, we recommend the development and use of practices to explore and communicate this neglected source of uncertainty.</p>
       </div>
       
            <div style="position: absolute; bottom: 0.5rem; right: 0.5rem; line-height: 1rem; z-index: 10 !important;">
@@ -450,11 +450,17 @@ window.Quarto = {
 <script>
   const body = document.body;
 
-  window.addEventListener('scroll', () => {
-    const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-    const speed = 0.03; // Adjust for desired parallax strength
-    body.style.backgroundPositionY = `-${scrollTop * speed}px`;
-  });
+  function updateParallax() {
+    const max = document.documentElement.scrollHeight - window.innerHeight;
+    const progress = max > 0
+      ? (window.pageYOffset || document.documentElement.scrollTop) / max
+      : 0;
+    body.style.backgroundPositionY = `${(progress * 100).toFixed(2)}%`;
+  }
+
+  window.addEventListener('scroll', updateParallax, { passive: true });
+  window.addEventListener('resize', updateParallax);
+  updateParallax();
 </script>
 <script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {

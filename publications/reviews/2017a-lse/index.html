@@ -202,11 +202,17 @@ ul.task-list li input[type="checkbox"] {
 <script>
   const body = document.body;
 
-  window.addEventListener('scroll', () => {
-    const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-    const speed = 0.03; // Adjust for desired parallax strength
-    body.style.backgroundPositionY = `-${scrollTop * speed}px`;
-  });
+  function updateParallax() {
+    const max = document.documentElement.scrollHeight - window.innerHeight;
+    const progress = max > 0
+      ? (window.pageYOffset || document.documentElement.scrollTop) / max
+      : 0;
+    body.style.backgroundPositionY = `${(progress * 100).toFixed(2)}%`;
+  }
+
+  window.addEventListener('scroll', updateParallax, { passive: true });
+  window.addEventListener('resize', updateParallax);
+  updateParallax();
 </script>
 <script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
