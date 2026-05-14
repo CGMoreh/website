@@ -44,7 +44,11 @@ render_blog_feed <- function(
   n_items = 3
 ) {
   feed_data <- .lookup_feed(feed_url)
-  if (is.null(feed_data) || isTRUE(feed_data$error) || length(feed_data$items) == 0) {
+  if (
+    is.null(feed_data) ||
+      isTRUE(feed_data$error) ||
+      length(feed_data$items) == 0
+  ) {
     return(htmltools::tags$p("Feed unavailable."))
   }
 
@@ -57,10 +61,20 @@ render_blog_feed <- function(
       ""
     }
 
-    description <- if (show_description && !is.null(item$description) && !is.na(item$description)) {
-      desc <- xml2::xml_text(xml2::read_html(paste0("<x>", item$description, "</x>")))
+    description <- if (
+      show_description && !is.null(item$description) && !is.na(item$description)
+    ) {
+      desc <- xml2::xml_text(xml2::read_html(paste0(
+        "<x>",
+        item$description,
+        "</x>"
+      )))
       desc <- gsub("<[^>]+>", "", desc)
-      if (nchar(desc) > max_chars) paste0(substr(desc, 1, max_chars), "...") else desc
+      if (nchar(desc) > max_chars) {
+        paste0(substr(desc, 1, max_chars), "...")
+      } else {
+        desc
+      }
     } else {
       NULL
     }
@@ -68,8 +82,14 @@ render_blog_feed <- function(
     htmltools::tagList(
       htmltools::tags$li(
         htmltools::HTML(paste0(
-          "<strong>", date_str, "</strong>: ",
-          "<a href='", item$link, "'>", item$title, "</a>"
+          "<strong>",
+          date_str,
+          "</strong>: ",
+          "<a href='",
+          item$link,
+          "'>",
+          item$title,
+          "</a>"
         )),
         if (!is.null(description)) htmltools::tags$div(description)
       )
@@ -92,7 +112,11 @@ render_blog_feed_dd <- function(
   label = "Recent posts"
 ) {
   feed_data <- .lookup_feed(feed_url)
-  if (is.null(feed_data) || isTRUE(feed_data$error) || length(feed_data$items) == 0) {
+  if (
+    is.null(feed_data) ||
+      isTRUE(feed_data$error) ||
+      length(feed_data$items) == 0
+  ) {
     return(htmltools::tags$p("Feed unavailable."))
   }
 
@@ -105,18 +129,34 @@ render_blog_feed_dd <- function(
       ""
     }
 
-    description <- if (show_description && !is.null(item$description) && !is.na(item$description)) {
-      desc <- xml2::xml_text(xml2::read_html(paste0("<x>", item$description, "</x>")))
+    description <- if (
+      show_description && !is.null(item$description) && !is.na(item$description)
+    ) {
+      desc <- xml2::xml_text(xml2::read_html(paste0(
+        "<x>",
+        item$description,
+        "</x>"
+      )))
       desc <- gsub("<[^>]+>", "", desc)
-      if (nchar(desc) > max_chars) paste0(substr(desc, 1, max_chars), "...") else desc
+      if (nchar(desc) > max_chars) {
+        paste0(substr(desc, 1, max_chars), "...")
+      } else {
+        desc
+      }
     } else {
       NULL
     }
 
     htmltools::tags$li(
       htmltools::HTML(paste0(
-        "<strong>", date_str, "</strong>: ",
-        "<a href='", item$link, "'>", item$title, "</a>"
+        "<strong>",
+        date_str,
+        "</strong>: ",
+        "<a href='",
+        item$link,
+        "'>",
+        item$title,
+        "</a>"
       )),
       if (!is.null(description)) htmltools::tags$div(description)
     )
@@ -125,7 +165,11 @@ render_blog_feed_dd <- function(
   fetched_at <- if (!is.null(.blog_feed_cache$generated_at)) {
     tryCatch(
       format(
-        as.POSIXct(.blog_feed_cache$generated_at, format = "%Y-%m-%dT%H:%M:%SZ", tz = "UTC"),
+        as.POSIXct(
+          .blog_feed_cache$generated_at,
+          format = "%Y-%m-%dT%H:%M:%SZ",
+          tz = "UTC"
+        ),
         "%e %B %Y at %R UTC"
       ),
       error = function(e) .blog_feed_cache$generated_at
@@ -173,6 +217,41 @@ render_blog_feed_dd(
 
 :::: {.g-col-12 .g-col-sm-6 .g-col-md-4}
 ::: heading-row
+### Data Colada
+
+{{< var blog >}}
+:::
+
+[Data Colada](https://datacolada.org/) – "thinking about evidence and vice versa" – is the meta-science blog of behavioural scientists Uri Simonsohn, Joe Simmons and Leif Nelson. Running since 2013, it has become required reading for anyone serious about research integrity in the social sciences. Posts range from the intuition behind robust standard errors and the misuse of common statistical defaults, to forensic re-analyses that have uncovered fabricated data in high-profile published work. The tone is patient, generous and quietly devastating.
+
+```{r}
+render_blog_feed_dd(
+  "https://datacolada.org/feed"
+)
+```
+::::
+
+:::: {.g-col-12 .g-col-sm-6 .g-col-md-4}
+::: heading-row
+### Data Is Plural
+
+{{< var newsletter >}} {{< var podcast >}}
+:::
+
+[Data Is Plural](https://www.data-is-plural.com/) is a long-running newsletter curated by Jeremy Singer-Vine, currently a data editor for the New York Times (previously at *BuzzFeed*, *The Wall Street Journal* and *Slate*). It's a good idea to subscribe to the newsletter to receive a list of interesting and useful publicly available datasets every once in a while, which are also added to a [Google Docs spreadsheet](https://docs.google.com/spreadsheets/d/1wZhPLMCHKJvwOkP4juclhjFgqIY8fQFMemwKL2c64vk/edit?gid=0#gid=0) containing all the datasets listed in past editions of the newsletter. It also has an [associated podcast](https://podcast.data-is-plural.com/2159594/episodes), although that has been quiet recently.
+
+```{r}
+render_blog_feed_dd(
+  "https://data-is-plural.github.io/newsletter-archive/feeds/dip.rss",
+  label = "Recent newsletters",
+  show_description = TRUE
+)
+# render_blog_feed_dd("https://feeds.buzzsprout.com/2159594.rss", label = "Recent pods")
+```
+::::
+
+:::: {.g-col-12 .g-col-sm-6 .g-col-md-4}
+::: heading-row
 ### Andrew Gelman et al.
 
 {{< var blog >}}
@@ -201,20 +280,6 @@ render_blog_feed_dd("https://elevanth.org/blog/feed/")
 
 :::: {.g-col-12 .g-col-sm-6 .g-col-md-4}
 ::: heading-row
-### Andrew Heiss
-
-{{< var blog >}}
-:::
-
-Andrew Heiss is a political scientist and public policy researcher at GSU. He has the strongest [explicit commitment to making all aspects of his work open and transparent](https://talks.andrewheiss.com/2022-03-22_uga-putting-everything-out-there/slides.html#1) that you'll find anywhere on the internet today. [His blog](https://www.andrewheiss.com/blog/) dives deeply into various technical aspects of social science programming and it's a wonderful resource for learning about coding in R.
-
-```{r}
-render_blog_feed_dd("https://www.andrewheiss.com/atom.xml")
-```
-::::
-
-:::: {.g-col-12 .g-col-sm-6 .g-col-md-4}
-::: heading-row
 ### Learning Bayesian Statistics
 
 {{< var podcast >}} {{< var videocast >}}
@@ -232,20 +297,48 @@ render_blog_feed_dd(
 
 :::: {.g-col-12 .g-col-sm-6 .g-col-md-4}
 ::: heading-row
-### Data Is Plural
+### Andrew Heiss
+
+{{< var blog >}}
+:::
+
+Andrew Heiss is a political scientist and public policy researcher at GSU. He has the strongest [explicit commitment to making all aspects of his work open and transparent](https://talks.andrewheiss.com/2022-03-22_uga-putting-everything-out-there/slides.html#1) that you'll find anywhere on the internet today. [His blog](https://www.andrewheiss.com/blog/) dives deeply into various technical aspects of social science programming and it's a wonderful resource for learning about coding in R.
+
+```{r}
+render_blog_feed_dd("https://www.andrewheiss.com/atom.xml")
+```
+::::
+
+:::: {.g-col-12 .g-col-sm-6 .g-col-md-4}
+::: heading-row
+### Kieran Healy
+
+{{< var blog >}}
+:::
+
+Fellow sociologist Kieran Healy (Duke) is a prolific author on both substantive and technical topics. He has written on almost everything from [organ procurement](https://kieranhealy.org/publications/lbg/), through [the institutionalization of mass shootings](https://kieranhealy.org/publications/rituals-of-childhood/) as a ritual of American childhood, to the problems of [digital capitalism](https://kieranhealy.org/publications/tos/). His [Plain Person's Guide to Plain Text Social Science](https://kieranhealy.org/files/papers/plain-person-text.pdf) has been a terrific resource for those transitioning to computationally reproducible research workflows, and he is best known in the R social science community for his book on [Data Visualization](https://socviz.co/). His [blog](https://kieranhealy.org/blog/) is just as diverse and interesting.
+
+```{r}
+render_blog_feed_dd(
+  "https://kieranhealy.org/blog/index.xml"
+)
+```
+::::
+
+:::: {.g-col-12 .g-col-sm-6 .g-col-md-4}
+::: heading-row
+### Scott Cunningham
 
 {{< var newsletter >}} {{< var podcast >}}
 :::
 
-[Data Is Plural](https://www.data-is-plural.com/) is a long-running newsletter curated by Jeremy Singer-Vine, currently a data editor for the New York Times (previously at *BuzzFeed*, *The Wall Street Journal* and *Slate*). It's a good idea to subscribe to the newsletter to receive a list of interesting and useful publicly available datasets every once in a while, which are also added to a [Google Docs spreadsheet](https://docs.google.com/spreadsheets/d/1wZhPLMCHKJvwOkP4juclhjFgqIY8fQFMemwKL2c64vk/edit?gid=0#gid=0) containing all the datasets listed in past editions of the newsletter. It also has an [associated podcast](https://podcast.data-is-plural.com/2159594/episodes), although that has been quiet recently.
+Scott Cunningham is an economist at Baylor whose [*Causal Inference: The Mixtape*](https://mixtape.scunning.com/) has done more than any other recent textbook to make modern identification strategies legible to applied researchers. His Substack runs in parallel with the [Mixtape Sessions](https://github.com/Mixtape-Sessions) workshops and the [Causal Inference podcast](https://causalinf.substack.com/podcast), mixing long-form essays on diff-in-diff, synthetic controls and event studies with episodes from the podcast and – more recently – field notes on how AI tools are reshaping empirical research practice.
 
 ```{r}
 render_blog_feed_dd(
-  "https://data-is-plural.github.io/newsletter-archive/feeds/dip.rss",
-  label = "Recent newsletters",
-  show_description = TRUE
+  "https://causalinf.substack.com/feed",
+  label = "Recent posts"
 )
-# render_blog_feed_dd("https://feeds.buzzsprout.com/2159594.rss", label = "Recent pods")
 ```
 ::::
 
@@ -283,16 +376,65 @@ render_blog_feed_dd(
 
 :::: {.g-col-12 .g-col-sm-6 .g-col-md-4}
 ::: heading-row
-### Kieran Healy
+### The Test Set
+
+{{< var podcast >}}
+:::
+
+[The Test Set](https://posit.co/thetestset) is Posit's podcast, hosted by Michael Chow with regular appearances from Wes McKinney and Hadley Wickham. Each episode is a long-form conversation with someone shaping the day-to-day of data science and analytics engineering – the kind of unglamorous but consequential topics (SQL, reactive notebooks, widgets, the half-life of tooling fads) that working data practitioners actually argue about. A useful counterweight to the more academic podcasts on this list.
+
+```{r}
+render_blog_feed_dd(
+  "https://rss.buzzsprout.com/2512485.rss",
+  label = "Recent pods"
+)
+```
+::::
+
+:::: {.g-col-12 .g-col-sm-6 .g-col-md-4}
+::: heading-row
+### Migration Policy Centre
 
 {{< var blog >}}
 :::
 
-Fellow sociologist Kieran Healy (Duke) is a prolific author on both substantive and technical topics. He has written on almost everything from [organ procurement](https://kieranhealy.org/publications/lbg/), through [the institutionalization of mass shootings](https://kieranhealy.org/publications/rituals-of-childhood/) as a ritual of American childhood, to the problems of [digital capitalism](https://kieranhealy.org/publications/tos/). His [Plain Person's Guide to Plain Text Social Science](https://kieranhealy.org/files/papers/plain-person-text.pdf) has been a terrific resource for those transitioning to computationally reproducible research workflows, and he is best known in the R social science community for his book on [Data Visualization](https://socviz.co/). His [blog](https://kieranhealy.org/blog/) is just as diverse and interesting.
+The [Migration Policy Centre](https://migrationpolicycentre.eu/) at the European University Institute in Florence is one of Europe's leading academic hubs for research on international migration, asylum and mobility, and the natural data-and-policy companion to its sister observatory GLOBALCIT. Posts on the MPC blog draw heavily on the centre's primary-data projects and comparative European fieldwork – covering irregular migration in the UK care sector, temporary-labour integration regimes, employer demand for undocumented workers, drivers of refugee return, and the conditions that produce irregularity in the first place. Multi-author, policy-literate, and consistently active.
 
 ```{r}
 render_blog_feed_dd(
-  "https://kieranhealy.org/blog/index.xml"
+  "https://migrationpolicycentre.eu/feed/"
+)
+```
+::::
+
+:::: {.g-col-12 .g-col-sm-6 .g-col-md-4}
+::: heading-row
+### GLOBALCIT
+
+{{< var blog >}}
+:::
+
+[GLOBALCIT](https://globalcit.eu/) is the Global Citizenship Observatory based at the European University Institute in Florence. Its blog is the place to follow what is happening in citizenship and statelessness law across the world – from citizenship deprivation in the UK and EU free movement debates, through the unwinding of colonial citizenship regimes, to climate-related proposals for new forms of political membership. Multi-author, academic in register but accessible, and indispensable for anyone whose research touches naturalisation, dual citizenship or denizenship.
+
+```{r}
+render_blog_feed_dd(
+  "https://globalcit.eu/feed/"
+)
+```
+::::
+
+:::: {.g-col-12 .g-col-sm-6 .g-col-md-4}
+::: heading-row
+### Migration Information Source
+
+{{< var blog >}} {{< var newsletter >}}
+:::
+
+The [Migration Information Source](https://www.migrationpolicy.org/programs/migration-information-source) is the flagship publication of the Migration Policy Institute (MPI) in Washington DC. It is to migration what *Data Is Plural* is to datasets: a steady, reliable feed of country profiles, policy briefs and data-driven feature articles that cover origin, transit and destination contexts in roughly equal measure. The writing is policy-literate without being parochial, and the depth of comparative coverage is hard to find anywhere else on the open web.
+
+```{r}
+render_blog_feed_dd(
+  "https://www.migrationpolicy.org/rss.xml"
 )
 ```
 ::::
