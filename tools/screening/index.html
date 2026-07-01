@@ -1,0 +1,765 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SDS Lit Rev</title>
+<style>
+  :root{
+    --navy:#1B2F45; --teal:#028090; --teal-d:#026d7a; --teal-l:#02C39A;
+    --gold:#F59E0B; --red:#DC2626; --green:#16A34A; --slate:#475569; --gray:#64748B; --light:#F1F5F9;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;
+    background:linear-gradient(160deg,#0d1b2a 0%,#1b2f45 100%);color:#1e293b;min-height:100vh;padding:18px;}
+  .wrap{max-width:960px;margin:0 auto;}
+  header{text-align:center;color:#fff;margin-bottom:16px;}
+  header h1{font-size:22px;font-weight:800;letter-spacing:-.4px;}
+  header .sub{font-size:12.5px;color:#94A3B8;margin-top:4px;}
+  .card{background:#fff;border-radius:14px;padding:24px;box-shadow:0 10px 40px rgba(0,0,0,.3);margin-bottom:14px;}
+  h2{font-size:17px;color:var(--navy);margin-bottom:12px;}
+  p.lead{font-size:13.5px;color:var(--gray);line-height:1.6;margin-bottom:14px;}
+  label.step{font-weight:600;color:var(--navy);font-size:13.5px;display:block;margin:14px 0 6px;}
+  input[type=text],select{width:100%;padding:11px 12px;border:1px solid #cbd5e1;border-radius:9px;font-size:14px;font-family:inherit;background:#fff;}
+  input[type=text]:focus,select:focus{outline:none;border-color:var(--teal);}
+  input[type=text].req,select.req{border-color:#f87171;background:#fef2f2;}
+  .file-input-label{display:block;padding:13px;border:2px dashed #cbd5e1;border-radius:10px;
+    text-align:center;cursor:pointer;color:var(--gray);font-size:13.5px;transition:.15s;}
+  .file-input-label:hover{border-color:var(--teal);background:#f8fafc;}
+  .file-input-label.is-set{border-style:solid;border-color:#cbd5e1;background:#f8fafc;color:var(--navy);}
+  .file-input-label .tick{font-weight:800;margin-right:5px;}
+  .file-input-label .tick.green{color:var(--green);}
+  .file-input-label .tick.teal{color:var(--teal);}
+  input[type=file]{display:none;}
+  .btn{padding:11px 16px;border:none;border-radius:9px;cursor:pointer;font-size:14px;font-weight:600;transition:.15s;}
+  .btn-primary{width:100%;background:var(--teal);color:#fff;font-size:15px;font-weight:700;padding:13px;margin-top:16px;}
+  .btn-primary:hover{background:var(--teal-d);}
+  .btn-primary:disabled{background:#cbd5e1;cursor:not-allowed;}
+  .btn-ghost{background:var(--light);color:var(--navy);}
+  .btn-ghost:hover{background:#e2e8f0;}
+  .save-row{display:flex;gap:10px;align-items:center;margin-top:10px;flex-wrap:wrap;}
+  .save-pill{font-size:12px;padding:5px 10px;border-radius:20px;font-weight:600;}
+  .save-ok{background:#dcfce7;color:#166534;} .save-warn{background:#fef9c3;color:#854d0e;}
+  .hint{font-size:12px;color:var(--gray);margin-top:6px;line-height:1.5;}
+
+  .progress-wrap{background:rgba(255,255,255,.12);border-radius:100px;height:8px;overflow:hidden;margin-bottom:8px;}
+  .progress-bar{height:100%;background:linear-gradient(90deg,var(--teal),var(--teal-l));width:0;transition:width .3s;}
+  .progress-row{display:flex;align-items:center;gap:10px;margin-bottom:14px;}
+  .progress-text{color:#cbd5e1;font-size:12.5px;flex:1;}
+  .info-btn{background:rgba(255,255,255,.12);color:#fff;border:none;border-radius:8px;cursor:pointer;font-size:13px;font-weight:600;padding:6px 11px;}
+  .info-btn:hover{background:rgba(255,255,255,.22);}
+  .rowid{font-size:11px;color:#94a3b8;font-family:monospace;}
+
+  .meta{display:flex;gap:7px;flex-wrap:wrap;margin-bottom:10px;align-items:center;}
+  .tag{font-size:11px;font-weight:600;padding:3px 9px;border-radius:6px;background:var(--light);color:var(--gray);}
+  .tag.src{background:#e0e7ff;color:#3730a3;text-transform:uppercase;letter-spacing:.4px;}
+  .paper-title{font-size:18px;font-weight:700;color:var(--navy);line-height:1.38;margin-bottom:12px;}
+  .abstract{font-size:14px;line-height:1.65;color:#334155;max-height:300px;overflow-y:auto;
+    padding:13px;background:#f8fafc;border-radius:10px;margin-bottom:10px;border-left:3px solid var(--teal);white-space:pre-wrap;}
+  .abstract.empty{color:#94a3b8;font-style:italic;}
+  .details{font-size:12.5px;color:var(--gray);line-height:1.7;border-top:1px solid #e2e8f0;padding-top:10px;}
+  .details strong{color:var(--slate);}
+  .doi-link{color:var(--teal);text-decoration:none;font-weight:600;}
+  .doi-link:hover{text-decoration:underline;}
+  details.kw{margin-top:4px;} details.kw summary{cursor:pointer;color:var(--slate);font-weight:600;}
+  details.kw .kwbody{margin-top:5px;color:var(--gray);}
+
+  .group-label{font-size:12px;font-weight:700;color:var(--slate);text-transform:uppercase;letter-spacing:.5px;margin:16px 0 7px;}
+  .req-star{color:var(--red);}
+  .btn-grid{display:flex;gap:8px;flex-wrap:wrap;border-radius:12px;}
+  .btn-grid.need{outline:2px solid #fca5a5;outline-offset:4px;}
+  .lab{flex:1 1 130px;padding:14px 8px;border:2px solid #cbd5e1;border-radius:11px;background:#fff;cursor:pointer;
+    font-size:15px;font-weight:700;transition:.12s;text-align:center;color:var(--slate);}
+  .lab:hover{background:rgba(0,0,0,.035);}
+  .lab .k{display:block;font-size:10.5px;font-weight:600;opacity:.65;margin-top:2px;}
+
+  .reason-wrap{margin-top:8px;}
+  .reason{width:100%;padding:10px 12px;border:1px solid #e2e8f0;border-radius:8px;font-size:13px;
+    font-family:inherit;resize:vertical;min-height:46px;}
+  .reason:focus{outline:none;border-color:var(--teal);}
+  .reason.req{border-color:#f87171;background:#fef2f2;}
+  .wordcount{font-size:11.5px;color:var(--gray);margin-top:4px;text-align:right;}
+  .wordcount.over{color:var(--red);font-weight:700;}
+
+  .nav{display:flex;gap:10px;align-items:center;margin-top:16px;}
+  .nav .spacer{flex:1;}
+  .nav-btn{padding:10px 18px;border:1px solid #e2e8f0;border-radius:8px;background:#fff;cursor:pointer;font-size:14px;font-weight:600;color:var(--navy);}
+  .nav-btn:hover{background:var(--light);} .nav-btn:disabled{opacity:.4;cursor:not-allowed;}
+  .nav-btn.next{background:var(--teal);color:#fff;border-color:var(--teal);}
+  .nav-btn.next:hover{background:var(--teal-d);}
+
+  .controls{display:flex;gap:9px;justify-content:center;flex-wrap:wrap;}
+  .done-banner{background:#f0fdf4;border:1px solid var(--green);color:#166534;padding:13px;border-radius:10px;
+    text-align:center;font-weight:600;margin-bottom:14px;display:none;}
+  .warn-banner{background:#fef2f2;border:1px solid #f87171;color:#991b1b;padding:11px 14px;border-radius:10px;
+    font-size:13px;line-height:1.5;margin-bottom:14px;}
+  .shortcut{font-size:11.5px;color:#94a3b8;text-align:center;margin-top:13px;line-height:1.8;}
+  .shortcut kbd{background:#1e293b;color:#fff;padding:2px 6px;border-radius:4px;font-size:10.5px;font-family:monospace;margin:0 1px;}
+  .toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:#0f172a;color:#fff;padding:11px 18px;border-radius:10px;
+    font-size:13px;font-weight:600;opacity:0;pointer-events:none;transition:opacity .25s;box-shadow:0 8px 24px rgba(0,0,0,.35);z-index:50;max-width:90%;text-align:center;}
+  .toast.show{opacity:1;}
+  .hidden{display:none!important;}
+
+  .instr{font-size:13px;color:#334155;line-height:1.6;}
+  .instr h3{font-size:14px;color:var(--navy);margin:14px 0 6px;}
+  .instr p{margin-bottom:8px;} .instr ul{margin:0 0 8px 18px;} .instr li{margin-bottom:4px;}
+  .instr code{background:#f1f5f9;padding:1px 5px;border-radius:4px;font-size:12px;}
+  details.instr-panel{border:1px solid #e2e8f0;border-radius:10px;padding:6px 14px;margin-top:6px;background:#fcfdff;}
+  details.instr-panel>summary{cursor:pointer;font-weight:700;color:var(--navy);font-size:14px;padding:8px 0;}
+  .modal-overlay{position:fixed;inset:0;background:rgba(15,23,42,.6);display:flex;align-items:center;justify-content:center;z-index:100;padding:20px;}
+  .modal{background:#fff;border-radius:14px;max-width:760px;width:100%;max-height:86vh;overflow-y:auto;padding:26px 28px;position:relative;box-shadow:0 20px 60px rgba(0,0,0,.4);}
+  .modal-close{position:absolute;top:14px;right:16px;border:none;background:var(--light);border-radius:8px;width:32px;height:32px;cursor:pointer;font-size:15px;color:var(--slate);font-weight:700;}
+  .modal-close:hover{background:#e2e8f0;}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <h1 id="hTitle"></h1>
+
+    <div class="sub" id="hSub"></div>
+  </header>
+
+  <!-- SETUP -->
+  <div class="card" id="setup">
+    <h2>To keep in mind</h2>
+    <p class="lead" id="setupLead"></p>
+    <div class="warn-banner hidden" id="storageWarn"></div>
+
+    <label class="step">1 · Your name <span class="req-star">*</span></label>
+    <select id="who"></select>
+    <button class="btn btn-primary hidden" id="continueBtn" style="margin-top:12px;">▶ Continue where you left off</button>
+    <div class="hint hidden" id="continueHint">Reopens your saved file and resumes. If your saved file has been deleted, load the raw dataset again.</div>
+
+    <label class="step">2 · Load the dataset <span class="req-star">*</span></label>
+    <div class="file-input-label" id="fileLabel">📂 Find and select the dataset</div>
+    <input type="file" id="fileInput" accept=".csv,text/csv">
+
+    <label class="step" id="saveStepLabel">3 · Choose where to save your coded file</label>
+    <div class="file-input-label" id="saveLabel">💾 Choose the save file…</div>
+    <div class="hint" id="saveHint"></div>
+
+    <label class="step">4 · Start reviewing</label>
+    <details class="instr-panel" open><summary>📖 Review guide</summary>
+      <div class="instr" id="instrBodySetup"></div></details>
+
+    <button class="btn btn-primary" id="startBtn" disabled>Start reviewing</button>
+    <div class="hint" id="resumeNote" style="text-align:center;margin-top:10px;"></div>
+  </div>
+
+  <!-- REVIEW -->
+  <div class="hidden" id="review">
+    <div class="card">
+      <div class="progress-wrap"><div class="progress-bar" id="bar"></div></div>
+      <div class="progress-row">
+        <span class="progress-text" id="ptext"></span>
+        <button class="info-btn" id="infoBtn" title="Reviewing guide (i)">ⓘ Guide</button>
+      </div>
+      <div class="done-banner" id="done">✅ All records reviewed. Use “Save now”, then send the file back.</div>
+
+      <div class="meta" id="meta"></div>
+      <div class="paper-title" id="title"></div>
+      <div class="abstract" id="abstract"></div>
+      <div class="details" id="details"></div>
+
+      <div id="dims"></div>
+
+      <div class="nav">
+        <button class="nav-btn" id="prev">← Previous</button>
+        <button class="nav-btn" id="jump">↷ Next unreviewed</button>
+        <div class="spacer"></div>
+        <button class="nav-btn next" id="next">Next →</button>
+      </div>
+      <div class="shortcut" id="shortcutHint"></div>
+    </div>
+
+    <div class="card">
+      <div class="controls">
+        <button class="btn btn-primary" style="width:auto;margin-top:0" id="exportBtn">💾 Save now</button>
+        <button class="btn btn-ghost" id="resetBtn">↺ Reset my progress</button>
+      </div>
+      <div class="hint" id="saveTarget" style="text-align:center;margin-top:10px;"></div>
+      <div class="hint" id="saveStatus" style="text-align:center;margin-top:4px;"></div>
+    </div>
+  </div>
+</div>
+
+<div class="modal-overlay hidden" id="instrModal">
+  <div class="modal"><button class="modal-close" id="instrClose" title="Close (Esc)">✕</button>
+    <div class="instr" id="instrBodyModal"></div></div>
+</div>
+<div class="toast" id="toast"></div>
+
+<script>
+// ============================================================================
+// SysLit reviewing tool – runs entirely in the browser, offline, no install.
+// Config-driven: everything project-specific is in CONFIG; the engine below is
+// generic. Built on the TReMeDa labelling-tool internals (CSV round-trip, File
+// System Access save, localStorage resume, save-on-exit flush).
+// ============================================================================
+
+// CONFIG – my single edit point. The engine reads everything from here, and the
+// page's visible text is injected from these values at load; the matching HTML
+// elements are left empty on purpose, so there is no second copy to keep in step
+// – change the wording here, not in the body.
+const CONFIG = {
+  // ---- visible text (injected into the page at load) ----
+  title:    "Social Data Science Literature Review coding",   // header, line 1
+  // subtitle: "...",  // header, line 2
+  dataHint: "... General > Literature Review > SysLit_Coding > syslit-2026-05-08-deduplicated.csv",  // the file to load, shown in step 2
+  // {maxWords} and {saveEvery} are filled in from the settings below, so the numbers always match
+  setupLead: "Use Chrome or Edge browser; Firefox/Safari cannot overwrite, so the auto-save is messier there. Picking a save file is required and work reconnects to it automatically next time you open this tool under your name. In Chrome/Edge the output file is re-saved automatically after every reviewed record and again when you switch away from or close the tab (Firefox/Safari download a fresh copy every {saveEvery} records instead), and you can save manually at any time. Your progress is also kept in the browser and resumes under your name, so nothing you code is lost.",
+
+  // ---- behaviour ----
+  storagePrefix: "syslit_review_",     // localStorage namespace (per reviewer)
+  saveEvery: 5,                        // Firefox/Safari download cadence (Chrome/Edge save on each Next – see saveOnNav)
+  reviewerColumn: "reviewer",          // reviewer's name
+  reviewers: ["Chris", "Josephine", "Jen", "Aycha", "Oladayo"],
+  reviewerPrompt: "Select your name…",   // placeholder shown before a name is chosen
+
+  // map the dataset's columns to display roles
+  fields: {
+    title: "title",
+    body:  "abstract",
+    bodyEmpty: "No abstract for this record – review from the title and authors (follow the DOI if needed).",
+    meta:  ["source", "year"],                                   // small tags
+    link:  { col: "doi", label: "DOI", base: "https://doi.org/" }, // bare DOI -> resolvable link
+    details: [ { col: "authors", label: "Authors" },
+               { col: "journal", label: "Journal" } ],
+    collapsible: [ { col: "keywords", label: "keywords" } ],
+  },
+  // internal resume key (NOT written out); content-stable for a frozen file
+  rowKey: ["doi", "title"],
+
+  // coding dimensions – here a single decision with a mandatory, word-limited reason
+  dimensions: [{
+    key: "review_decision", label: "Review decision", required: true,
+    options: [
+      { v: "Include", key: "1", color: "#16A34A" },
+      { v: "Exclude", key: "2", color: "#DC2626" },
+      { v: "Maybe",   key: "3", color: "#F59E0B" },
+    ],
+    reason: { key: "review_reason", required: true, maxWords: 15,
+              placeholder: "Required – why include / exclude / maybe? (max {maxWords} words)" },
+  }],
+
+  instructionsHTML: `
+  <p>Review each record based on its title, authors and abstract against the inclusion criteria. Decide between <i>Include</i>, <i>Exclude</i> and <i>Maybe</i>, then give a short, max {maxWords}-word reason.</p>
+  <h3>Inclusion criteria</h3>
+  <table style="border-collapse:collapse;width:100%;font-size:0.92em;margin:0.4em 0;">
+    <thead>
+      <tr>
+        <th style="border:1px solid #cbd5e1;padding:6px 8px;text-align:left;background:#f1f5f9;vertical-align:top;">Reason</th>
+        <th style="border:1px solid #cbd5e1;padding:6px 8px;text-align:left;background:#f1f5f9;vertical-align:top;">Inclusion criteria</th>
+        <th style="border:1px solid #cbd5e1;padding:6px 8px;text-align:left;background:#f1f5f9;vertical-align:top;">Exclusion criteria</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td style="border:1px solid #cbd5e1;padding:6px 8px;vertical-align:top;">Irrelevant topic/subject</td>
+        <td style="border:1px solid #cbd5e1;padding:6px 8px;vertical-align:top;">At least 1 discussion of data science, digital humanities, or social data science or related skilled training such as digital/data methods training.</td>
+        <td style="border:1px solid #cbd5e1;padding:6px 8px;vertical-align:top;">Does not include discussions of data science, digital humanities or social data science or related skilled training such as digital/data methods training.</td>
+      </tr>
+      <tr>
+        <td style="border:1px solid #cbd5e1;padding:6px 8px;vertical-align:top;">Irrelevant topic/subject</td>
+        <td style="border:1px solid #cbd5e1;padding:6px 8px;vertical-align:top;">Must include discussion about higher education, university, and training/teaching/education/pedagogy in undergraduate or postgraduate studies.</td>
+        <td style="border:1px solid #cbd5e1;padding:6px 8px;vertical-align:top;">Does not include discussions about higher education, university, and training/teaching/education/pedagogy in undergraduate or postgraduate studies.</td>
+      </tr>
+      <tr>
+        <td style="border:1px solid #cbd5e1;padding:6px 8px;vertical-align:top;">Irrelevant topic/subject</td>
+        <td style="border:1px solid #cbd5e1;padding:6px 8px;vertical-align:top;">Must include discussions related to digital humanities and social science or humanities adjacent subjects.</td>
+        <td style="border:1px solid #cbd5e1;padding:6px 8px;vertical-align:top;">Does not include discussions related to digital humanities and social science or humanities adjacent subjects.</td>
+      </tr>
+      <tr>
+        <td style="border:1px solid #cbd5e1;padding:6px 8px;vertical-align:top;">Wrong language</td>
+        <td style="border:1px solid #cbd5e1;padding:6px 8px;vertical-align:top;">Must be written in English.</td>
+        <td style="border:1px solid #cbd5e1;padding:6px 8px;vertical-align:top;">Is not written in English.</td>
+      </tr>
+      <tr>
+        <td style="border:1px solid #cbd5e1;padding:6px 8px;vertical-align:top;">Wrong time period</td>
+        <td style="border:1px solid #cbd5e1;padding:6px 8px;vertical-align:top;">Must be written/published between 2022–2026.</td>
+        <td style="border:1px solid #cbd5e1;padding:6px 8px;vertical-align:top;">Not written/published between 2022–2026.</td>
+      </tr>
+    </tbody>
+  </table>
+  <p><b>Shortcuts:</b> <code>1</code> Include · <code>2</code> Exclude · <code>3</code> Maybe ·
+  <code>→</code>/<code>Enter</code> next · <code>←</code> back · <code>i</code> guide.</p>`,
+};
+
+// ---- engine ----------------------------------------------------------------
+const $ = id => document.getElementById(id);
+const D0 = CONFIG.dimensions[0];
+const OUT_COLS = CONFIG.dimensions.flatMap(d => [d.key, d.reason.key])
+  .concat(CONFIG.reviewerColumn ? [CONFIG.reviewerColumn] : []);
+// any visible text may use {maxWords}/{saveEvery}; filled from the settings above so the
+// numbers always match – change maxWords once and every label/placeholder follows it
+const fillTokens = (s, mw) => String(s).replaceAll('{maxWords}', mw).replaceAll('{saveEvery}', CONFIG.saveEvery);
+
+let papers = [], headers = [], current = 0;
+let who = "", fileName = "dataset.csv", fileHandle = null, datasetHandle = null, lastSaveAt = 0, dirty = false;
+
+function wordCount(s){ return (s||"").trim() ? (s.trim().split(/\s+/).length) : 0; }
+function rowKey(p){ return CONFIG.rowKey.map(c => (p[c]||"")).join("||"); }
+
+// ---- CSV parse / serialise (Excel-compatible: BOM + CRLF) ------------------
+function parseCSV(text){
+  if(text.charCodeAt(0) === 0xFEFF) text = text.slice(1);
+  const rows=[]; let row=[],f="",q=false;
+  for(let i=0;i<text.length;i++){
+    const c=text[i],n=text[i+1];
+    if(q){ if(c==='"'&&n==='"'){f+='"';i++;} else if(c==='"'){q=false;} else {f+=c;} }
+    else { if(c==='"'){q=true;}
+      else if(c===','){row.push(f);f="";}
+      else if(c==='\r'){}
+      else if(c==='\n'){row.push(f);rows.push(row);row=[];f="";}
+      else {f+=c;} }
+  }
+  if(f.length>0||row.length>0){row.push(f);rows.push(row);}
+  return rows;
+}
+function toCSV(headers,rows){
+  const esc=v=>{ v=(v==null)?"":String(v); return /[",\n\r]/.test(v) ? '"'+v.replace(/"/g,'""')+'"' : v; };
+  let out=headers.map(esc).join(",")+"\r\n";
+  for(const r of rows) out+=headers.map(h=>esc(r[h])).join(",")+"\r\n";
+  return "﻿"+out;
+}
+
+// ---- file save: File System Access API (true overwrite) + download fallback -
+const FSA = ('showSaveFilePicker' in window);
+// SESSION_STAMP is fixed once when the page loads and appended to the suggested
+// name of a newly chosen (or downloaded) file, so starting a fresh file never
+// silently overwrites an earlier one. Continuing a remembered file writes to its
+// existing handle and never calls outName(), so that path stays unaffected.
+const SESSION_STAMP=(()=>{ const d=new Date(), p=n=>(""+n).padStart(2,"0");
+  return d.getFullYear()+"-"+p(d.getMonth()+1)+"-"+p(d.getDate())+"_"+p(d.getHours())+p(d.getMinutes()); })();
+function outName(){   // reviewer first, then a session timestamp: "jane-doe_coded_2026-07-01_1432.csv"
+  return (who.trim().replace(/[^a-z0-9_-]+/gi,"-")||"reviewer")+"_coded_"+SESSION_STAMP+".csv"; }
+async function pickSaveFile(){
+  if(!FSA) return false;
+  try{
+    const opts={ suggestedName: outName(), types:[{description:"CSV file",accept:{"text/csv":[".csv"]}}] };
+    if(datasetHandle) opts.startIn=datasetHandle;   // open the save dialog in the folder the dataset came from
+    fileHandle = await window.showSaveFilePicker(opts);
+    return true;
+  }catch(e){ return false; }
+}
+async function writeToFile(text){
+  if(fileHandle){
+    try{
+      if(fileHandle.queryPermission){
+        let pm=await fileHandle.queryPermission({mode:"readwrite"});
+        if(pm!=="granted") pm=await fileHandle.requestPermission({mode:"readwrite"});
+        if(pm!=="granted") throw new Error("permission");
+      }
+      const w=await fileHandle.createWritable(); await w.write(text); await w.close();
+      return "file";
+    }catch(e){ /* fall through to download */ }
+  }
+  const blob=new Blob([text],{type:"text/csv"}), url=URL.createObjectURL(blob);
+  const a=document.createElement("a"); a.href=url; a.download=outName(); a.click(); URL.revokeObjectURL(url);
+  return "download";
+}
+function buildCSV(){
+  papers.forEach(p=>{
+    CONFIG.dimensions.forEach(d=>{ p[d.key]=p["__"+d.key]||""; p[d.reason.key]=p["__"+d.reason.key]||""; });
+    if(CONFIG.reviewerColumn) p[CONFIG.reviewerColumn]=who;
+  });
+  return toCSV(headers,papers);
+}
+async function saveAll(reason){
+  const how=await writeToFile(buildCSV());
+  dirty=false;
+  const nm = fileHandle ? fileHandle.name : outName();
+  toast((reason?reason+" – ":"")+(how==="file"?"Saved to file ✓":"Downloaded a copy ✓"));
+  updateSaveTarget();
+  const t=new Date().toLocaleTimeString();
+  $('saveStatus').innerHTML = how==="file"
+    ? "Last save "+t+": written to <strong>"+esc(nm)+"</strong> ✓"
+    : "Last save "+t+": downloaded <strong>"+esc(nm)+"</strong> (this browser can’t overwrite in place – use Chrome/Edge to keep one file).";
+}
+// Persistent reminder, shown under the Save/Reset buttons, of where saves go. The
+// browser exposes only the file NAME, never its folder path (a deliberate File System
+// Access privacy restriction), so we show the name and note the folder is the one you
+// picked. fileHandle.name is the actual handle we write to, so it can't drift out of sync.
+function updateSaveTarget(){
+  const el=$('saveTarget'); if(!el) return;
+  if(!FSA){ el.innerHTML='⬇ This browser saves by downloading a copy each time (it can’t keep a single file).'; return; }
+  if(fileHandle){ el.innerHTML='📄 Saving to <strong>'+esc(fileHandle.name)+'</strong> <span style="opacity:.7">– in the folder you chose (the browser hides the full path)</span>'; }
+  else { el.innerHTML='⚠ No save file chosen.'; }
+}
+
+// ---- persistent save target (survives reload via IndexedDB) ----------------
+// A File System Access handle is structured-cloneable, so we stash it per
+// reviewer and reconnect on reopen – no more re-picking the file by hand.
+// (Chrome/Edge only; if IndexedDB is unavailable it just degrades to re-picking.)
+let handleRemembered=false;
+const handleKey=()=>who.toLowerCase().trim();
+function idbOpen(){ return new Promise((res,rej)=>{ let r; try{ r=indexedDB.open('syslit_handles',1); }catch(e){ return rej(e); }
+  r.onupgradeneeded=()=>r.result.createObjectStore('h'); r.onsuccess=()=>res(r.result); r.onerror=()=>rej(r.error); }); }
+async function idbPut(k,v){ try{ const db=await idbOpen(); await new Promise((res,rej)=>{ const tx=db.transaction('h','readwrite'); tx.objectStore('h').put(v,k); tx.oncomplete=res; tx.onerror=()=>rej(tx.error); }); db.close(); return true; }catch(e){ return false; } }
+async function idbGet(k){ try{ const db=await idbOpen(); const v=await new Promise((res,rej)=>{ const tx=db.transaction('h','readonly'); const rq=tx.objectStore('h').get(k); rq.onsuccess=()=>res(rq.result||null); rq.onerror=()=>rej(rq.error); }); db.close(); return v; }catch(e){ return null; } }
+async function idbDel(k){ try{ const db=await idbOpen(); await new Promise((res,rej)=>{ const tx=db.transaction('h','readwrite'); tx.objectStore('h').delete(k); tx.oncomplete=res; tx.onerror=()=>rej(tx.error); }); db.close(); return true; }catch(e){ return false; } }
+async function rememberHandle(){ if(FSA && fileHandle && who.trim()) await idbPut(handleKey(),fileHandle); }
+// drop a stale/unreachable save handle so the tool stops offering to continue from it
+async function forgetHandle(){ const k=who.trim()?handleKey():null; fileHandle=null; handleRemembered=false; if(k) await idbDel(k); }
+async function restoreHandle(){
+  handleRemembered=false; fileHandle=null;
+  if(!FSA || !who.trim()) return;
+  const h=await idbGet(handleKey());
+  if(h){ fileHandle=h; handleRemembered=true; }
+}
+// re-acquire write permission – MUST run inside a user gesture (the Start click)
+async function ensureWritePermission(){
+  if(!FSA || !fileHandle || !fileHandle.queryPermission) return true;
+  try{
+    let pm=await fileHandle.queryPermission({mode:'readwrite'});
+    if(pm!=='granted') pm=await fileHandle.requestPermission({mode:'readwrite'});
+    if(pm==='granted') return true;
+  }catch(e){}
+  fileHandle=null; handleRemembered=false; return false;
+}
+
+// ---- completion / storage --------------------------------------------------
+const storeKey = () => CONFIG.storagePrefix+who.toLowerCase().trim();
+function dimSet(p,d){ return !!p["__"+d.key]; }
+function dimReasonOK(p,d){ const t=(p["__"+d.reason.key]||"").trim();
+  if(d.reason.required && !t) return false;
+  if(d.reason.maxWords && wordCount(t)>d.reason.maxWords) return false; return true; }
+function touched(p){ return CONFIG.dimensions.some(d => dimSet(p,d) || (p["__"+d.reason.key]||"").trim()); }
+function isComplete(p){ return CONFIG.dimensions.every(d => (!d.required || dimSet(p,d)) && dimReasonOK(p,d)); }
+function partial(p){ return touched(p) && !isComplete(p); }
+function completedCount(){ return papers.filter(isComplete).length; }
+
+function saveProgress(){
+  if(!who) return;
+  const d={__current:current,__lastSaveAt:lastSaveAt,labels:{}};
+  papers.forEach(p=>{ if(touched(p)){ const o={}; CONFIG.dimensions.forEach(dim=>{
+    o[dim.key]=p["__"+dim.key]||""; o[dim.reason.key]=p["__"+dim.reason.key]||""; }); d.labels[rowKey(p)]=o; } });
+  try{ localStorage.setItem(storeKey(),JSON.stringify(d)); }catch(e){}
+}
+function loadProgress(){
+  try{
+    const raw=localStorage.getItem(storeKey()); if(!raw) return false;
+    const d=JSON.parse(raw);
+    papers.forEach(p=>{ const L=d.labels&&d.labels[rowKey(p)]; if(L) CONFIG.dimensions.forEach(dim=>{
+      p["__"+dim.key]=L[dim.key]||""; p["__"+dim.reason.key]=L[dim.reason.key]||""; }); });
+    if(typeof d.__current==="number") current=d.__current;
+    if(typeof d.__lastSaveAt==="number") lastSaveAt=d.__lastSaveAt;
+    return true;
+  }catch(e){ return false; }
+}
+
+// ---- setup wiring ----------------------------------------------------------
+$('who').addEventListener('change',async()=>{
+  who=$('who').value; $('who').classList.toggle('req',!who.trim());
+  await restoreHandle();                 // reconnect this reviewer's remembered save file, if any
+  refreshResume(); updateSavePill(); refreshContinue(); checkReady();
+});
+function refreshResume(){
+  try{ $('resumeNote').textContent =
+    (who.trim() && localStorage.getItem(storeKey())) ? 'Saved progress found for “'+who+'” – it resumes when you start.' : ''; }catch(e){}
+}
+// one-click resume button: shown when this reviewer has a remembered save file and no
+// dataset is loaded yet (Chrome/Edge); reopening that file is enough to continue
+function refreshContinue(){ const show=!!(FSA && handleRemembered && fileHandle && papers.length===0);
+  $('continueBtn').classList.toggle('hidden',!show); $('continueHint').classList.toggle('hidden',!show);
+  $('startBtn').classList.toggle('hidden',show); }   // Continue offered → the bottom "Start reviewing" button is redundant
+// parse + load a CSV File, from either the FSA open picker or the classic input.
+// Resolves with the number of records loaded (0 for an empty/header-only file) and
+// REJECTS on a read/parse error. Critically, the Promise ALWAYS settles – an earlier
+// version threw inside onload and left it pending forever, which hung Continue/Start
+// on an empty saved file. Callers use the count to prompt for the real dataset.
+function loadDataset(file){ return new Promise((resolve,reject)=>{
+  const r=new FileReader();
+  r.onerror=()=>reject(new Error('read failed'));
+  r.onload=ev=>{
+    try{
+      const rows=parseCSV(ev.target.result);
+      const hdr=rows[0]||[];
+      const dataRows=rows.slice(1).filter(rr=>rr.length>1);
+      if(!hdr.length || dataRows.length===0){ resolve(0); return; }   // empty / header-only – nothing to review, leave state untouched
+      fileName=file.name;
+      headers=hdr.slice();
+      OUT_COLS.forEach(c=>{ if(!headers.includes(c)) headers.push(c); });
+      papers=dataRows.map(rr=>{
+        const o={}; hdr.forEach((h,i)=>o[h]=rr[i]??"");
+        CONFIG.dimensions.forEach(d=>{ o["__"+d.key]=o[d.key]||""; o["__"+d.reason.key]=o[d.reason.key]||""; });
+        return o;
+      });
+      // guarantee unique resume keys even if doi+title repeats
+      const seen={}; papers.forEach((p,i)=>{ const k=rowKey(p); if(seen[k]!==undefined){ p.__dup=i; } seen[k]=i; });
+      $('fileLabel').innerHTML='<span class="tick green">✓</span>Loaded <strong>'+esc(file.name)+'</strong> – '+papers.length+' records';
+      $('fileLabel').classList.add('is-set');
+      checkReady(); refreshContinue(); resolve(papers.length);
+    }catch(e){ reject(e); }
+  };
+  r.readAsText(file);
+}); }
+// Chrome/Edge: load via the File System Access picker so we capture the dataset's
+// handle – the save dialog then opens in that same folder (shared-folder workflow)
+async function openDataset(){
+  let h; try{ [h]=await window.showOpenFilePicker({ types:[{description:"CSV file",accept:{"text/csv":[".csv"]}}], multiple:false }); }
+  catch(e){ return; }   // user cancelled the picker
+  datasetHandle=h;
+  try{ if(!(await loadDataset(await h.getFile()))) toast('That file is empty – choose the original dataset, or a saved file that already has coding in it.'); }
+  catch(e){ toast('Couldn’t read that file – is it a CSV?'); }
+}
+$('fileLabel').addEventListener('click',()=>{ if(FSA) openDataset(); else $('fileInput').click(); });
+$('fileInput').addEventListener('change',e=>{ const file=e.target.files[0]; if(!file) return;
+  loadDataset(file).then(n=>{ if(!n) toast('That file is empty – choose the original dataset, or a saved file that already has coding in it.'); })
+    .catch(()=>toast('Couldn’t read that file – is it a CSV?')); });
+$('saveLabel').addEventListener('click',async()=>{
+  if(!who.trim()){ toast('Select your name first – it names the saved file.'); $('who').focus(); return; }
+  if(!FSA){ updateSavePill(); return; }
+  const ok=await pickSaveFile();
+  if(ok){ handleRemembered=false; await rememberHandle(); }   // persist the chosen file for next time
+  updateSavePill(ok); refreshContinue(); checkReady();   // a chosen file is part of the Start gate, so re-check
+});
+function updateSavePill(ok){
+  // step 3's box mirrors step 2's dataset box; when a file is set it shows the
+  // actual filename with a teal ✓ (step 2 uses a green ✓ – same shape, tick
+  // colour is the at-a-glance difference between "dataset in" and "save out").
+  const box=$('saveLabel'), name=fileHandle ? esc(fileHandle.name) : '';
+  box.classList.remove('is-set');   // reset; re-added below when a file is set
+  if(!FSA){ box.textContent='⬇ This browser saves by downloading a copy';
+    $('saveHint').textContent='This browser can’t overwrite a file in place (use Chrome or Edge for that). Auto-save will download a fresh copy every '+CONFIG.saveEvery+' records – keep the newest.'; return; }
+  if(handleRemembered && fileHandle){ box.classList.add('is-set');
+    box.innerHTML='<span class="tick teal">✓</span>Will reuse <strong>'+name+'</strong>';
+    $('saveHint').textContent='Reconnects to your previous file when you press Start (the browser may ask you to allow saving). Click above to choose a different file.'; }
+  else if(ok||fileHandle){ box.classList.add('is-set');
+    box.innerHTML='<span class="tick teal">✓</span>Saving to <strong>'+name+'</strong>';
+    $('saveHint').textContent='Your coded file is overwritten in place after every reviewed record, when you switch away from or close the tab, and whenever you click Save now.'; }
+  else { box.innerHTML='💾 Choose the save file…'; $('saveHint').textContent=''; }   // not-set: red star on step 3 label is signal enough
+}
+// Start needs a name and something to review. Normally that's a loaded dataset, but a
+// *remembered* save file counts too – it already holds the records, so Start loads
+// straight from it (see the handler below). Chrome/Edge still require a save file to
+// exist; Firefox/Safari can't pick one and fall through to downloads.
+function checkReady(){ $('startBtn').disabled=!(who.trim() && (papers.length>0 || (FSA && handleRemembered && fileHandle)) && (!FSA || fileHandle)); }
+
+function enterReview(){
+  loadProgress();
+  if(current<0||current>=papers.length) current=0;
+  $('setup').classList.add('hidden'); $('review').classList.remove('hidden');
+  buildDims(); render(); updateSaveTarget();
+}
+$('startBtn').addEventListener('click',async()=>{
+  if(FSA && fileHandle){
+    if(!(await ensureWritePermission())){   // confirm we can still write before entering review
+      updateSavePill(); refreshContinue(); checkReady();
+      toast('Couldn’t get permission to save to that file – please choose a save file again.');
+      return;
+    }
+    // no dataset loaded yet? the remembered save file IS what we're continuing – load it
+    if(papers.length===0){
+      try{ await loadDataset(await fileHandle.getFile()); }
+      catch(e){ toast('Couldn’t read your saved file – load the dataset in step 2.'); return; }
+      if(papers.length===0){ checkReady(); toast('Your saved file has no records yet – load the original dataset in step 2 to start.'); return; }
+    }
+  }
+  if(papers.length===0){ toast('Load the dataset in step 2 first.'); return; }
+  enterReview();
+});
+// returning reviewer: reopen the remembered file (it already holds their saved work) and resume in one click
+async function continueFromRemembered(){
+  if(!(FSA && fileHandle)) return;
+  if(!(await ensureWritePermission())){ updateSavePill(); refreshContinue(); checkReady();
+    toast('Couldn’t reopen your saved file – choose it again under step 3.'); return; }
+  let n;
+  try{ n=await loadDataset(await fileHandle.getFile()); }
+  catch(e){
+    // the remembered file is gone (moved / deleted / renamed) – forget it and drop
+    // back to the first-time flow: load the dataset, pick a fresh save file.
+    await forgetHandle();
+    updateSavePill(); refreshContinue(); checkReady();
+    toast('Your saved file can’t be found (moved or deleted) – load the dataset and choose a save file to start again.');
+    return;
+  }
+  if(!n){   // file exists but has no records yet – keep it as the save target, just load the dataset
+    refreshContinue(); checkReady();
+    toast('Your saved file is empty (no coding saved yet) – load the original dataset in step 2 to start.');
+    return;
+  }
+  enterReview();
+}
+$('continueBtn').addEventListener('click',continueFromRemembered);
+
+// ---- build coding controls -------------------------------------------------
+function buildDims(){
+  const host=$('dims'); host.innerHTML='';
+  CONFIG.dimensions.forEach((d,di)=>{
+    const gl=document.createElement('div'); gl.className='group-label';
+    gl.innerHTML=d.label+(d.required?' <span class="req-star">*</span>':'')+(di===0?' &nbsp;<span class="rowid" id="rowid"></span>':'');
+    host.appendChild(gl);
+    const grid=document.createElement('div'); grid.className='btn-grid'; grid.id='grid_'+di;
+    d.options.forEach(o=>{
+      const b=document.createElement('button'); b.className='lab'; b.dataset.v=o.v; b.dataset.dim=di;
+      b.style.borderColor=o.color; b.style.color=o.color;
+      b.innerHTML=o.v+(o.key?'<span class="k">key '+o.key+'</span>':'');
+      b.addEventListener('click',()=>setOption(di,o.v)); grid.appendChild(b);
+    });
+    host.appendChild(grid);
+    const rw=document.createElement('div'); rw.className='reason-wrap';
+    const ta=document.createElement('textarea'); ta.className='reason'; ta.id='reason_'+di; ta.placeholder=fillTokens(d.reason.placeholder||'', d.reason.maxWords);
+    ta.addEventListener('input',()=>onReason(di)); rw.appendChild(ta);
+    if(d.reason.maxWords){ const wc=document.createElement('div'); wc.className='wordcount'; wc.id='wc_'+di; rw.appendChild(wc); }
+    host.appendChild(rw);
+  });
+}
+
+// ---- render ----------------------------------------------------------------
+function p(){ return papers[current]; }
+function esc(s){ return String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c])); }
+function updateProgress(){
+  const total=papers.length, done=completedCount();
+  $('bar').style.width=(done/total*100)+'%';
+  $('ptext').textContent='Record '+(current+1)+' of '+total+'  ·  '+done+' reviewed  ·  '+(total-done)+' to go';
+  $('done').style.display=(done===total)?'block':'none';
+}
+function render(){
+  const x=p(), F=CONFIG.fields;
+  if($('rowid')) $('rowid').textContent='#'+(current+1);
+  document.querySelectorAll('.btn-grid').forEach(g=>g.classList.remove('need'));
+
+  let meta='';
+  (F.meta||[]).forEach(c=>{ if(x[c]) meta+='<span class="tag '+(c==='source'?'src':'')+'">'+esc(x[c])+'</span>'; });
+  $('meta').innerHTML=meta;
+  $('title').textContent=x[F.title]||'(no title)';
+
+  const ab=(x[F.body]||'').trim();
+  if(ab){ $('abstract').textContent=ab; $('abstract').classList.remove('empty'); }
+  else { $('abstract').textContent=F.bodyEmpty||'No text available.'; $('abstract').classList.add('empty'); }
+
+  let d='';
+  (F.details||[]).forEach(f=>{ if(x[f.col]) d+='<strong>'+esc(f.label)+':</strong> '+esc(x[f.col])+'<br>'; });
+  if(F.link){ const raw=(x[F.link.col]||'').trim();
+    if(raw){ const href=raw.startsWith('http')?raw:(F.link.base||'')+raw;
+      d+='<strong>'+esc(F.link.label)+':</strong> <a class="doi-link" href="'+esc(href)+'" target="_blank" rel="noopener noreferrer">'+esc(raw)+'</a>'; }
+    else d+='<strong>'+esc(F.link.label)+':</strong> <span style="color:#94a3b8">(none)</span>'; }
+  (F.collapsible||[]).forEach(f=>{ if(x[f.col]) d+='<details class="kw"><summary>'+esc(f.label)+'</summary><div class="kwbody">'+esc(x[f.col])+'</div></details>'; });
+  $('details').innerHTML=d;
+
+  CONFIG.dimensions.forEach((dim,di)=>{
+    document.querySelectorAll('#grid_'+di+' .lab').forEach(b=>{
+      const sel=(b.dataset.v===x['__'+dim.key]);
+      if(sel){ const o=dim.options.find(o=>o.v===b.dataset.v); b.style.background=o.color; b.style.color='#fff'; }
+      else { b.style.background='#fff'; b.style.color=b.dataset.color||dim.options.find(o=>o.v===b.dataset.v).color; }
+    });
+    $('reason_'+di).value=x['__'+dim.reason.key]||'';
+    updateReason(di);
+  });
+  updateProgress();
+  $('prev').disabled=(current===0); $('next').disabled=(current===papers.length-1);
+}
+function updateReason(di){
+  const dim=CONFIG.dimensions[di], ta=$('reason_'+di), t=ta.value, n=wordCount(t);
+  const need = touched(p()) && !dimReasonOK(p(),dim);
+  ta.classList.toggle('req',need);
+  if(dim.reason.maxWords){ const wc=$('wc_'+di);
+    wc.textContent=n+' / '+dim.reason.maxWords+' words'; wc.classList.toggle('over',n>dim.reason.maxWords); }
+}
+
+// ---- set values ------------------------------------------------------------
+function setOption(di,v){ const dim=CONFIG.dimensions[di], x=p();
+  x['__'+dim.key]=(x['__'+dim.key]===v)?'':v; dirty=true; saveProgress(); render(); }
+function onReason(di){ const dim=CONFIG.dimensions[di], ta=$('reason_'+di);
+  let t=ta.value;
+  if(dim.reason.maxWords){ const w=t.trim().split(/\s+/).filter(Boolean);
+    if(w.length>dim.reason.maxWords){ t=w.slice(0,dim.reason.maxWords).join(' '); ta.value=t; toast(dim.reason.maxWords+'-word limit'); } }
+  p()['__'+dim.reason.key]=t; dirty=true; updateReason(di); updateProgress(); saveProgress();
+}
+
+// ---- save the file on navigation (NOT on every keystroke) ------------------
+// Called when the reviewer moves to another record (Next / Prev / Jump). Writes the
+// file only when there are unsaved edits, so typing a reason no longer triggers a save
+// mid-word. Chrome/Edge overwrite in place, so we save on every such move; Firefox/
+// Safari would download a copy each time, so there we keep the gentler every-N-completed
+// cadence (CONFIG.saveEvery) to avoid a pile of downloads.
+function saveOnNav(){
+  if(!dirty) return;
+  const done=completedCount();
+  if(FSA){ lastSaveAt=done; saveAll().catch(()=>{}); return; }
+  if((done-lastSaveAt>=CONFIG.saveEvery && done>0) || (done===papers.length && done>lastSaveAt)){
+    lastSaveAt=done; saveAll(done+' reviewed').catch(()=>{});
+  }
+}
+
+// ---- navigation (finish a started row) -------------------------------------
+function go(i){
+  if(i<0||i>=papers.length) return;
+  if(partial(p())){
+    toast('Finish this record first – pick a decision and give a reason (max '+(D0.reason.maxWords||'')+' words).');
+    CONFIG.dimensions.forEach((d,di)=>{ if(!dimSet(p(),d)) $('grid_'+di).classList.add('need'); updateReason(di); });
+    return;
+  }
+  current=i; saveProgress(); render(); saveOnNav();
+}
+$('prev').addEventListener('click',()=>go(current-1));
+$('next').addEventListener('click',()=>go(current+1));
+$('jump').addEventListener('click',()=>{ for(let k=0;k<papers.length;k++) if(!isComplete(papers[k])){ go(k); return; } toast('Every record is reviewed 🎉'); });
+$('exportBtn').addEventListener('click',()=>saveAll('manual').catch(()=>{}));
+$('resetBtn').addEventListener('click',()=>{
+  if(!confirm('Reset all progress for “'+who+'”? This clears your in-browser review (any saved file is untouched).')) return;
+  papers.forEach(p=>CONFIG.dimensions.forEach(d=>{ p['__'+d.key]=''; p['__'+d.reason.key]=''; }));
+  current=0; lastSaveAt=0; dirty=false; saveProgress(); render();
+});
+
+// ---- instructions modal ----------------------------------------------------
+$('infoBtn').addEventListener('click',()=>$('instrModal').classList.remove('hidden'));
+$('instrClose').addEventListener('click',()=>$('instrModal').classList.add('hidden'));
+$('instrModal').addEventListener('click',e=>{ if(e.target===$('instrModal')) $('instrModal').classList.add('hidden'); });
+
+// ---- keyboard --------------------------------------------------------------
+document.addEventListener('keydown',e=>{
+  if(!$('instrModal').classList.contains('hidden')){ if(e.key==='Escape') $('instrModal').classList.add('hidden'); return; }
+  if($('review').classList.contains('hidden')) return;
+  if(document.activeElement && document.activeElement.classList.contains('reason')){ if(e.key==='Escape') document.activeElement.blur(); return; }
+  if(e.key==='i'||e.key==='I'){ $('instrModal').classList.remove('hidden'); e.preventDefault(); return; }
+  const m=e.code.match(/^Digit([1-9])$/);
+  if(m){ const di=e.shiftKey?1:0, dim=CONFIG.dimensions[di]; if(dim){ const o=dim.options[+m[1]-1]; if(o){ setOption(di,o.v); e.preventDefault(); } } return; }
+  if(e.key==='ArrowRight'||e.key==='Enter'){ go(current+1); e.preventDefault(); }
+  else if(e.key==='ArrowLeft'){ go(current-1); e.preventDefault(); }
+});
+
+// ---- toast + unload guard --------------------------------------------------
+let toastT=null;
+function toast(msg){ const t=$('toast'); t.textContent=msg; t.classList.add('show'); clearTimeout(toastT); toastT=setTimeout(()=>t.classList.remove('show'),2400); }
+// Save on the way out instead of nagging with a "Leave site?" dialog. Hard browser
+// limit: the File System Access write is asynchronous and the browser will NOT wait
+// for async work once the page is closing, so a *guaranteed* file write on close is
+// not possible. We lean on two things instead: saveProgress() is synchronous
+// localStorage and always completes (your coding is never lost and resumes under your
+// name), and saveAll() is fired best-effort – it finishes on a tab-switch, and with
+// per-record autosave above at most the current, not-yet-decided record is unwritten.
+async function flushOnExit(){
+  if(!papers.length) return;
+  saveProgress();                                   // synchronous – runs before any await, so it is guaranteed
+  if(dirty && FSA && fileHandle && fileHandle.queryPermission){   // only if write permission is already granted (never prompt or download on the way out)
+    try{ if(await fileHandle.queryPermission({mode:'readwrite'})==='granted') saveAll('auto-saved on exit').catch(()=>{}); }catch(e){}
+  }
+}
+document.addEventListener('visibilitychange',()=>{ if(document.visibilityState==='hidden') flushOnExit(); });
+window.addEventListener('pagehide', flushOnExit);
+
+// ---- init ------------------------------------------------------------------
+$('hTitle').textContent=CONFIG.title;
+// storage probe – warn the reviewer (don't fail silently) if progress can't be remembered
+(function(){ let ok=false; try{ const k='__syslit_probe__'; localStorage.setItem(k,'1'); localStorage.removeItem(k); ok=true; }catch(e){}
+  if(!ok){ const w=$('storageWarn'); w.classList.remove('hidden');
+    w.innerHTML='<b>This browser won’t remember your progress.</b> Resume is off (private/incognito window, or site data is blocked). Your decisions live only in the saved CSV – pick a save file and save often.'; } })();
+// step 3 is required where in-place overwrite exists; downloads-only otherwise
+$('saveStepLabel').innerHTML='3 · Choose where to save your coded file '+(FSA?'<span class="req-star">*</span>':'– downloads only in this browser');
+$('hSub').textContent=CONFIG.subtitle;
+// step-1 dropdown is built from CONFIG.reviewers, so that list is the only place to edit names
+$('who').innerHTML='<option value="" disabled selected>'+esc(CONFIG.reviewerPrompt)+'</option>'
+  +CONFIG.reviewers.map(r=>'<option value="'+esc(r)+'">'+esc(r)+'</option>').join('');
+$('setupLead').textContent=fillTokens(CONFIG.setupLead, D0.reason.maxWords);
+// the decision keys are built from CONFIG.dimensions, so renaming a button updates this hint too
+$('shortcutHint').innerHTML=D0.options.map(o=>'<kbd>'+o.key+'</kbd> '+esc(o.v)).join(' · ')
+  +' · <kbd>→</kbd>/<kbd>Enter</kbd> next · <kbd>←</kbd> back · <kbd>Esc</kbd> leave a box · <kbd>i</kbd> guide';
+$('instrBodySetup').innerHTML=fillTokens(CONFIG.instructionsHTML, D0.reason.maxWords);
+$('instrBodyModal').innerHTML=fillTokens(CONFIG.instructionsHTML, D0.reason.maxWords);
+updateSavePill();
+</script>
+</body>
+</html>
