@@ -77,7 +77,7 @@ ul.task-list li input[type="checkbox"] {
 
 
 
-<div class="quarto-layout-panel" data-layout="[ 30, 40, 30 ]" style="margin-bottom: 0em !important">
+<div class="quarto-layout-panel" style="margin-bottom: 0em !important" data-layout="[ 30, 40, 30 ]">
 <div class="quarto-layout-row">
 <div id="first-column" class="quarto-layout-cell" style="flex-basis: 30.0%;justify-content: flex-start;">
 
@@ -95,6 +95,17 @@ ul.task-list li input[type="checkbox"] {
 </div>
 <p><span class="animate-fade found delay-35">The page cannot be found</span></p>
 <p><span class="animate-fade later delay-45">But it may be temporary - please check back again later</span></p>
+<script>
+// Society500 lives at /teaching/Society500/, and addresses are case-sensitive on GitHub Pages, so any
+// other capitalisation of it (such as /teaching/society500/) is forwarded to the real address
+(function () {
+  var path = window.location.pathname, prefix = "/teaching/society500";
+  if (path.toLowerCase().indexOf(prefix) === 0 && path.indexOf("/teaching/Society500") !== 0) {
+    window.location.replace("/teaching/Society500" + path.slice(prefix.length) +
+                            window.location.search + window.location.hash);
+  }
+})();
+</script>
 <script>
 function goBack()
   {
