@@ -19,7 +19,9 @@ belong in docs/editorial-notes/), a reference to the timeline, a module, a cours
 a book project, and a closing paragraph of a biography that does not name the person's traditions.
 REVIEW lines are heuristics that need a reader: a word that is banned only in one sense (account,
 signal, vital, rich), a perception verb, the word student, a possessive on a lowercase noun, a head
-noun followed by a name and a verb with no relativiser, a not-but inversion, a payoff colon, a
+noun followed by a name and a verb with no relativiser, any other relative clause that has its own
+subject and no relativiser as the spaCy parser reads it ("the writing people do"; skipped when spaCy and
+en_core_web_sm are not installed), a not-but inversion, a payoff colon, a
 sentence-length quotation without a page locator, curly quotation marks, a short paragraph-final
 sentence, and a body outside the usual range (a biography under 150 or over 650 words, a works summary
 under 50 or over 260, an event card under 100 or over 300), since length follows the complexity of the
@@ -159,6 +161,41 @@ def cast_list(cell):
     return [v.strip().lower() for v in re.split(r"[;,]", cell or "") if v.strip()]
 
 
+_NLP = []
+RELATIVISERS = {"that", "which", "who", "whom", "whose", "where", "when", "why", "whereby"}
+
+
+def parser():
+    """spaCy's small English model, loaded once; None when spaCy or the model is not installed."""
+    if not _NLP:
+        try:
+            import spacy
+            _NLP.append(spacy.load("en_core_web_sm", disable=["ner"]))
+        except (ImportError, OSError):
+            _NLP.append(None)
+    return _NLP[0]
+
+
+def zero_relatives(text):
+    """Relative clauses with a subject of their own and no relativiser, as spaCy parses them: "the writing
+    people do", "the occupation the census recognised". Clauses whose subject is a personal pronoun ("the
+    passports they hold") are allowed by the rules and left out. The parser misses some and misreads a few."""
+    nlp = parser()
+    if nlp is None:
+        return []
+    hits = []
+    for tok in nlp(text):
+        if tok.dep_ != "relcl":
+            continue
+        lead = [t for t in tok.subtree if t.i <= tok.i]
+        if any(t.tag_ in ("WDT", "WP", "WP$", "WRB") or t.lower_ in RELATIVISERS for t in lead):
+            continue
+        subjects = [c for c in tok.children if c.dep_ in ("nsubj", "nsubjpass")]
+        if subjects and not all(s.tag_ == "PRP" for s in subjects):
+            hits.append(tok.head.text + " " + " ".join(t.text for t in lead))
+    return hits
+
+
 def check_prose(paras, add, kind):
     """The word, punctuation and sentence checks over a list of paragraphs."""
     for i, para in enumerate(paras, 1):
@@ -183,6 +220,9 @@ def check_prose(paras, add, kind):
             if m.group(1) not in FUNCTION_WORDS:
                 add("REVIEW", where, "possible contact clause: a head noun, a name and a verb with no relativiser",
                     bare[max(0, m.start() - 30):m.end() + 30])
+        for hit in zero_relatives(bare):
+            add("REVIEW", where, "relative clause with no that, which or who: 'the writing people do' becomes "
+                "'how people write' or 'the writing that people do'", hit)
         curly = len(CURLY.findall(para))
         if curly:
             add("REVIEW", where, f"{curly} curly quotation marks: straight marks in this project, source marks inside a quotation", "")
