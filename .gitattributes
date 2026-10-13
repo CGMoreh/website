@@ -1,2 +1,9 @@
 # Auto detect text files and perform LF normalization
 * text=auto
+
+# Society500: the pages, libraries and portrait crops written by teaching/Society500/Society500.R.
+# They are committed because the CI render does not run the R build; marked as generated so that
+# GitHub collapses them in diffs and leaves them out of the language statistics
+teaching/Society500/*.html linguist-generated=true
+teaching/Society500/lib/** linguist-generated=true
+teaching/Society500/author_photos/circles/** linguist-generated=true

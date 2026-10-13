@@ -2,21 +2,19 @@
 // One copy of this file serves every page. Build-time configuration is injected
 // by SocTime.R before widget init as:
 //   window.SocTimeConfig = {
-//     labelCutoffYear, tickIntervalMs, infoTitle, infoText,
+//     tickIntervalMs, tickYears, infoTitle, infoText,
 //     periodId, periodLabel, prevHref, prevLabel, nextHref, nextLabel,
 //     indexHref,
 //     portraitPx, traditions
 //   }
-// labelCutoffYear is null on a period page: only the full-span page suppresses
-// the labels of its opening gutter. periodLabel is null there in turn, and the
-// navigation strip is then not built. traditions is the list of
-// { id, label } pairs that the highlight selector offers, in vocabulary order
-// and limited to the traditions somebody on the page carries; an empty list
-// means no selector.
+// traditions is the list of { id, label } pairs that the highlight selector
+// offers, in vocabulary order and limited to the traditions somebody on the
+// page carries; an empty list means no selector.
 //
 // A query string of the form ?from=1700&to=1760 zooms the x-axis to those
 // years once the chart has loaded. It exists so that a zoomed state can be
-// screenshotted from a headless browser; readers zoom by dragging.
+// screenshotted from a headless browser; readers zoom by dragging. A hash of
+// the form #locke opens that person's biography once the chart has loaded.
 
 window.SocTime = (function () {
 
@@ -494,6 +492,31 @@ window.SocTime = (function () {
     if (chart.showResetZoom) chart.showResetZoom();
   }
 
+  // ===== Hash link to a biography =====
+  // A link of the form sources.html#locke, which the portraits on the index
+  // carry, opens that person's biography once the chart has loaded; the label
+  // series is the one whose points carry an id
+  function applyHashBio(chart) {
+    const id = decodeURIComponent((window.location.hash || '').slice(1));
+    if (!id) return;
+    for (const series of chart.series) {
+      const point = series.points.find(function (p) { return p.options && p.options.id === id; });
+      if (point) { authorClick.call(point); return; }
+    }
+  }
+
+  // ===== Date note =====
+  // A biography or a work whose date the sources give differently carries a
+  // short note; the date is marked with an asterisk and the note set in small
+  // type at the foot of the dialog
+  function dateNoteElement(noteHtml) {
+    const note = document.createElement('p');
+    note.innerHTML = '* ' + noteHtml;
+    note.style.cssText = 'font-size: 0.8rem; color: #666; line-height: 1.35; margin: 14px 0 0 0; ' +
+      'padding-top: 8px; border-top: 1px solid #e2e2e2; text-align: left;';
+    return note;
+  }
+
   // ===== Chart load handler =====
   function onChartLoad() {
     const chart = this;
@@ -557,6 +580,7 @@ window.SocTime = (function () {
     addGroupSelector(chart);
 
     applyQueryZoom(chart);
+    applyHashBio(chart);
   }
 
   // ===== Chart redraw handler =====
@@ -637,13 +661,15 @@ window.SocTime = (function () {
     var pob = this.options.pob || '';
     var pod = this.options.living ? '' : (this.options.pod || '');
 
+    var dateNote = this.options.date_note || '';
+
     var lifeInfo = '';
     if (birthYear || deathYear || pob || pod) {
       lifeInfo = '' +
         [birthYear, pob].filter(Boolean).join(', ') +
         ' – ' +
         [deathYear, pod].filter(Boolean).join(', ') +
-        '';
+        (dateNote ? ' *' : '');
     }
 
     // Create overlay
@@ -724,6 +750,7 @@ window.SocTime = (function () {
     var bioElem = document.createElement('div');
     bioElem.innerHTML = bio;
     content.appendChild(bioElem);
+    if (dateNote) content.appendChild(dateNoteElement(dateNote));
 
     dialog.appendChild(header);
     dialog.appendChild(lifeLine);
@@ -748,13 +775,20 @@ window.SocTime = (function () {
     if (!inActiveGroup(chart, this)) return;
 
     // The labels carry the precision of the front matter (a year alone for most
-    // of the medieval cast); the millisecond values are for drawing only
+    // of the medieval cast); the millisecond values are for drawing only. A date
+    // explained by a note in the biography carries an asterisk: the birth when
+    // it is not a birth date (a baptism) or the person is living, else the death
+    const mark = (this.date_note || this.has_date_note) ? '*' : '';
+    const event = this.birth_event || 'Born';
+    const markBirth = this.living || event !== 'Born';
     const died = this.living
       ? ''
-      : 'Died: ' + (this.death_label || Highcharts.dateFormat('%d %b %Y', this.death)) + ' in ' + this.pod + '<br>';
+      : 'Died: ' + (this.death_label || Highcharts.dateFormat('%d %b %Y', this.death)) +
+        (markBirth ? '' : mark) + ' in ' + this.pod + '<br>';
 
     return '<b>' + (this.author_long || this.author) + '</b><br>' +
-          'Born: ' + (this.birth_label || Highcharts.dateFormat('%d %b %Y', this.birth)) + ' in ' + this.pob + '<br>' +
+          event + ': ' + (this.birth_label || Highcharts.dateFormat('%d %b %Y', this.birth)) +
+          (markBirth ? mark : '') + ' in ' + this.pob + '<br>' +
           died +
           '<span style="font-family: Arial, sans-serif; font-size: 12px; color: #a67c00;">Click for a biography</span>';
   }
@@ -802,6 +836,7 @@ window.SocTime = (function () {
     var eng_title = this.options.eng_title || '';
     var eng_date = this.options.eng_date || '';
     var summary = this.options.summary || '';
+    var dateNote = this.options.date_note || '';
 
     // Convert pub_date (e.g. 1762-01-01) to just the year
     var pub_year = '';
@@ -809,6 +844,7 @@ window.SocTime = (function () {
       var match = pub_date.match(/\d{4}/);
       if (match) pub_year = match[0];
     }
+    if (dateNote) pub_year += '*';
 
     // Remove any existing overlay first
     var existing = document.getElementById('bioOverlay');
@@ -874,6 +910,7 @@ window.SocTime = (function () {
     var summaryElem = document.createElement('div');
     summaryElem.innerHTML = summary;
     content.appendChild(summaryElem);
+    if (dateNote) content.appendChild(dateNoteElement(dateNote));
 
     // Assemble dialog
     dialog.appendChild(header);
@@ -904,34 +941,14 @@ window.SocTime = (function () {
         engInfo = "<span class='lang-flag'>EN</span> <b>" + this.eng_title + '</b><br>';
       }
     }
-    return this.orig_language + ' <b>' + (this.orig_title || '') + ' (' + Highcharts.dateFormat("%Y", this.x) + ')</b><br>' + engInfo + '<span style="font-family: Arial, sans-serif; font-size: 12px; color: #a67c00;">Click for a summary</span>';
+    var mark = this.date_note ? '*' : '';
+    return this.orig_language + ' <b>' + (this.orig_title || '') + ' (' + Highcharts.dateFormat("%Y", this.x) + mark + ')</b><br>' + engInfo + '<span style="font-family: Arial, sans-serif; font-size: 12px; color: #a67c00;">Click for a summary</span>';
   }
 
   // ===== X-axis: label formatter =====
-  // Only the full-span page carries a cutoff year, for the compressed gutter at
-  // its left edge; a period page starts where its first tick starts and prints
-  // every year plainly.
+  // A page starts where its first tick starts and prints every year plainly
   function xAxisLabelFormatter() {
-    var cutoffYear = window.SocTimeConfig.labelCutoffYear;
-    var year = new Date(this.value).getUTCFullYear();
-
-    if (cutoffYear === null || cutoffYear === undefined) return year;
-
-    var cutoffMs = Date.UTC(cutoffYear, 0, 1);
-
-    if (year < cutoffYear) {
-      return ''; // hide label, keep tick
-    } else {
-      // Find the first tick position at/after the cutoff year
-      var positions = (this.axis.tickPositions || []).filter(function(t) {
-        return t >= cutoffMs;
-      });
-      var firstPos = positions.length ? positions[0] : null;
-      if (firstPos !== null && this.value === firstPos) {
-        return '⋯'; // show middle-dot ellipsis for first visible year
-      }
-      return year;
-    }
+    return new Date(this.value).getUTCFullYear();
   }
 
   // ===== X-axis: tick positioner =====
@@ -940,17 +957,12 @@ window.SocTime = (function () {
   // four years from the 1970 epoch, so that a tick meant for 1980 falls on
   // 30 December 1979 and is labelled with the wrong year
   function xAxisTickPositioner(min, max) {
-    var cutoffYear = window.SocTimeConfig.labelCutoffYear;
     var years = window.SocTimeConfig.tickYears ||
       Math.max(1, Math.round(window.SocTimeConfig.tickIntervalMs / (365 * 864e5)));
     var first = Math.ceil(new Date(min).getUTCFullYear() / years) * years;
     var last = new Date(max).getUTCFullYear();
     var positions = [];
     for (var y = first; y <= last; y += years) positions.push(Date.UTC(y, 0, 1));
-    if (cutoffYear === null || cutoffYear === undefined) return positions;
-    positions = positions.filter(function(t) {
-      return new Date(t).getUTCFullYear() >= cutoffYear;
-    });
     return positions;
   }
 
