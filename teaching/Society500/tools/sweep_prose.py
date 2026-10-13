@@ -249,7 +249,10 @@ def check_prose(paras, add, kind):
             quoted = m.group(1) if m.group(1) is not None else m.group(2)
             if words(quoted) < 8:
                 continue
-            locator = r"(1\d{3}|20\d{2})[a-z]?: ?\d|section \d"
+            # a page, a roman page, a chapter or part, after a year that may carry the first
+            # edition in brackets ("Popper 2013 [1945]: 508", "Goldthorpe 2021: ch. 3")
+            locator = (r"(1\d{3}|20\d{2})[a-z]?(?: \[\d{4}\])?: ?(?:\d|[ivxlc]+\b|chs? |part |[Ii]ntroduction|list of)"
+                       r"|section \d")
             if not re.search(locator, para[m.end():m.end() + 140]) and not re.search(locator, para[max(0, m.start() - 140):m.start()]):
                 add("REVIEW", where, "sentence-length quotation without a page locator beside it", m.group(0))
 

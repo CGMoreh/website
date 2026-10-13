@@ -111,27 +111,45 @@ def front(path):
     return out
 
 
-def ref_keys(path, corpus_rows):
-    t = open(path, encoding="utf-8").read()
-    m = re.search(r"<reference>(.*?)</reference>", t, re.S)
+def load_corpus_rows():
+    """(key, authors, year) for every corpus text. Zotero items come from corpus-index.md; the library
+    books held outside Zotero (texts/LIB-<Surname>-<title>.txt) are not in the index and carry no
+    reliable year, so they are listed with year None and matched on the surname alone."""
+    rows = []
+    for line in open(f"{CORPUS}/corpus-index.md", encoding="utf-8"):
+        parts = [p.strip() for p in line.split("|")]
+        if len(parts) > 4 and re.match(r"^[A-Z0-9]{8}$", parts[0]):
+            rows.append((parts[0], parts[2], parts[3]))
+    for path in glob.glob(f"{CORPUS}/texts/LIB-*.txt"):
+        key = os.path.basename(path)[:-4]
+        rows.append((key, key[4:].replace("-", " "), None))
+    return rows
+
+
+def keys_from_block(block, corpus_rows):
+    """Corpus keys for the entries of a reference block: same year and the surname as a whole word
+    among the authors, or, for a library book, the surname at the head of its file name."""
     keys = set()
-    if not m:
-        return keys
-    for entry in re.findall(r"^([A-Z][\w'’\- ]+?),.*?\b(1[5-9]\d\d|20\d\d)\b", m.group(1), re.M):
+    for entry in re.findall(r"^([A-Z][\w'’\- ]+?),.*?\b(1[5-9]\d\d|20\d\d)\b", block, re.M):
         sur, yr = entry[0].split()[-1].lower(), entry[1]
         for key, authors, year in corpus_rows:
-            if year == yr and sur in authors.lower():
+            if year is None:
+                if re.match(rf"lib-(?:[a-z]+-)?{re.escape(sur)}-", key.lower()):
+                    keys.add(key)
+            elif year == yr and re.search(rf"(?<![\w-]){re.escape(sur)}(?![\w-])", authors.lower()):
                 keys.add(key)
     return keys
 
 
+def ref_keys(path, corpus_rows):
+    t = open(path, encoding="utf-8").read()
+    m = re.search(r"<reference>(.*?)</reference>", t, re.S)
+    return keys_from_block(m.group(1), corpus_rows) if m else set()
+
+
 def main(ids):
     cast = {r["id"]: r for r in csv.DictReader(open(f"{ROOT}/docs/cast-2026-09.csv", encoding="utf-8-sig"))}
-    corpus_rows = []
-    for line in open(f"{CORPUS}/corpus-index.md", encoding="utf-8"):
-        parts = [p.strip() for p in line.split("|")]
-        if len(parts) > 4 and re.match(r"^[A-Z0-9]{8}$|^LIB-", parts[0]):
-            corpus_rows.append((parts[0], parts[2], parts[3]))
+    corpus_rows = load_corpus_rows()
     cache = {}
     report = {}
     for pid in ids:
